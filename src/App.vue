@@ -1,29 +1,50 @@
 <template>
-  <v-app light>
-    <v-toolbar  dark color="black">
-      <v-toolbar-side-icon
-      @click.stop="sideNav = !sideNav"
-      class="hidden-sm-and-up"
-      ></v-toolbar-side-icon>
-      <v-toolbar-title>TiendaVirtual.com</v-toolbar-title>
-      <v-spacer></v-spacer>
-      <v-toolbar-side-icon class="hidden-md-and-up"></v-toolbar-side-icon>
-      <v-toolbar-items class="hidden-sm-and-down">
-        <v-btn flat
-        v-for="item in menuItems"
-        :to="item.link"
-        :key="item.title">
-        {{ item.title }}
-      </v-btn>
-    </v-toolbar-items>
-  </v-toolbar>
   <main>
-    <router-view></router-view>
-  </main>
-  <v-footer></v-footer>
-</v-app>
-</template>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+      <div class="container">
+        <a class="navbar-brand" href="#">TiendaVirtual.com</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item active">
+              <router-link to="/" class="nav-link">Inicio</router-link>
+            </li>
+            <li class="nav-item">
+             <router-link to="/login" class="nav-link">Entrar</router-link>
+           </li>
+           <li class="nav-item">
+            <a class="nav-link" href="#">Empresa</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Contacto</a>
+          </li>  
+          <li class="nav-item">
+            <router-link to="/carrito" class="nav-link">Carrito</router-link>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <!-- Page Content -->
+  <div class="container" style="margin-top:80px">
+    <transition>
+      <keep-alive>
+        <router-view></router-view>
+      </keep-alive>
+    </transition>
+  </div>
+  <!-- /.container -->
+  <!-- Footer -->
+  <footer class="py-5" style="margin-top:40px">
+    <p class="m-0 text-center ">Copyright &copy; Your Website 2018</p>
+    <!-- /.container -->
+  </footer>
 
+</main>
+</template>
 <script>
 export default {
   data () {
@@ -31,6 +52,7 @@ export default {
       sideNav: false
     }
   },
+
   computed: {
     menuItems () {
       let menuItems = [
@@ -44,15 +66,10 @@ export default {
         ]
       }
       return menuItems
-    },
-    userIsAuthenticated () {
-//        return this.$store.getters.user !== null && this.$store.getters.user !== undefined
-return false
-}
-}
+    }    
+  }
 }
 </script>
 
 <style lang="stylus">
-@import './stylus/main'
 </style>
