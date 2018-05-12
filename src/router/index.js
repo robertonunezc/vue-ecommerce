@@ -5,6 +5,7 @@ import ListadoMetasRezagadas from '@/components/ListadoMetasRezagadas'
 import Home from '@/components/Home'
 import Login from '@/components/Login'
 import Carrito from '@/components/Carrito'
+import DetalleArticulo from '@/components/DetalleArticulo'
 
 Vue.use(Router)
 
@@ -22,6 +23,10 @@ export default new Router({
 		path: '/carrito',
 		name: 'Carrito',
 		component: Carrito
+	},{
+		path: '/detalle-articulo/:claveArticulo+',
+		name: 'DetalleArticulo',
+		component: DetalleArticulo
 	}
 	]
 })

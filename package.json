@@ -4,7 +4,7 @@
     "description": "Tienda virtual",
     "author": "h3dx0 <rob3rto@openmailbox.org>",
     "private": true,
-    "scripts": {
+   "scripts": {
         "dev": "node build/dev-server.js",
         "start": "npm run dev",
         "build": "node build/build.js",

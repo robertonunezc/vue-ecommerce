@@ -23,6 +23,23 @@ new Vue({
       storageBucket: "firechat-3caa0.appspot.com",
       messagingSenderId: "638485700110"
     })
-    //this.$store.dispatch('cargarMetasRezagadasCreadas')
+    this.$store.dispatch('cargarArticulos')
+    let articulosDummy = [
+    {      
+      clave: '3444',
+      descripcion: 'descripcion largaaaaa',
+      imgUrl:'https://www.mexicodesconocido.com.mx/assets/images/destinos/queretaro/_MG_0088_GEMD_QUERETARO_CD_TEMPLO-SANTA-ROSA-DE-VITERBO_TEMPLO-Y-FUENTE_NOCTURNA_RV.jpg',
+      linea: '3CM01',
+      precio:'6.00'
+    },{      
+      clave: '3133',
+      descripcion: 'descripcion largaaaaa',
+      imgUrl:'https://www.mexicodesconocido.com.mx/assets/images/destinos/queretaro/_MG_0088_GEMD_QUERETARO_CD_TEMPLO-SANTA-ROSA-DE-VITERBO_TEMPLO-Y-FUENTE_NOCTURNA_RV.jpg',
+      linea: '3VM01',
+      precio:'3.00'
+    }
+    ]
+    //firebase.database().ref('articulos/').set(articulosDummy);
+
   }
 })
