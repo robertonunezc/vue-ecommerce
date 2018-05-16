@@ -19,7 +19,7 @@
 				<a href="#" class="btn btn-primary"
 				@click="addProductoCarrito">
 				Comprar
-				{{articulo.precio}}
+				${{articulo.precio}}
 			</a>
 		</div>
 	</div>
