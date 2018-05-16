@@ -69,7 +69,6 @@ export default {
 				'linea': '3MM01',
 				'descripcion': 'ESPIRAL METALICO',
 				'precio':10.91,
-				'claveEsquema': 1,
 				'imgUrl':'https://www.mexicodesconocido.com.mx/assets/images/destinos/queretaro/_MG_0088_GEMD_QUERETARO_CD_TEMPLO-SANTA-ROSA-DE-VITERBO_TEMPLO-Y-FUENTE_NOCTURNA_RV.jpg',
 				'claveUnidad': 'H67'
 			}

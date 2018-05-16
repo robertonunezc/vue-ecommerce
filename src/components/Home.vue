@@ -3,6 +3,7 @@
 	<div>
 		<h2>Catálogo de productos</h2>
 		<!-- Filtros -->		
+		<filtros-articulos v-bind:claves="claves" v-bind:lineas="lineas" v-bind:clavesUnidad="clavesUnidad"></filtros-articulos>
 		<catalogo-articulos v-bind:listadoArticulos="articulos"></catalogo-articulos>
 	</div>
 </div>
@@ -10,10 +11,12 @@
 </template>
 <script>
 import CatalogoArticulos from '@/components/CatalogoArticulos.vue';
+import FiltrosArticulo from '@/components/FiltrosArticulo.vue';
 export default {
 	name: 'Home',
 	components: {
-		catalogoArticulos: CatalogoArticulos
+		catalogoArticulos: CatalogoArticulos,
+		filtrosArticulos: FiltrosArticulo
 	},
 	data () {
 		return {			

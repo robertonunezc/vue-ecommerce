@@ -37,12 +37,14 @@
 
 <script>
 export default {
-
+	props: ['claves', 'lineas', 'clavesUnidad'],
 	name: 'FiltrosArticulo',
 
 	data () {
 		return {
-
+			claveSeleccionada: "",
+			lineaSeleccionada: "",
+			claveUnidadSeleccionada: ""
 		}
 	}
 }
