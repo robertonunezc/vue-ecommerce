@@ -27,20 +27,20 @@
 </template>
 
 <script>
-export default {
-	props:['articulo'],
-	name: 'ItemProducto',
-	data () {
-		return {
+	export default {
+		props:['articulo'],
+		name: 'ItemProducto',
+		data () {
+			return {
 
-		}
-	},
-	methods: {
-		addProductoCarrito () {
-			alert('Producto agregado')
+			}
+		},
+		methods: {
+			addProductoCarrito () {
+				alert('Producto agregado')
+			}
 		}
 	}
-}
 </script>
 
 <style lang="css" scoped>

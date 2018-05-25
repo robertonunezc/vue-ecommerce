@@ -9,66 +9,63 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
-            <li class="nav-item active">
-              <router-link to="/" class="nav-link">Inicio</router-link>
-            </li>
-            <li class="nav-item">
-             <router-link to="/login" class="nav-link">Entrar</router-link>
-           </li>
-           <li class="nav-item">
-            <a class="nav-link" href="#">Empresa</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Contacto</a>
-          </li>  
-          <li class="nav-item">
-            <router-link to="/carrito" class="nav-link">Carrito</router-link>
-          </li>
-        </ul>
+            <li class="nav-item" v-for="item in menuItems">
+              <router-link :to="item.link" class="nav-link">
+                {{item.title}}
+              </router-link>             
+            </li>            
+          </ul>
+        </div>
       </div>
+    </nav>
+    <!-- Page Content -->
+    <div class="container" style="margin-top:80px">
+      <transition>
+        <keep-alive>
+          <router-view></router-view>
+        </keep-alive>
+      </transition>
     </div>
-  </nav>
-  <!-- Page Content -->
-  <div class="container" style="margin-top:80px">
-    <transition>
-      <keep-alive>
-        <router-view></router-view>
-      </keep-alive>
-    </transition>
-  </div>
-  <!-- /.container -->
-  <!-- Footer -->
-  <footer class="py-5" style="margin-top:40px">
-    <p class="m-0 text-center ">Copyright &copy; Your Website 2018</p>
     <!-- /.container -->
-  </footer>
+    <!-- Footer -->
+    <footer class="py-5" style="margin-top:40px">
+      <p class="m-0 text-center ">Copyright &copy; Your Website 2018</p>
+      <!-- /.container -->
+    </footer>
 
-</main>
+  </main>
 </template>
 <script>
-export default {
-  data () {
-    return {
-      sideNav: false
-    }
-  },
-
-  computed: {
-    menuItems () {
-      let menuItems = [
-      { icon: 'face', title: 'Iniciar sesión', link: '/login' },
-      ]
-      if (this.userIsAuthenticated) {
-        menuItems = [
-        { icon: 'supervisor_account', title: 'Mi Cuenta', link: '/usuario/perfil' },
-        { icon: 'room', title: 'Carrito', link: '/carrito' },
-        { icon: 'person', title: 'Salir', link: '/salir' }
-        ]
+  export default {
+    data () {
+      return {
+        sideNav: false
       }
-      return menuItems
-    }    
+    },
+
+    computed: {
+      menuItems () {
+        let menuItems = [
+        { icon: 'face', title: 'Inicio', link: '/' },
+        { icon: 'face', title: 'Entrar', link: '/login' },
+        { icon: 'face', title: 'Carrito', link: '/carrito' },
+        { icon: 'face', title: 'Contacto', link: '/login' },
+        ]
+        if (this.userIsAuthenticated) {
+          menuItems = [
+          { icon: 'supervisor_account', title: 'Mi Cuenta', link: '/usuario/perfil' },
+          { icon: 'room', title: 'Catálogo', link: '/' },
+          { icon: 'room', title: 'Carrito', link: '/carrito' },
+          { icon: 'person', title: 'Salir', link: '/salir' }
+          ]
+        }
+        return menuItems
+      } ,
+      userIsAuthenticated () {
+        return this.$store.getters.usuario !== null && this.$store.getters.usuario !== undefined
+      }   
+    }
   }
-}
 </script>
 
 <style lang="stylus">

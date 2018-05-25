@@ -18,7 +18,7 @@ const port = process.env.PORT || config.dev.port
 // automatically open browser, if not set will be false
 const autoOpenBrowser = !!config.dev.autoOpenBrowser
 // Define HTTP proxies to your custom API backend
-// https://github.com/chimurai/http-proxy-middleware
+// https://github.com/chimurai/http-asdasdproxy-middleware
 const proxyTable = config.dev.proxyTable
 
 const app = express()

@@ -18,18 +18,12 @@
 							<span class="badge badge-info">Línea</span>
 						</td>
 						<td>{{articulo.linea}}</td>
-					</tr>
-					<tr>
-						<td>
-							<span class="badge badge-info">Clave Esquema</span>
-						</td>
-						<td>{{articulo.claveEsquema}}</td>
-					</tr>
+					</tr>					
 					<tr>
 						<td>
 							<span class="badge badge-info">Clave Unidad</span>
 						</td>
-						<td>{{articulo.claveUnidad}}</td>
+						<td>{{articulo.clave_unidad}}</td>
 					</tr>
 				</table>
 				<div class="row">
@@ -38,51 +32,62 @@
 						<input placeholder="Cantidad" class="form-control" type="number" name="cantidad" v-model="cantidad">
 					</div>
 					<div class="col-md-9">
-						<button class="mt-3 btn btn-primary btn-block"><strong>${{precioTotal}}</strong> COMPRAR</button> 
-					</div>
+						<button
+						@click.stop="onAgregarCarrito"
+						class="mt-3 btn btn-primary btn-block">
+						<strong>${{precioTotal}}</strong>
+					COMPRAR</button> 
 				</div>
 			</div>
 		</div>
-
-		<hr class="mt-5">
-		<div class="articulos-relacionados">
-			<h4>Otros artículos</h4>
-			<catalogo-articulos v-bind:listadoArticulos="articulos"></catalogo-articulos>
-		</div>
 	</div>
+
+	<hr class="mt-5">
+	<div class="articulos-relacionados">
+		<h4>Otros artículos</h4>
+		<catalogo-articulos v-bind:listadoArticulos="articulos"></catalogo-articulos>
+	</div>
+</div>
 </template>
 
 <script>
-import CatalogoArticulos from '@/components/CatalogoArticulos.vue';
+	import CatalogoArticulos from '@/components/CatalogoArticulos.vue';
 
-export default {
+	export default {
 
-	name: 'DetalleArticulo',
-	components: {
-		catalogoArticulos: CatalogoArticulos
-	},
-	data () {
-		return {
-			cantidad:1,	
-			articulo : {
-				'clave': '3199',
-				'linea': '3MM01',
-				'descripcion': 'ESPIRAL METALICO',
-				'precio':10.91,
-				'imgUrl':'https://www.mexicodesconocido.com.mx/assets/images/destinos/queretaro/_MG_0088_GEMD_QUERETARO_CD_TEMPLO-SANTA-ROSA-DE-VITERBO_TEMPLO-Y-FUENTE_NOCTURNA_RV.jpg',
-				'claveUnidad': 'H67'
+		name: 'DetalleArticulo',
+		components: {
+			catalogoArticulos: CatalogoArticulos
+		},
+		data () {
+			return {
+				cantidad:1,								
+			}
+		},
+		computed: {
+			articulo () {
+				let claveArticulo = this.$route.params.claveArticulo
+				console.log('Clave', claveArticulo)
+				return this.$store.getters.articulo(claveArticulo)
+			},
+			precioTotal: function () {		
+				let precioTotal = this.articulo.precio;;
+				if (this.cantidad > 0) {
+					precioTotal = this.cantidad *  this.articulo.precio;
+				}
+				return parseFloat(precioTotal).toFixed(2) ;
+			},
+			articulos () {
+				return this.$store.getters.listadoArticulos.slice(1,5)
+			}
+		},
+		methods: {
+			onAgregarCarrito() {
+				alert('Producto Agregado Total' + this.precioTotal)
 			}
 		}
-	},
-	computed: {
-		precioTotal: function () {		
-			return parseFloat(this.cantidad * this.articulo.precio).toFixed(2) ;
-		},
-		articulos () {
-			return this.$store.getters.listadoArticulos
-		}
+		
 	}
-}
 </script>
 
 <style lang="css" scoped>

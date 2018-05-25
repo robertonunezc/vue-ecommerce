@@ -4,28 +4,48 @@
 			<h3 class="text-center">Entrar a su cuenta</h3>
 			<div class="form-group">
 				<label for="exampleInputEmail1">Correo electrónico</label>
-				<input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Escriba su correo electrónico">				
+				<input type="text" class="form-control" id="usuario" v-model="usuario" aria-describedby="emailHelp" placeholder="Escriba su correo electrónico">				
 			</div>
 			<div class="form-group">
 				<label for="exampleInputPassword1">Contraseña</label>
-				<input type="password" class="form-control" id="exampleInputPassword1" placeholder="Contraseña">
+				<input type="password" class="form-control" v-model="password" id="password" placeholder="Contraseña">
 			</div>			
-			<button type="submit" class="btn btn-success">Entrar</button>
+			<button type="submit"
+			class="btn btn-success"			
+			@click.stop="onLogin"
+			>Entrar</button>
 		</form>
 	</div>
 </template>
 
 <script>
-export default {
+	export default {
 
-	name: 'Login',
+		name: 'Login',
 
-	data () {
-		return {
-
+		data () {
+			return {
+				usuario:'',
+				password: ''
+			}
+		},
+		computed: {
+			formIsValid () {
+				return this.usuario !== '' &&
+				this.password !== ''
+			}
+		},
+		methods: {
+			onLogin() {
+				const loginDatos = {
+					usuario: this.usuario,
+					password: this.password
+				}				
+				this.$store.dispatch('login', loginDatos)
+				this.$router.push('/')
+			}
 		}
 	}
-}
 </script>
 
 <style lang="css" scoped>

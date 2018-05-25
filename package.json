@@ -4,14 +4,16 @@
     "description": "Tienda virtual",
     "author": "h3dx0 <rob3rto@openmailbox.org>",
     "private": true,
-   "scripts": {
+    "scripts": {
         "dev": "node build/dev-server.js",
         "start": "npm run dev",
         "build": "node build/build.js",
         "lint": "eslint --ext .js,.vue src"
     },
     "dependencies": {
+        "axios": "^0.18.0",
         "firebase": "^4.13.1",
+        "jsonp": "^0.2.1",
         "stylus": "^0.54.5",
         "stylus-loader": "^3.0.2",
         "vue": "^2.5.16",
