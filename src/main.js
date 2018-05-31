@@ -8,14 +8,15 @@ import * as firebase from 'firebase'
 
 Vue.config.productionTip = false
 /* eslint-disable no-new */
+
 new Vue({
-  el: '#app',
-  router,
-  store,
-  template: '<App/>',
-  components: { App },
-  created () {
+	el: '#app',
+	router,
+	store,
+	template: '<App/>',
+	components: { App },
+	created () {
 //    this.$store.dispatch('cargarArticulos')
     //firebase.database().ref('articulos/').set(articulosDummy);
-  }
+}
 })

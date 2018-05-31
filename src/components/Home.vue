@@ -36,15 +36,16 @@
 		},
 		methods: {
 			
-		},	
-		beforeCreate () {
-			if (this.$store.getters.listadoArticulos != null) {
-				this.$store.dispatch('cargarArticulos')
-			}
-		},
+		},			
 		computed: {
-			articulos () {
-				return this.$store.getters.listadoArticulos.slice(0,10)
+			articulos () {		
+				console.log('cargando articulos...')
+				let articulos = this.$store.getters.listadoArticulos.slice(0,10)
+				if (articulos.length === 0) {
+					this.$store.dispatch('cargarArticulos')
+					articulos = this.$store.getters.listadoArticulos.slice(0,10)
+				}
+				return articulos
 			}
 		}
 	}

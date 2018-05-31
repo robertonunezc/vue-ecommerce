@@ -56,7 +56,7 @@
           { icon: 'supervisor_account', title: 'Mi Cuenta', link: '/usuario/perfil' },
           { icon: 'room', title: 'Catálogo', link: '/' },
           { icon: 'room', title: 'Carrito', link: '/carrito' },
-          { icon: 'person', title: 'Salir', link: '/salir' }
+          { icon: 'person', title: 'Salir', link: '/logout' }
           ]
         }
         return menuItems
@@ -64,6 +64,9 @@
       userIsAuthenticated () {
         return this.$store.getters.usuario !== null && this.$store.getters.usuario !== undefined
       }   
+    },
+    methods: {
+
     }
   }
 </script>

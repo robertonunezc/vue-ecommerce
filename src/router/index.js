@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import CreateMetaResagada from '@/components/CreateMetaResagada'
-import ListadoMetasRezagadas from '@/components/ListadoMetasRezagadas'
+import AuthGuard from './auth-guard'
 import Home from '@/components/Home'
 import Login from '@/components/Login'
 import Carrito from '@/components/Carrito'
@@ -14,19 +13,29 @@ export default new Router({
 	{
 		path: '/',
 		name: 'Home',
-		component: Home
+		component: Home,
+		beforeEnter: AuthGuard
+
 	},{
 		path: '/login',
 		name: 'Login',
 		component: Login
 	},{
+		path: '/logout',
+		name: 'Logout',	
+		beforeEnter: AuthGuard
+
+	},{
 		path: '/carrito',
 		name: 'Carrito',
-		component: Carrito
+		component: Carrito,
+		beforeEnter: AuthGuard
 	},{
 		path: '/detalle-articulo/:claveArticulo+',
 		name: 'DetalleArticulo',
-		component: DetalleArticulo
+		component: DetalleArticulo,
+		beforeEnter: AuthGuard
+
 	}
 	]
 })
