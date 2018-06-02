@@ -9,11 +9,11 @@ const host = "http://localhost:8000/api/"
 export const store = new Vuex.Store({
   state: {
     listadoArticulos:[],
-    metasRezagadasCreadas: [],
     usuario: null,
     errors: [],
     token:null,
-    cargando: false
+    cargando: false,
+    carrito:null
   },
   mutations: {
     cargarArticulos (state, payload) {
@@ -24,13 +24,67 @@ export const store = new Vuex.Store({
     },
     setToken(state, payload) {
       state.token = payload
+    },
+    setCarrito(state, payload) {
+      state.carrito = payload
     }
   },
   actions: { 
+    crearCarrito({commit}){
+      if (this.state.carrito === null) {
+        let url = host + 'carrito'
+        let usuario = this.state.usuario
+        const params = new URLSearchParams()
+        params.append('token', this.state.token)
+        params.append('cliente', usuario.id)
+        axios.post(url, params)
+        .then(response =>{
+          console.log('RespCarrito',response)
+          if (response.data.rc == 0 ) {
+           let carrito = response.data.data
+           commit('setCarrito',carrito) 
+         }else{
+          alert('Lo sentimos ocurrió un error. Intente mas tarde')
+        }
+
+      })
+        .catch(err =>{
+          console.log(err)
+        })
+      }
+    },
+    actualizarCarrito({commit}, payload){
+      let articulo = {
+        'articulo': payload.articulo,
+        'cantidad':payload.cantidad
+      }
+      let carrito = this.state.carrito
+      let articulosCarrito = carrito.articulos
+      let articuloCarrito = articulosCarrito.find(itemArticulo=>{
+        console.log(itemArticulo)
+        if (itemArticulo.articulo.clave == articulo.articulo.clave) {
+          itemArticulo.cantidad++
+          return true
+        }else{
+          return false
+        }
+      })
+      let totalArticulo = articulo.cantidad * articulo.articulo.precio
+      let totalCarrito =  carrito.total
+      let nuevoTotal = totalArticulo + totalCarrito
+      carrito.total = nuevoTotal
+      if (!articuloCarrito) {
+        carrito.articulos.push(articulo)
+      }
+      commit('setCarrito', carrito)
+      console.log('NuevoCarro', carrito)
+    },
     logout({commit}){
       console.log('saliendo...')
       sessionStorage.removeItem('token')
       commit('setToken', null)
+      commit('setUsuario', null)
+      
     }, 
     login({commit, getters}, payload) {
       const url = host + 'login'
@@ -48,11 +102,12 @@ export const store = new Vuex.Store({
             'email': data.email,
             'nombre': data.nombre,
             'apellidos': data.apellidos,
+            'id': data.id
           }
           let token = data.token
           sessionStorage.setItem('token', token)
           commit('setToken',token)  
-          commit('setUsuario',usuario)  
+          commit('setUsuario',usuario)          
         }else {
           alert('Entre datos correcto')
         }
@@ -94,6 +149,9 @@ export const store = new Vuex.Store({
   getters: {
     usuario(state) {
       return state.usuario
+    },
+    carrito(state) {
+      return state.carrito
     },
     token(state) {
       return state.token

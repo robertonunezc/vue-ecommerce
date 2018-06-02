@@ -13,27 +13,30 @@
               <router-link :to="item.link" class="nav-link">
                 {{item.title}}
               </router-link>             
-            </li>            
-          </ul>
-        </div>
-      </div>
-    </nav>
-    <!-- Page Content -->
-    <div class="container" style="margin-top:80px">
-      <transition>
-        <keep-alive>
-          <router-view></router-view>
-        </keep-alive>
-      </transition>
-    </div>
+            </li>   
+            <li class="nav-item">
+             <a href="#" class="nav-link"  @click.stop="logout">Salir</a> 
+           </li>                     
+         </ul>
+       </div>
+     </div>
+   </nav>
+   <!-- Page Content -->
+   <div class="container" style="margin-top:80px">
+    <transition>
+      <keep-alive>
+        <router-view></router-view>
+      </keep-alive>
+    </transition>
+  </div>
+  <!-- /.container -->
+  <!-- Footer -->
+  <footer class="py-5" style="margin-top:40px">
+    <p class="m-0 text-center ">Copyright &copy; Your Website 2018</p>
     <!-- /.container -->
-    <!-- Footer -->
-    <footer class="py-5" style="margin-top:40px">
-      <p class="m-0 text-center ">Copyright &copy; Your Website 2018</p>
-      <!-- /.container -->
-    </footer>
+  </footer>
 
-  </main>
+</main>
 </template>
 <script>
   export default {
@@ -56,7 +59,6 @@
           { icon: 'supervisor_account', title: 'Mi Cuenta', link: '/usuario/perfil' },
           { icon: 'room', title: 'Catálogo', link: '/' },
           { icon: 'room', title: 'Carrito', link: '/carrito' },
-          { icon: 'person', title: 'Salir', link: '/logout' }
           ]
         }
         return menuItems
@@ -66,7 +68,10 @@
       }   
     },
     methods: {
-
+      logout() {
+        this.$store.dispatch('logout')
+        this.$router.push('/')
+      }
     }
   }
 </script>

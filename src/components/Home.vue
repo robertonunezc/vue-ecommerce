@@ -47,6 +47,13 @@
 				}
 				return articulos
 			}
+		},
+		created(){
+			if (this.$store.getters.carrito === null) {
+				console.log('Creando carrito')
+				this.$store.dispatch('crearCarrito')
+			}
+			
 		}
 	}
 </script>

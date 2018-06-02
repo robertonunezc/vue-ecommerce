@@ -34,10 +34,15 @@
 			return {
 
 			}
-		},
+		},		
 		methods: {
 			addProductoCarrito () {
-				alert('Producto agregado')
+				let articulo = {
+					'articulo': this.articulo,
+					'cantidad': 1
+				}
+				console.log(articulo)
+				this.$store.dispatch('actualizarCarrito',articulo)
 			}
 		}
 	}
