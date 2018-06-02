@@ -14,21 +14,24 @@
 						<th>Acciones</th>
 					</thead>
 					<tbody>
-						<tr>
+						<tr v-for="articulo in carrito.articulos">
 							<td>
 								<img width="80px" class="d-block m-0" src="https://www.mexicodesconocido.com.mx/assets/images/destinos/queretaro/_MG_0088_GEMD_QUERETARO_CD_TEMPLO-SANTA-ROSA-DE-VITERBO_TEMPLO-Y-FUENTE_NOCTURNA_RV.jpg">	
 							</td>
 							<td>
-								<p>3MM01-3199 Descripción del producto</p>
+								<p>{{articulo.articulo.clave}}
+									{{articulo.articulo.clave_unidad}}
+									{{articulo.articulo.descripcion}}
+								</p>
 							</td>
 							<td>
-								<p>$3.00</p>
+								<p>${{articulo.articulo.precio}}</p>
 							</td>
 							<td>
-								<input type="number" name="cantidad" value="10" />
+								<input type="number" name="cantidad" :value="articulo.cantidad" />
 							</td>
 							<td>
-								<p>$30.00</p>
+								<p>${{articulo.total}}</p>
 							</td>
 							<td>
 								<div class="btn btn-danger btn-sm">Borrar</div>
@@ -42,11 +45,11 @@
 			<div class="col-md-4 offset-8">
 				<div class="subtotal d-flex">
 					<div class="subtotal_label bg-light p-md-3">Subtotal</div>
-					<div class="subtotal_value p-md-3">$30.00</div>
+					<div class="subtotal_value p-md-3">${{carrito.total}}</div>
 				</div>
 				<div class="subtotal d-flex">
 					<div class="subtotal_label bg-light p-md-3">Total</div>
-					<div class="subtotal_value p-md-3">$30.00</div>
+					<div class="subtotal_value p-md-3">${{carrito.total}}</div>
 				</div>
 			</div>
 		</div>
@@ -60,16 +63,23 @@
 </template>
 
 <script>
-export default {
+	export default {
 
-	name: 'Carrito',
+		name: 'Carrito',
 
-	data () {
-		return {
+		data () {
+			return {
 
+			}
+		},
+		computed: {
+			carrito() {
+				let carrito = this.$store.getters.carrito
+				console.log("carrito", carrito)
+				return carrito
+			}
 		}
 	}
-}
 </script>
 
 <style lang="css" scoped>
