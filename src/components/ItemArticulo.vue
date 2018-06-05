@@ -13,7 +13,7 @@
 						<span class="badge badge-success">{{articulo.linea}}</span>
 					</a>
 				</h4>
-				<p class="card-text">{{articulo.descripcion}}</p>
+				<p class="card-text">{{articulo.descripcion}}</p>				
 			</div>
 			<div class="card-footer">
 				<a href="#" class="btn btn-primary"
@@ -32,7 +32,6 @@
 		name: 'ItemProducto',
 		data () {
 			return {
-
 			}
 		},		
 		methods: {
@@ -40,9 +39,9 @@
 				let articulo = {
 					'articulo': this.articulo,
 					'cantidad': 1
-				}
-				console.log(articulo)
-				this.$store.dispatch('actualizarCarrito',articulo)
+				}				
+				this.$store.dispatch('actualizarCarrito',articulo)				
+				alert('Producto Agregado');
 			}
 		}
 	}

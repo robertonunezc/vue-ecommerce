@@ -3,7 +3,7 @@
 	<div>
 		<h2>Catálogo de productos</h2>
 		<!-- Filtros -->		
-		<filtros-articulos v-bind:claves="claves" v-bind:lineas="lineas" v-bind:clavesUnidad="clavesUnidad"></filtros-articulos>
+		<!-- 	<filtros-articulos v-bind:claves="claves" v-bind:lineas="lineas" v-bind:clavesUnidad="clavesUnidad"></filtros-articulos> -->
 		<catalogo-articulos v-bind:listadoArticulos="articulos"></catalogo-articulos>
 	</div>
 </div>

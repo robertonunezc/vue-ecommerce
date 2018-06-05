@@ -61,7 +61,6 @@ export const store = new Vuex.Store({
       let carrito = this.state.carrito
       let articulosCarrito = carrito.articulos
       let articuloCarrito = articulosCarrito.find(itemArticulo=>{
-        console.log(itemArticulo)
         if (itemArticulo.articulo.clave == articulo.articulo.clave) {
           itemArticulo.cantidad++
           return true
@@ -69,21 +68,26 @@ export const store = new Vuex.Store({
           return false
         }
       })
-      let totalArticulo = articulo.cantidad * articulo.articulo.precio
-      let totalCarrito =  carrito.total
-      let nuevoTotal = totalArticulo + totalCarrito
-      carrito.total = nuevoTotal
+      let totalArticulo = (articulo.cantidad * articulo.articulo.precio)
+      let totalCarrito = carrito.total + totalArticulo
+      carrito.total = Math.round(totalCarrito*100)/100
       if (!articuloCarrito) {
         carrito.articulos.push(articulo)
       }
       commit('setCarrito', carrito)
       console.log('NuevoCarro', carrito)
     },
+    borrarArticuloCarrito({commit}, payload){
+      commit('setCarrito', payload)
+    },
     logout({commit}){
       console.log('saliendo...')
       sessionStorage.removeItem('token')
       commit('setToken', null)
       commit('setUsuario', null)
+      commit('setCarrito', null)
+      commit('cargarArticulos', null)
+      window.location.reload()
       
     }, 
     login({commit, getters}, payload) {
@@ -145,7 +149,7 @@ export const store = new Vuex.Store({
         console.log(error)
       })
     }   
-  },
+  }, 
   getters: {
     usuario(state) {
       return state.usuario

@@ -34,7 +34,8 @@
 								<p>${{articulo.total}}</p>
 							</td>
 							<td>
-								<div class="btn btn-danger btn-sm">Borrar</div>
+								<div class="btn btn-danger btn-sm"								
+								@click="onBorrarArticulo(articulo.articulo.clave)">Borrar</div>
 							</td>
 						</tr>
 					</tbody>
@@ -69,7 +70,9 @@
 
 		data () {
 			return {
-
+				articulo: null,	
+				total: 0,
+				subTotal: 0		
 			}
 		},
 		computed: {
@@ -77,6 +80,24 @@
 				let carrito = this.$store.getters.carrito
 				console.log("carrito", carrito)
 				return carrito
+			},			
+		},
+		methods: {
+			onBorrarArticulo(articuloClave){
+				console.log("Clave", articuloClave)
+				let carrito = this.$store.getters.carrito		
+				let indexArticulo = carrito.articulos.findIndex(itemArticulo=>{
+					return itemArticulo.articulo.clave == articuloClave
+				})
+				let articulo = carrito.articulos[indexArticulo]		
+				let totalArticulo = articulo.articulo.precio * articulo.cantidad
+				console.log("Total", totalArticulo)
+				if (carrito.total > 0) {
+					let nuevoTotal = carrito.total  -totalArticulo
+					carrito.total = Math.round(nuevoTotal * 100) / 100
+				}						
+				carrito.articulos.splice(indexArticulo,1)
+				this.$store.dispatch('borrarArticuloCarrito', carrito)
 			}
 		}
 	}

@@ -83,7 +83,13 @@
 		},
 		methods: {
 			onAgregarCarrito() {
-				alert('Producto Agregado Total' + this.precioTotal)
+				let articulo = {
+					'articulo': this.articulo,
+					'cantidad': this.cantidad
+				}
+				this.$store.dispatch('actualizarCarrito', articulo)
+				console.log(articulo)
+				alert('Producto agregado')
 			}
 		}
 		
