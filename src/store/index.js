@@ -54,9 +54,13 @@ export const store = new Vuex.Store({
       }
     },
     actualizarCarrito({commit}, payload){
+      let cantidad = 1
+      if (payload.cantidad > 1) {
+        cantidad = payload.cantidad
+      }
       let articulo = {
         'articulo': payload.articulo,
-        'cantidad':payload.cantidad
+        'cantidad': cantidad
       }
       let carrito = this.state.carrito
       let articulosCarrito = carrito.articulos
