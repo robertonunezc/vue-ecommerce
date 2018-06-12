@@ -62,6 +62,7 @@ export const store = new Vuex.Store({
         'articulo': payload.articulo,
         'cantidad': cantidad
       }
+      let totalArticulo = (articulo.cantidad * articulo.articulo.precio)
       let carrito = this.state.carrito
       let articulosCarrito = carrito.articulos
       let articuloCarrito = articulosCarrito.find(itemArticulo=>{
@@ -71,8 +72,8 @@ export const store = new Vuex.Store({
         }else{
           return false
         }
-      })
-      let totalArticulo = (articulo.cantidad * articulo.articulo.precio)
+      })      
+
       let totalCarrito = carrito.total + totalArticulo
       carrito.total = Math.round(totalCarrito*100)/100
       if (!articuloCarrito) {

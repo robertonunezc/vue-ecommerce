@@ -51,49 +51,48 @@
 </template>
 
 <script>
-	import CatalogoArticulos from '@/components/CatalogoArticulos.vue';
+import CatalogoArticulos from '@/components/CatalogoArticulos.vue';
 
-	export default {
+export default {
 
-		name: 'DetalleArticulo',
-		components: {
-			catalogoArticulos: CatalogoArticulos
-		},
-		data () {
-			return {
-				cantidad:1,								
-			}
-		},
-		computed: {
-			articulo () {
-				let claveArticulo = this.$route.params.claveArticulo
-				console.log('Clave', claveArticulo)
-				return this.$store.getters.articulo(claveArticulo)
-			},
-			precioTotal: function () {		
-				let precioTotal = this.articulo.precio;;
-				if (this.cantidad > 0) {
-					precioTotal = this.cantidad *  this.articulo.precio;
-				}
-				return parseFloat(precioTotal).toFixed(2) ;
-			},
-			articulos () {
-				return this.$store.getters.listadoArticulos.slice(1,5)
-			}
-		},
-		methods: {
-			onAgregarCarrito() {
-				let articulo = {
-					'articulo': this.articulo,
-					'cantidad': this.cantidad
-				}
-				this.$store.dispatch('actualizarCarrito', articulo)
-				console.log(articulo)
-				alert('Producto agregado')
-			}
+	name: 'DetalleArticulo',
+	components: {
+		catalogoArticulos: CatalogoArticulos
+	},
+	data () {
+		return {
+			cantidad:1,								
 		}
-		
+	},
+	computed: {
+		articulo () {
+			let claveArticulo = this.$route.params.claveArticulo
+			console.log('Clave', claveArticulo)
+			return this.$store.getters.articulo(claveArticulo)
+		},
+		precioTotal: function () {		
+			let precioTotal = this.articulo.precio
+			if (this.cantidad > 0) {
+				precioTotal = this.cantidad *  this.articulo.precio
+			}
+			return parseFloat(precioTotal).toFixed(2)
+		},
+		articulos () {
+			return this.$store.getters.listadoArticulos.slice(1,5)
+		}
+	},
+	methods: {
+		onAgregarCarrito() {
+			let articulo = {
+				'articulo': this.articulo,
+				'cantidad': this.cantidad
+			}
+			this.$store.dispatch('actualizarCarrito', articulo)
+			alert('Producto agregado')
+		}
 	}
+
+}
 </script>
 
 <style lang="css" scoped>
