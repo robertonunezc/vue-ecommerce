@@ -153,7 +153,27 @@ export const store = new Vuex.Store({
         this.errors.push(error);
         console.log(error)
       })
-    }   
+    },
+    filtrarArticulo({commit}, payload){
+      const text = payload.text
+      let compoFiltrar = payload.campoFiltrar            
+      let articulosFiltrados = this.state.listadoArticulos.filter( articulo=> {
+        if (compoFiltrar == "clave" && articulo.clave == text) {
+          return true
+        }
+        if (compoFiltrar == "familias" && articulo.familia == text) {
+          return true
+        } 
+        if (compoFiltrar == "lineas" && articulo.linea == text) {
+          return true
+        } 
+        if (compoFiltrar == "descripcion" && articulo.descripcion.includes(text)) {
+          return true
+        }
+        return false
+      })
+      commit('cargarArticulos', articulosFiltrados)
+    } 
   }, 
   getters: {
     usuario(state) {
@@ -170,11 +190,10 @@ export const store = new Vuex.Store({
     },
     articulo (state) {
       return (articuloClave)=> {
-        console.log(articuloClave)
         return state.listadoArticulos.find((articulo) => {
           return articulo.clave === articuloClave
         })
       }
-    }
+    }    
   }
 })

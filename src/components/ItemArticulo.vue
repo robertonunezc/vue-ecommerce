@@ -10,7 +10,7 @@
 						<span class="badge badge-primary">{{articulo.clave}}</span>					
 					</a>
 					<a href="">
-						<span class="badge badge-success">{{articulo.linea}}</span>
+						<span class="badge badge-success">{{articulo.familia}}</span>
 					</a>
 				</h4>
 				<p class="card-text">{{articulo.descripcion}}</p>				
@@ -27,24 +27,24 @@
 </template>
 
 <script>
-	export default {
-		props:['articulo'],
-		name: 'ItemProducto',
-		data () {
-			return {
-			}
-		},		
-		methods: {
-			addProductoCarrito () {
-				let articulo = {
-					'articulo': this.articulo,
-					'cantidad': 1
-				}				
-				this.$store.dispatch('actualizarCarrito',articulo)				
-				alert('Producto Agregado');
-			}
+export default {
+	props:['articulo'],
+	name: 'ItemProducto',
+	data () {
+		return {
+		}
+	},		
+	methods: {
+		addProductoCarrito () {
+			let articulo = {
+				'articulo': this.articulo,
+				'cantidad': 1
+			}				
+			this.$store.dispatch('actualizarCarrito',articulo)				
+			alert('Producto Agregado');
 		}
 	}
+}
 </script>
 
 <style lang="css" scoped>

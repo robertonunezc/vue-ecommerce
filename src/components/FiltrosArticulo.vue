@@ -4,47 +4,119 @@
 			<div class="col-sm-12 col-md-3">
 				<div class="form-group">
 					<label>Claves</label>
-					<select id="claves" name="claves" class="form-control" v-model="claveSeleccionada">
-						<option v-for="clave in claves">{{clave.text}}</option>
-					</select>
-				</div>
-			</div>
-			<div class="col-sm-12 col-md-3">
-				<div class="form-group">
-					<label>Lineas</label>
-					<select id="lineas" name="lineas" class="form-control" v-model="lineaSeleccionada">
-						<option v-for="linea in lineas">{{linea.text}}</option>
-					</select>
-				</div>
-			</div>
-			<div class="col-sm-12 col-md-3">
-				<div class="form-group">
-					<label>ClavesUnidad</label>
-					<select id="clavesUnidad" name="clavesUnidad" class="form-control" v-model="claveUnidadSeleccionada">
-						<option v-for="claveUnidad in clavesUnidad">{{claveUnidad.text}}</option>
-					</select>
-				</div>
-			</div>
-			<div class="col-sm-12 col-md-3">
-				<div class="form-group">
-					<label>Buscar</label>
-					<input type="text" name="Buscar" class="form-control" placeholder="buscar">
-				</div>
+					<select id="claves"
+					name="claves"
+					class="form-control"
+					v-model="claveSeleccionada"	
+					data-tipo="clave"	
+					@change="onSelectFiltro"			
+					>
+					<option v-for="clave in claves" data-clave="clave.text">{{clave.text}}</option>
+				</select>
 			</div>
 		</div>
+		<div class="col-sm-12 col-md-3">
+			<div class="form-group">
+				<label>Lineas</label>
+				<select id="lineas"
+				name="lineas"
+				class="form-control"
+				v-model="lineaSeleccionada"
+				data-tipo="lineas"	
+				@change="onSelectFiltro"			
+				>
+				<option v-for="linea in lineas">{{linea.text}}</option>
+			</select>
+		</div>
 	</div>
+	<div class="col-sm-12 col-md-3">
+		<div class="form-group">
+			<label>Familia</label>
+			<select id="familia" name="familia" class="form-control"
+			v-model="familiaSeleccionada"
+			data-tipo="familias"	
+			@change="onSelectFiltro"	
+			>
+			<option v-for="familia in familias">{{familia.text}}</option>
+		</select>
+	</div>
+</div>
+<div class="col-sm-12 col-md-3">
+	<div class="form-group">
+		<label>Buscar</label>
+		<input type="text" name="Buscar" class="form-control"
+		placeholder="buscar descripcion"
+		data-tipo="descripcion"	
+		@change="onSelectFiltro"	
+		>
+	</div>
+</div>
+<div class="col-sm-12 col-md-1">
+	<div class="form-group">
+		<button class="btn btn-warning" @click="onBorrarFiltros">Borrar filtros</button>
+	</div>
+</div>
+</div>
+</div>
+</div>
 </template>
 
 <script>
 export default {
-	props: ['claves', 'lineas', 'clavesUnidad'],
+	props: ['claves', 'lineas', 'familias'],
 	name: 'FiltrosArticulo',
 
 	data () {
 		return {
 			claveSeleccionada: "",
 			lineaSeleccionada: "",
-			claveUnidadSeleccionada: ""
+			familiaSeleccionada: ""
+		}
+	},
+	methods: {
+		onSelectFiltro(event){
+			let selectedIndex = null
+			let option = null 
+			let payload = {}
+			const tipoFiltro = event.target.dataset.tipo
+			if (tipoFiltro == "descripcion") {
+				payload = {
+					'campoFiltrar': "descripcion",
+					'text': event.target.value
+				}
+			}else{
+				selectedIndex = event.target.options.selectedIndex	
+			}
+			if (tipoFiltro == "clave") {
+				option = this.claves[selectedIndex]
+				payload = {
+					'campoFiltrar': "clave",
+					'text': option.text
+				}				
+			}
+			if (tipoFiltro == "lineas") {
+				option = this.lineas[selectedIndex]
+				payload = {
+					'campoFiltrar': "lineas",
+					'text': option.text
+				}	
+			}
+			if (tipoFiltro == "familias") {
+				option = this.familias[selectedIndex]
+				payload = {
+					'campoFiltrar': "familias",
+					'text': option.text
+				}	
+			}
+			
+			console.log(payload)
+			this.$store.dispatch('filtrarArticulo',payload)
+		},
+		onBorrarFiltros(){
+			document.querySelectorAll('select').forEach( element => {
+				element.selectedIndex = -1
+			});
+			return this.$store.dispatch('cargarArticulos')
 		}
 	}
 }

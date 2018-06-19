@@ -2,10 +2,17 @@
 	<!-- Jumbotron Header -->
 	<div>
 		<h2>Catálogo de productos</h2>
-		<!-- Filtros -->		
-		<!-- 	<filtros-articulos v-bind:claves="claves" v-bind:lineas="lineas" v-bind:clavesUnidad="clavesUnidad"></filtros-articulos> -->
-		<catalogo-articulos v-bind:listadoArticulos="articulos"></catalogo-articulos>
-	</div>
+		<!-- Filtros -->
+		<filtros-articulos v-bind:claves="claves" v-bind:lineas="lineas" v-bind:familias="familias"></filtros-articulos>
+		<paginate
+		name="articulos"
+		:list="articulos"
+		:per="10"
+		>
+		<catalogo-articulos v-bind:listadoArticulos="paginated('articulos')"></catalogo-articulos>
+	</paginate>
+	<paginate-links for="articulos"></paginate-links>
+</div>
 </div>
 <!-- /.row -->
 </template>
@@ -19,7 +26,7 @@
 			filtrosArticulos: FiltrosArticulo
 		},
 		data () {
-			return {			
+			return {
 				claves:[
 				{'text':'3199', 'sku':'ABCD2'},
 				{'text':'3188', 'sku':'DEF123'},
@@ -28,22 +35,23 @@
 				{'text':'3MM01', 'sku':'ABCD2'},
 				{'text':'AKS01', 'sku':'DEF123'},
 				],
-				clavesUnidad:[
-				{'text':'H67', 'sku':'ABCD2'},
-				{'text':'H95', 'sku':'DEF123'},
+				familias:[
+				{'text':'AUTOMOTRIZ', 'sku':'ABCD2'},
+				{'text':'OTRA', 'sku':'DEF123'},
 				],
+				paginate: ['articulos']
 			}
 		},
 		methods: {
-			
-		},			
+
+		},
 		computed: {
-			articulos () {		
+			articulos () {
 				console.log('cargando articulos...')
-				let articulos = this.$store.getters.listadoArticulos.slice(0,10)
+				let articulos = this.$store.getters.listadoArticulos
 				if (articulos.length === 0) {
 					this.$store.dispatch('cargarArticulos')
-					articulos = this.$store.getters.listadoArticulos.slice(0,10)
+					articulos = this.$store.getters.listadoArticulos
 				}
 				return articulos
 			}
@@ -53,10 +61,23 @@
 				console.log('Creando carrito')
 				this.$store.dispatch('crearCarrito')
 			}
-			
+
 		}
 	}
 </script>
 
-<style lang="css" scoped>
+<style lang="css">
+
+ul.paginate-links > li {
+	list-style: none;
+	float: left;
+	padding: 5px;
+	border: solid 1px #ececec;
+	margin: 5px;
+}
+ul.paginate-links > li:hover {
+	cursor: pointer;
+	background-color: #ededed;
+}
+
 </style>

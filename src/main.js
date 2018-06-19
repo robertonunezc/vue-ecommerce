@@ -5,6 +5,8 @@ import App from './App'
 import router from './router'
 import { store } from './store/'
 import * as firebase from 'firebase'
+import VuePaginate from 'vue-paginate'
+Vue.use(VuePaginate)
 
 Vue.config.productionTip = false
 /* eslint-disable no-new */
@@ -14,7 +16,7 @@ new Vue({
 	router,
 	store,
 	template: '<App/>',
-	components: { App },
+	components: { App },	
 	created () {
 //    this.$store.dispatch('cargarArticulos')
     //firebase.database().ref('articulos/').set(articulosDummy);
