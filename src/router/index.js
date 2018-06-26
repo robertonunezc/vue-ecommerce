@@ -5,6 +5,9 @@ import Home from '@/components/Home'
 import Login from '@/components/Login'
 import Carrito from '@/components/Carrito'
 import DetalleArticulo from '@/components/DetalleArticulo'
+import ResumenPedido from '@/components/ResumenPedido'
+import Perfil from '@/components/Perfil'
+
 
 Vue.use(Router)
 
@@ -29,6 +32,16 @@ export default new Router({
 		path: '/carrito',
 		name: 'Carrito',
 		component: Carrito,
+		beforeEnter: AuthGuard
+	},{
+		path: '/perfil',
+		name: 'Perfil',
+		component: Perfil,
+		beforeEnter: AuthGuard
+	},{
+		path: '/resumen-pedido',
+		name: 'ResumenPedido',
+		component: ResumenPedido,
 		beforeEnter: AuthGuard
 	},{
 		path: '/detalle-articulo/:claveArticulo+',

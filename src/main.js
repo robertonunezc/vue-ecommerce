@@ -7,7 +7,7 @@ import { store } from './store/'
 import * as firebase from 'firebase'
 import VuePaginate from 'vue-paginate'
 Vue.use(VuePaginate)
-
+export const eventBus = new Vue({})
 Vue.config.productionTip = false
 /* eslint-disable no-new */
 
@@ -18,7 +18,9 @@ new Vue({
 	template: '<App/>',
 	components: { App },	
 	created () {
-//    this.$store.dispatch('cargarArticulos')
+		this.$store.dispatch('cargarClaves')
+		this.$store.dispatch('cargarFamilias')
+		this.$store.dispatch('cargarLineas')
     //firebase.database().ref('articulos/').set(articulosDummy);
 }
 })

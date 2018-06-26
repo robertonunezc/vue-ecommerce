@@ -11,7 +11,7 @@
 					data-tipo="clave"	
 					@change="onSelectFiltro"			
 					>
-					<option v-for="clave in claves" data-clave="clave.text">{{clave.text}}</option>
+					<option v-for="clave in claves" data-clave="clave.nombre">{{clave.nombre}}</option>
 				</select>
 			</div>
 		</div>
@@ -25,7 +25,7 @@
 				data-tipo="lineas"	
 				@change="onSelectFiltro"			
 				>
-				<option v-for="linea in lineas">{{linea.text}}</option>
+				<option v-for="linea in lineas">{{linea.nombre}}</option>
 			</select>
 		</div>
 	</div>
@@ -37,7 +37,7 @@
 			data-tipo="familias"	
 			@change="onSelectFiltro"	
 			>
-			<option v-for="familia in familias">{{familia.text}}</option>
+			<option v-for="familia in familias">{{familia.nombre}}</option>
 		</select>
 	</div>
 </div>
@@ -91,21 +91,21 @@ export default {
 				option = this.claves[selectedIndex]
 				payload = {
 					'campoFiltrar': "clave",
-					'text': option.text
+					'text': option.nombre
 				}				
 			}
 			if (tipoFiltro == "lineas") {
 				option = this.lineas[selectedIndex]
 				payload = {
 					'campoFiltrar': "lineas",
-					'text': option.text
+					'text': option.nombre
 				}	
 			}
 			if (tipoFiltro == "familias") {
 				option = this.familias[selectedIndex]
 				payload = {
 					'campoFiltrar': "familias",
-					'text': option.text
+					'text': option.nombre
 				}	
 			}
 			

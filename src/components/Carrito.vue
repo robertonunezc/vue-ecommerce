@@ -14,8 +14,10 @@
 						<th>Acciones</th>
 					</thead>
 					<tbody>
-						<item-articulo-carrito v-for="articulo in carrito.articulos"
+						<item-articulo-carrito
+						v-for="articulo in carrito.articulos"
 						:key="articulo.clave"
+						:editable="true"
 						:articulo="articulo">							
 					</item-articulo-carrito>
 				</tbody>
@@ -36,7 +38,10 @@
 	</div>
 	<div class="row">
 		<div class="col-md-4 offset-8">
-			<button class="btn btn-success btn-block">PAGAR</button>
+			<router-link tag="li" to="/resumen-pedido" class="btn btn-block btn-success">
+				REALIZAR PEDIDO
+			</router-link>
+
 		</div>
 	</div>
 </div>
@@ -44,29 +49,27 @@
 </template>
 
 <script>
-	import itemArticuloCarrito from '@/components/ItemArticuloCarrito.vue';
+import itemArticuloCarrito from '@/components/ItemArticuloCarrito.vue';
 
-	export default {
-		props:['articulo'],
-		name: 'Carrito',
-		components: {
-			itemArticuloCarrito: itemArticuloCarrito
-		},
-		data () {
-			return {
-				articulo: null,	
-				subTotal: 0		
-			}
-		},
-		computed: {
-			carrito() {
-				let carrito = this.$store.getters.carrito
-				console.log("carrito", carrito)
-				return carrito
-			}
-		},
-		
+export default {
+	props:['articulo'],
+	name: 'Carrito',
+	components: {
+		itemArticuloCarrito: itemArticuloCarrito
+	},
+	data () {
+		return {		
+			subTotal: 0					
+		}
+	},
+	computed: {
+		carrito() {
+			let carrito = this.$store.getters.carrito				
+			return carrito
+		}
 	}
+
+}
 </script>
 
 <style lang="css" scoped>

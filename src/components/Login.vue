@@ -19,33 +19,33 @@
 </template>
 
 <script>
-	export default {
+export default {
 
-		name: 'Login',
+	name: 'Login',
 
-		data () {
-			return {
-				usuario:'',
-				password: ''
-			}
-		},
-		computed: {
-			formIsValid () {
-				return this.usuario !== '' &&
-				this.password !== ''
-			}
-		},
-		methods: {
-			onLogin() {
-				const loginDatos = {
-					usuario: this.usuario,
-					password: this.password
-				}				
-				this.$store.dispatch('login', loginDatos)
-				this.$router.push('/')
-			}
+	data () {
+		return {
+			usuario:'',
+			password: ''
+		}
+	},
+	computed: {
+		formIsValid () {
+			return this.usuario !== '' &&
+			this.password !== ''
+		}
+	},
+	methods: {
+		onLogin() {
+			const loginDatos = {
+				usuario: this.usuario,
+				password: this.password
+			}				
+			this.$store.dispatch('login', loginDatos)
+			this.$router.push('/')
 		}
 	}
+}
 </script>
 
 <style lang="css" scoped>

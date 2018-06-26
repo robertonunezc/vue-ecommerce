@@ -39,41 +39,41 @@
 </main>
 </template>
 <script>
-  export default {
-    data () {
-      return {
-        sideNav: false
-      }
-    },
+export default {
+  data () {
+    return {
+      sideNav: false
+    }
+  },
 
-    computed: {
-      menuItems () {
-        let menuItems = [
-        { icon: 'face', title: 'Inicio', link: '/' },
-        { icon: 'face', title: 'Entrar', link: '/login' },
-        { icon: 'face', title: 'Carrito', link: '/carrito' },
-        { icon: 'face', title: 'Contacto', link: '/login' },
+  computed: {
+    menuItems () {
+      let menuItems = [
+      { icon: 'face', title: 'Inicio', link: '/' },
+      { icon: 'face', title: 'Entrar', link: '/login' },
+      { icon: 'face', title: 'Carrito', link: '/carrito' },
+      { icon: 'face', title: 'Contacto', link: '/login' },
+      ]
+      if (this.userIsAuthenticated) {
+        menuItems = [
+        { icon: 'supervisor_account', title: 'Mi Cuenta', link: '/perfil' },
+        { icon: 'room', title: 'Catálogo', link: '/' },
+        { icon: 'room', title: 'Carrito', link: '/carrito' },
         ]
-        if (this.userIsAuthenticated) {
-          menuItems = [
-          { icon: 'supervisor_account', title: 'Mi Cuenta', link: '/usuario/perfil' },
-          { icon: 'room', title: 'Catálogo', link: '/' },
-          { icon: 'room', title: 'Carrito', link: '/carrito' },
-          ]
-        }
-        return menuItems
-      } ,
-      userIsAuthenticated () {
-        return this.$store.getters.usuario !== null && this.$store.getters.usuario !== undefined
-      }   
-    },
-    methods: {
-      logout() {
-        this.$store.dispatch('logout')
-        this.$router.push('/')
       }
+      return menuItems
+    } ,
+    userIsAuthenticated () {
+      return this.$store.getters.usuario !== null && this.$store.getters.usuario !== undefined
+    }   
+  },
+  methods: {
+    logout() {
+      this.$store.dispatch('logout')
+      this.$router.push('/')
     }
   }
+}
 </script>
 
 <style lang="stylus">
