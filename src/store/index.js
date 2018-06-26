@@ -113,90 +113,103 @@ export const store = new Vuex.Store({
     actualizarCarrito({commit}, payload){
       let cantidad = 1
       let carrito = this.state.carrito
+      let url = host + 'add_articulo_carrito'
+      let usuario = this.state.usuario
+      const params = new URLSearchParams()
+      params.append('token', this.state.token)
+      params.append('carrito', carrito.id)
+      params.append('articulo', payload.articulo.id)
       if (payload.cantidad > 1) {
         cantidad = payload.cantidad
       }
-      let articulo = {
-        'articulo': payload.articulo,
-        'cantidad': cantidad
-      }
-      let totalArticulo = (articulo.cantidad * articulo.articulo.precio)
-      let articulosCarrito = carrito.articulos
-      let articuloCarrito = articulosCarrito.find(itemArticulo=>{        
-        if (itemArticulo.articulo.clave == articulo.articulo.clave 
-          && itemArticulo.cantidad != articulo.cantidad) {
-          itemArticulo.cantidad = articulo.cantidad
-        return true
-      }else{
-        return false
-      }
-    })   
-      let totalCarrito = carrito.total + totalArticulo   
-      if (carrito.cantidad > 1 || articulo.cantidad > 1) {
-       totalCarrito = totalCarrito - articulo.articulo.precio 
-
-     }
-     carrito.total = Math.round(totalCarrito*100)/100
-     if (!articuloCarrito) {
-      carrito.articulos.push(articulo)
-    }
-    commit('setCarrito', carrito)
-
-  },
-  borrarArticuloCarrito({commit}, payload){
-    commit('setCarrito', payload)
-  },
-  logout({commit}){
-    console.log('saliendo...')
-    sessionStorage.removeItem('token')
-    commit('setToken', null)
-    commit('setUsuario', null)
-    commit('setCarrito', null)
-    commit('cargarArticulos', null)
-    window.location.reload()
-
-  }, 
-  login({commit, getters}, payload) {
-    const url = host + 'login'
-    console.log(payload)
-    const params = new URLSearchParams()
-    params.append('username', payload.usuario)
-    params.append('password', payload.password)
-    axios.post(url,params)
-    .then(response => {
-      console.log(response)
-      if (response.data.rc == 0) {
-        let data = response.data.data
-        let usuario = {
-          'usuario': data.username,
-          'email': data.email,
-          'nombre': data.nombre,
-          'apellidos': data.apellidos,
-          'id': data.id,
-          'rfc': data.rfc,
-          'calle': data.calle,
-          'numero_ext': data.numero_ext,
-          'numero_int': data.numero_int || "No",
-          'colonia': data.colonia,
-          'cp': data.cp,
-          'municipio': data.municipio || "No",
-          'estado': data.estado.estado
-        }
-        let token = data.token
-        sessionStorage.setItem('token', token)
-        commit('setToken',token)  
-        commit('setUsuario',usuario)          
-      }else {
-        alert('Entre datos correcto')
+      params.append('cantidad', cantidad )
+      axios.post(url, params)
+      .then(response =>{
+        if (response.data.rc == 0 ) {
+         let carrito = response.data.data
+         commit('setCarrito',carrito) 
+       }else{
+        alert('Lo sentimos ocurrió un error. Intente mas tarde')
       }
 
     })
-    .catch(error => {
-     this.errors.push(error);
-     console.log(error)
-   })
-  },
-  cargarArticulos ({commit}) {
+      .catch(err =>{
+        console.log(err)
+      })
+    },
+    borrarArticuloCarrito({commit}, payload){
+      let carrito = this.state.carrito
+      let url = host + 'remove_articulo_carrito'
+      let usuario = this.state.usuario
+      const params = new URLSearchParams()
+      params.append('token', this.state.token)
+      params.append('carrito', carrito.id)
+      params.append('articulo', payload.articulo.id)     
+      axios.post(url, params)
+      .then(response =>{
+        if (response.data.rc == 0 ) {
+         let carrito = response.data.data
+         commit('setCarrito',carrito) 
+       }else{
+        alert('Lo sentimos ocurrió un error. Intente mas tarde')
+      }
+    })
+      .catch(err =>{
+        console.log(err)
+      })
+      
+    },
+    logout({commit}){
+      console.log('saliendo...')
+      sessionStorage.removeItem('token')
+      commit('setToken', null)
+      commit('setUsuario', null)
+      commit('setCarrito', null)
+      commit('cargarArticulos', null)
+      window.location.reload()
+
+    }, 
+    login({commit, getters}, payload) {
+      const url = host + 'login'
+      console.log(payload)
+      const params = new URLSearchParams()
+      params.append('username', payload.usuario)
+      params.append('password', payload.password)
+      axios.post(url,params)
+      .then(response => {
+        console.log(response)
+        if (response.data.rc == 0) {
+          let data = response.data.data
+          let usuario = {
+            'usuario': data.username,
+            'email': data.email,
+            'nombre': data.nombre,
+            'apellidos': data.apellidos,
+            'id': data.id,
+            'rfc': data.rfc,
+            'calle': data.calle,
+            'numero_ext': data.numero_ext,
+            'numero_int': data.numero_int || "No",
+            'colonia': data.colonia,
+            'cp': data.cp,
+            'municipio': data.municipio || "No",
+            'estado': data.estado.estado
+          }
+          let token = data.token
+          sessionStorage.setItem('token', token)
+          commit('setToken',token)  
+          commit('setUsuario',usuario)          
+        }else {
+          alert('Entre datos correcto')
+        }
+
+      })
+      .catch(error => {
+       this.errors.push(error);
+       console.log(error)
+     })
+    },
+    cargarArticulos ({commit}) {
       //aqui se llama al servicio
       const url = host + 'articulos'
       const params = new URLSearchParams()

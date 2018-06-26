@@ -21,7 +21,7 @@
 		</td>
 		<td v-if="editable">
 			<div class="btn btn-danger btn-sm"								
-			@click="onBorrarArticulo(articulo.articulo.clave)">Borrar</div>
+			@click="onBorrarArticulo(articulo.articulo)">Borrar</div>
 			<div class="btn btn-info btn-sm"								
 			@click="onActualizarArticulo(articulo.articulo)">Actualizar</div>
 		</td>
@@ -59,22 +59,11 @@ export default {
 		}
 	},
 	methods: {
-		onBorrarArticulo(articuloClave){
-			console.log("Clave", articuloClave)
-			let carrito = this.carrito	
-			let indexArticulo = carrito.articulos.findIndex(itemArticulo=>{
-				return itemArticulo.articulo.clave == articuloClave
-			})
-			let articulo = carrito.articulos[indexArticulo]		
-
-			let totalArticulo = articulo.articulo.precio * this.cantidad
-			console.log("Total", totalArticulo)
-			if (carrito.total > 0) {
-				let nuevoTotal = carrito.total - totalArticulo
-				carrito.total = Math.round(nuevoTotal * 100) / 100
-			}						
-			carrito.articulos.splice(indexArticulo,1)
-			this.$store.dispatch('borrarArticuloCarrito', carrito)
+		onBorrarArticulo(articulo){			
+			let payload = {
+				'articulo': articulo,
+			}
+			this.$store.dispatch('borrarArticuloCarrito', payload)
 		},
 		onActualizarArticulo(articulo) {
 			let payload = {
