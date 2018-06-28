@@ -89,7 +89,7 @@ export const store = new Vuex.Store({
       })
     },
     crearCarrito({commit}){
-      if (this.state.carrito === null) {
+      if (this.state.carrito == null) {
         let url = host + 'carrito'
         let usuario = this.state.usuario
         const params = new URLSearchParams()
@@ -101,7 +101,7 @@ export const store = new Vuex.Store({
            let carrito = response.data.data
            commit('setCarrito',carrito) 
          }else{
-          alert('Lo sentimos ocurrió un error. Intente mas tarde')
+          alert('Lo sentimos ocurrió un error creado un carrito. Intente mas tarde')
         }
 
       })
@@ -193,7 +193,7 @@ export const store = new Vuex.Store({
             'colonia': data.colonia,
             'cp': data.cp,
             'municipio': data.municipio || "No",
-            'estado': data.estado.estado
+            'estado': data.estado.estado || "No"
           }
           let token = data.token
           sessionStorage.setItem('token', token)
@@ -205,7 +205,7 @@ export const store = new Vuex.Store({
 
       })
       .catch(error => {
-       this.errors.push(error);
+       //this.errors.push(error);
        console.log(error)
      })
     },
@@ -225,9 +225,9 @@ export const store = new Vuex.Store({
             data[i].imgUrl="/static/img/producto.jpg"
             articulos.push(data[i])
           }*/
-          commit('cargarArticulos', articulos);          
+          commit('cargarArticulos', data);          
         }else{
-          alert('Hubo un error lo sentimos')          
+          alert('Hubo un error al cargar articulos.Lo sentimos')          
           console.log(response.data.rc)
         }
       })

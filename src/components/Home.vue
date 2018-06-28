@@ -48,7 +48,7 @@ export default {
 		}
 	},
 	created(){
-		if (this.$store.getters.carrito === null) {
+		if (this.$store.getters.carrito == null) {
 			console.log('Creando carrito')
 			this.$store.dispatch('crearCarrito')
 		}
