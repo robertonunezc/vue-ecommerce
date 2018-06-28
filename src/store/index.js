@@ -220,11 +220,11 @@ export const store = new Vuex.Store({
         console.log(response.data.rc)
         if (response.data.rc == 0) {
           var data = response.data.data
-          const articulos = []
+          /*const articulos = []
           for (var i = 0; i < data.length; i++) {
             data[i].imgUrl="/static/img/producto.jpg"
             articulos.push(data[i])
-          }
+          }*/
           commit('cargarArticulos', articulos);          
         }else{
           alert('Hubo un error lo sentimos')          
