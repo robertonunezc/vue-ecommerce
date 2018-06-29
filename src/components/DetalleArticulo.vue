@@ -2,7 +2,7 @@
 	<div class="wrapper-articulo">
 		<div class="row">
 			<div class="col-md-4">
-				<img class="card-img-top" :src="articulo.imgUrl" alt=""/>
+				<img class="card-img-top" :src="articulo.imagen" alt=""/>
 			</div>
 			<div class="col-md-8">
 				<h2>{{articulo.descripcion}}</h2>
@@ -63,7 +63,7 @@ export default {
 		return {
 			cantidad:1,								
 		}
-	},
+	},		
 	computed: {
 		articulo () {
 			let claveArticulo = this.$route.params.claveArticulo
@@ -79,7 +79,7 @@ export default {
 		},
 		articulos () {
 			return this.$store.getters.listadoArticulos.slice(1,5)
-		}
+		}		
 	},
 	methods: {
 		onAgregarCarrito() {

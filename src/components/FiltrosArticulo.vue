@@ -1,7 +1,7 @@
 <template>
 	<div class="bg-light p-md-3">
 		<div class="row">
-			<div class="col-sm-12 col-md-3">
+			<div class="col-sm-12 col-md-4">
 				<div class="form-group">
 					<label>Claves</label>
 					<select id="claves"
@@ -15,7 +15,7 @@
 				</select>
 			</div>
 		</div>
-		<div class="col-sm-12 col-md-3">
+		<div class="col-sm-12 col-md-4">
 			<div class="form-group">
 				<label>Lineas</label>
 				<select id="lineas"
@@ -29,7 +29,7 @@
 			</select>
 		</div>
 	</div>
-	<div class="col-sm-12 col-md-3">
+	<div class="col-sm-12 col-md-4">
 		<div class="form-group">
 			<label>Familia</label>
 			<select id="familia" name="familia" class="form-control"
@@ -39,16 +39,6 @@
 			>
 			<option v-for="familia in familias">{{familia.nombre}}</option>
 		</select>
-	</div>
-</div>
-<div class="col-sm-12 col-md-3">
-	<div class="form-group">
-		<label>Buscar</label>
-		<input type="text" name="Buscar" class="form-control"
-		placeholder="buscar descripcion"
-		data-tipo="descripcion"	
-		@change="onSelectFiltro"	
-		>
 	</div>
 </div>
 <div class="col-sm-12 col-md-1">

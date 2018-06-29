@@ -2,16 +2,16 @@
 	<div class="col-lg-3 col-md-6 mb-4">
 		<div class="card">
 			<router-link :to="{name:'DetalleArticulo', params: { claveArticulo: articulo.clave }}">
-				<img class="card-img-top" :src="articulo.imgUrl" alt="">
+				<img class="card-img-top" :src="articulo.imagen" width="244" height="180" alt="">
 			</router-link>
 			<div class="card-body">
 				<h4 class="card-title">
-					<a href="">
+					<router-link :to="{name:'DetalleArticulo', params: { claveArticulo: articulo.clave }}">
 						<span class="badge badge-primary">{{articulo.clave}}</span>					
-					</a>
-					<a href="">
+					</router-link>
+					<router-link :to="{name:'DetalleArticulo', params: { claveArticulo: articulo.clave }}">
 						<span class="badge badge-success">{{articulo.familia}}</span>
-					</a>
+					</router-link>
 				</h4>
 				<p class="card-text">{{articulo.descripcion}}</p>				
 			</div>

@@ -16,7 +16,8 @@ export const store = new Vuex.Store({
     errors: [],
     token:null,
     cargando: false,
-    carrito:null
+    carrito:null,
+    host: host
   },
   mutations: {
     cargarArticulos (state, payload) {
@@ -219,12 +220,14 @@ export const store = new Vuex.Store({
       .then(response => {        
         console.log(response.data.rc)
         if (response.data.rc == 0) {
-          var data = response.data.data
-          /*const articulos = []
+          var data = response.data.data          
           for (var i = 0; i < data.length; i++) {
-            data[i].imgUrl="/static/img/producto.jpg"
-            articulos.push(data[i])
-          }*/
+            if (data[i].imagen == null) {
+              data[i].imagen = "/static/img/producto.jpg"
+            }else{
+              data[i].imagen = host.split("/api/")[0] + "/uploads/images/" + data[i].imagen
+            }
+          }
           commit('cargarArticulos', data);          
         }else{
           alert('Hubo un error al cargar articulos.Lo sentimos')          
