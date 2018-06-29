@@ -30,14 +30,10 @@
 												<tr>
 													<td>Dirección envío</td>
 													<td>
-														{{usuario.calle}} #{{usuario.num_ext}},{{usuario.colonia}}, {{usuario.municipio}}
-														,{{usuario.estado}}, CP {{usuario.cp}}
+														{{usuario.calle}} #{{usuario.num_ext}}, {{usuario.colonia}}, {{usuario.municipio.municipio}}
+														,{{usuario.estado.estado}}, CP {{usuario.cp}}
 													</td>
-												</tr>
-												<tr>
-													<td>Email</td>
-													<td><a href="mailto:info@support.com">info@support.com</a></td>
-												</tr>
+												</tr>												
 												<td>RFC</td>
 												<td>{{usuario.rfc}}
 												</td>

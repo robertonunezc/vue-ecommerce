@@ -42,8 +42,8 @@
 							Dirección envío
 						</td>
 						<td>
-							{{usuario.calle}} #{{usuario.num_ext}},{{usuario.colonia}}, {{usuario.municipio}}
-							,{{usuario.estado}}, CP {{usuario.cp}}
+							{{usuario.calle}} # {{usuario.num_ext}},{{usuario.colonia}}, {{usuario.municipio}}
+							,{{usuario.estado.estado}}, CP {{usuario.cp}}
 						</td>
 					</tr>
 				</table>
