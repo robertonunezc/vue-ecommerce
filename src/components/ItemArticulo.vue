@@ -39,11 +39,21 @@ export default {
 			let articulo = {
 				'articulo': this.articulo,
 				'cantidad': 1
-			}				
-			this.$store.dispatch('actualizarCarrito',articulo)				
-			alert('Producto Agregado');
+			}
+			if(this.$store.getters.usuario && this.$store.getters.carrito){
+				this.$store.dispatch('actualizarCarrito',articulo)				
+				alert('Producto Agregado')				
+				return
+			}
+			if (this.$store.getters.usuario && this.$store.getters.carrito == null) {
+				this.$store.dispatch('crearCarrito', articulo)
+			}else{
+				alert('Debe iniciar sesión para poder comprar')
+			}
+
 		}
 	}
+	
 }
 </script>
 

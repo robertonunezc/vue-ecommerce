@@ -42,7 +42,7 @@
 							Dirección envío
 						</td>
 						<td>
-							{{usuario.calle}} # {{usuario.num_ext}},{{usuario.colonia}}, {{usuario.municipio}}
+							{{usuario.calle}} # {{usuario.num_ext}},{{usuario.colonia}}, {{usuario.municipio.municipio}}
 							,{{usuario.estado.estado}}, CP {{usuario.cp}}
 						</td>
 					</tr>
@@ -70,7 +70,7 @@
 			<div>
 				<h5><strong>Total:${{carrito.total}}</strong></h5>
 			</div>
-			<button class="btn btn-block btn-success">Estoy seguro. Realizar pedido</button>
+			<button class="btn btn-block btn-success" @click.stop="onProcesarPedido">Estoy seguro. Realizar pedido</button>
 		</div>
 	</div>
 </div>
@@ -78,6 +78,8 @@
 
 <script>
 import itemArticuloCarrito from '@/components/ItemArticuloCarrito.vue';
+import config from '../../config/index'
+import axios from 'axios'
 
 export default {
 	name: 'ResumenPedido',
@@ -96,7 +98,35 @@ export default {
 		usuario(){
 			return this.$store.getters.usuario
 		}
+	},
+	methods:{
+		onProcesarPedido(){
+			const carrito = this.$store.getters.carrito
+			const token = this.$store.getters.token
+			let params = new URLSearchParams()
+			params.append('token', token)
+			params.append('carrito', carrito.id)
+			params.append('status', 2)	
+			const url = `${config.urlBase}process_carrito` 
+			axios.post(url,params)
+			.then(response =>{
+				console.log(response.data.rc)
+				if (response.data.rc == 0 ) {
+					this.$store.dispatch('limpiarCarrito')
+					this.$router.push({'name':'PedidoExitoso'})
+				}else{
+					alert('Ocurrió un error procesando su pedido. Intente más tarde')
+				}
+			})
+			.catch(err =>{
+				console.log(err)
+				alert('Ocurrió un error procesando su pedido. Intente más tarde')
+
+			})
+
+		}
 	}
+	
 }
 </script>
 

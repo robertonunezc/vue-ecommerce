@@ -6,6 +6,7 @@ import Login from '@/components/Login'
 import Carrito from '@/components/Carrito'
 import DetalleArticulo from '@/components/DetalleArticulo'
 import ResumenPedido from '@/components/ResumenPedido'
+import PedidoExitoso from '@/components/PedidoExitoso'
 import Perfil from '@/components/Perfil'
 
 
@@ -17,7 +18,6 @@ export default new Router({
 		path: '/',
 		name: 'Home',
 		component: Home,
-		beforeEnter: AuthGuard
 
 	},{
 		path: '/login',
@@ -44,10 +44,14 @@ export default new Router({
 		component: ResumenPedido,
 		beforeEnter: AuthGuard
 	},{
+		path: '/pedido-exitoso',
+		name: 'PedidoExitoso',
+		component: PedidoExitoso,
+		beforeEnter: AuthGuard
+	},{
 		path: '/detalle-articulo/:claveArticulo+',
 		name: 'DetalleArticulo',
 		component: DetalleArticulo,
-		beforeEnter: AuthGuard
 
 	}
 	]

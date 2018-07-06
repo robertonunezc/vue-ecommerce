@@ -8,33 +8,35 @@
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
-          <ul class="navbar-nav ml-auto">
-            <li class="nav-item" v-for="item in menuItems">
-              <router-link :to="item.link" class="nav-link">
-                {{item.title}}
-              </router-link>             
-            </li>   
-            <li class="nav-item">
-             <a href="#" class="nav-link"  @click.stop="logout">Salir</a> 
-           </li>                     
-         </ul>
-       </div>
+          <ul class="navbar-nav ml-auto">           
+          </li>
+          <li class="nav-item" v-for="item in menuItems">
+
+            <router-link :to="item.link" class="nav-link">
+              {{item.title}}
+            </router-link>             
+          </li>   
+          <li class="nav-item">
+           <a href="#" class="nav-link"  @click.stop="logout">Salir</a> 
+         </li>                      
+       </ul>
      </div>
-   </nav>
-   <!-- Page Content -->
-   <div class="container" style="margin-top:80px">
-    <transition>
-      <keep-alive>
-        <router-view></router-view>
-      </keep-alive>
-    </transition>
-  </div>
+   </div>
+ </nav>
+ <!-- Page Content -->
+ <div class="container" style="margin-top:80px">
+  <transition>
+    <keep-alive>
+      <router-view></router-view>
+    </keep-alive>
+  </transition>
+</div>
+<!-- /.container -->
+<!-- Footer -->
+<footer class="py-5" style="margin-top:40px">
+  <p class="m-0 text-center ">Copyright &copy; Your Website 2018</p>
   <!-- /.container -->
-  <!-- Footer -->
-  <footer class="py-5" style="margin-top:40px">
-    <p class="m-0 text-center ">Copyright &copy; Your Website 2018</p>
-    <!-- /.container -->
-  </footer>
+</footer>
 
 </main>
 </template>
@@ -49,15 +51,15 @@ export default {
   computed: {
     menuItems () {
       let menuItems = [
-      { icon: 'face', title: 'Inicio', link: '/' },
       { icon: 'face', title: 'Entrar', link: '/login' },
+      { icon: 'face', title: 'Catalogo', link: '/' },
       { icon: 'face', title: 'Carrito', link: '/carrito' },
       { icon: 'face', title: 'Contacto', link: '/login' },
       ]
       if (this.userIsAuthenticated) {
         menuItems = [
         { icon: 'supervisor_account', title: 'Mi Cuenta', link: '/perfil' },
-        { icon: 'room', title: 'Catálogo', link: '/' },
+        { icon: 'face', title: 'Catalogo', link: '/' },
         { icon: 'room', title: 'Carrito', link: '/carrito' },
         ]
       }

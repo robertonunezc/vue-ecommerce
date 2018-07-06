@@ -2,7 +2,10 @@
 	<div class="wrapper-carrito">
 		<h3 class="display-5">Resumen del pedido</h3>
 		<hr>
-		<div class="row">
+		<div v-if="!carrito">
+			<div class="alert alert-danger"> No hay productos en su carrito de compras</div>
+		</div>
+		<div class="row" v-if="carrito">
 			<div class="col-sm-12">
 				<table class="table table-bordered">
 					<thead>
@@ -24,7 +27,7 @@
 			</table>
 		</div>
 	</div>
-	<div class="row mb-3">
+	<div class="row mb-3" v-if="carrito">
 		<div class="col-md-4 offset-8">
 			<!-- <div class="subtotal d-flex">
 				<div class="subtotal_label bg-light p-md-3">Subtotal</div>
@@ -36,7 +39,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="row">
+	<div class="row"  v-if="carrito">
 		<div class="col-md-4 offset-8">
 			<router-link tag="li" to="/resumen-pedido" class="btn btn-block btn-success">
 				REALIZAR PEDIDO
@@ -64,9 +67,22 @@ export default {
 	},
 	computed: {
 		carrito() {
-			let carrito = this.$store.getters.carrito				
-			return carrito
+			const carrito = this.$store.getters.carrito
+			return  carrito		
 		}
+	},
+	
+	beforeCreate(){
+		try {
+			console.log("Carrito detalle beforeCreate", this.$store.getters.carrito)
+			// statements
+		} catch(e) {
+			// statements
+			console.log('Se rompio antes d crearse');
+		}
+	},
+	created(){
+		console.log("Carrito detalle creado", this.$store.getters.carrito)
 	}
 
 }

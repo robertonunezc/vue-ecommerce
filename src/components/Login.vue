@@ -41,8 +41,7 @@ export default {
 				usuario: this.usuario,
 				password: this.password
 			}				
-			this.$store.dispatch('login', loginDatos)
-			this.$router.push('/')
+			this.$store.dispatch('login', loginDatos)		
 		}
 	}
 }

@@ -1,7 +1,7 @@
 <template>	
-	<div class="container">
+	<div>
 		<div class="row">
-			<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xs-offset-0 col-sm-offset-0 col-md-offset-5 col-lg-offset-5 toppad">				
+			<div class="col-md-6 col-lg-6">				
 				<div class="panel panel-info">
 					<div class="panel-heading">
 						<h3 class="panel-title">{{usuario.usuario}}</h3>
@@ -51,7 +51,36 @@
 						</div>
 					</div>
 				</div>
+				<div class="col-md-6 col-lg-6">
+					<h3>Pedidos</h3>
+					<table class="table table-striped">
+						<thead>
+							<th>ID</th>
+							<th>Estado</th>
+							<th>Pedidos</th>
+							<th>Total</th>
+						</thead>
+						<tbody>
+							<tr v-for="pedido in usuario.pedidos" :key="pedido.id">
+								<td>{{pedido.id}}</td>
+								<td>{{pedido.status}}</td>
+								<td>
+									<ul>
+										<li v-for="articulo in pedido.articulos" :key="articulo.id" class="fs10">
+											{{articulo.articulo.clave}}
+											{{articulo.articulo.descripcion}}
+											{{articulo.articulo.cantidad}}
+										</li>
+									</ul>
+								</td>
+								<td>${{pedido.total}}</td>
+							</tr>
+							
+						</tbody>
+					</table>
+				</div>
 			</div>
+
 		</div>
 	</template>
 
@@ -82,7 +111,9 @@
 		padding: 5px;
 		height: 100%;
 	}
-
+	.fs10{
+		font-size:10px;
+	}
 	.dropdown-user:hover {
 		cursor: pointer;
 	}
@@ -98,9 +129,6 @@
 
 	.table-user-information > tbody > tr > td {
 		border-top: 0;
-	}
-	.toppad
-	{margin-top:20px;
 	}
 
 	</style>

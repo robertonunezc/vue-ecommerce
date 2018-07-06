@@ -3,8 +3,9 @@ import Vuex from 'vuex'
 import * as firebase from 'firebase'
 import axios from 'axios'
 import jsonp from 'jsonp'
-
+import router from '../router/index'
 Vue.use(Vuex)
+//const host = "http://reicalab.com.cp-1.webhostbox.net/ecommerce/web/app_dev.php/api/"
 const host = "http://localhost:8000/api/"
 export const store = new Vuex.Store({
   state: {
@@ -15,7 +16,7 @@ export const store = new Vuex.Store({
     familias:[],
     errors: [],
     token:null,
-    cargando: false,
+    cargando: true,
     carrito:null,
     host: host
   },
@@ -40,6 +41,9 @@ export const store = new Vuex.Store({
     },
     setFamilias(state, payload) {
       state.familias = payload
+    },
+    setCargando(state, payload) {
+      state.cargando = payload
     }
   },
   actions: { 
@@ -89,7 +93,7 @@ export const store = new Vuex.Store({
         console.log(err)
       })
     },
-    crearCarrito({commit}){
+    crearCarrito({commit, dispatch}, payload){
       if (this.state.carrito == null) {
         let url = host + 'carrito'
         let usuario = this.state.usuario
@@ -106,6 +110,12 @@ export const store = new Vuex.Store({
         }
 
       })
+        .then(()=>{
+          console.log('Despues de crear el carrito')
+          if (payload) {
+            dispatch('actualizarCarrito', payload)
+          }
+        })
         .catch(err =>{
           console.log(err)
         })
@@ -157,8 +167,7 @@ export const store = new Vuex.Store({
     })
       .catch(err =>{
         console.log(err)
-      })
-      
+      })      
     },
     logout({commit}){
       console.log('saliendo...')
@@ -170,7 +179,7 @@ export const store = new Vuex.Store({
       window.location.reload()
 
     }, 
-    login({commit, getters}, payload) {
+    login({commit, getters, dispatch}, payload) {
       const url = host + 'login'
       console.log(payload)
       const params = new URLSearchParams()
@@ -194,14 +203,26 @@ export const store = new Vuex.Store({
             'colonia': data.colonia,
             'cp': data.cp,
             'municipio': data.municipio || "No",
-            'estado': data.estado.estado || "No"
+            'estado': data.estado.estado || "No",
+            'pedidos': data.pedidos
           }
           let token = data.token
           sessionStorage.setItem('token', token)
           commit('setToken',token)  
-          commit('setUsuario',usuario)          
+          commit('setUsuario',usuario)   
+          let carritoActivo = data.pedidos.find(item => item.status == 1) 
+          if (carritoActivo == null) {
+            console.log('No hay carrito lo creo')
+            dispatch('crearCarrito')
+          }else{
+            console.log('Si hay carrito lo setteo', carritoActivo)
+            commit('setCarrito',carritoActivo)            
+            console.log('Obteneindo carrito', this.getters.carrito)
+          }  
+          router.push('/')      
         }else {
           alert('Entre datos correcto')
+          router.push('/login')      
         }
 
       })
@@ -210,25 +231,26 @@ export const store = new Vuex.Store({
        console.log(error)
      })
     },
+    limpiarCarrito({commit}){
+      commit('setCarrito', null)
+    }, 
     cargarArticulos ({commit}) {
       //aqui se llama al servicio
       const url = host + 'articulos'
-      const params = new URLSearchParams()
-      const token = this.state.token
-      params.append('token', token)
-      axios.post(url,params)
+      axios.get(url)
       .then(response => {        
         console.log(response.data.rc)
         if (response.data.rc == 0) {
           var data = response.data.data          
           for (var i = 0; i < data.length; i++) {
             if (data[i].imagen == null) {
-              data[i].imagen = "/static/img/producto.jpg"
+              data[i].imagen = "/static/img/producto.png"
             }else{
               data[i].imagen = host.split("/api/")[0] + "/uploads/images/" + data[i].imagen
             }
           }
-          commit('cargarArticulos', data);          
+          commit('cargarArticulos', data)
+          commit('setCargando', false)         
         }else{
           alert('Hubo un error al cargar articulos.Lo sentimos')          
           console.log(response.data.rc)
@@ -264,8 +286,15 @@ export const store = new Vuex.Store({
     usuario(state) {
       return state.usuario
     },
-    carrito(state) {
-      return state.carrito
+    cargando(state) {
+      return state.cargando
+    },
+    carrito(state) {           
+      let carrito = state.carrito
+      if (Array.isArray(carrito)) {
+        return carrito[0]
+      }
+      return carrito
     },
     token(state) {
       return state.token
@@ -285,7 +314,7 @@ export const store = new Vuex.Store({
     articulo (state) {
       return (articuloClave)=> {
         return state.listadoArticulos.find((articulo) => {
-          return articulo.clave === articuloClave
+          return articulo.clave == articuloClave
         })
       }
     }    
