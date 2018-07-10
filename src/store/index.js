@@ -169,8 +169,53 @@ export const store = new Vuex.Store({
         console.log(err)
       })      
     },
+    editarPerfil({commit},payload){
+      const url = host + 'profile'
+      const params = new URLSearchParams()
+      params.append('token', this.state.token)
+      params.append('email', payload.email)
+      params.append('nombre', payload.nombre)
+      params.append('apellidos', payload.apellidos)
+      params.append('calle', payload.calle)
+      params.append('rfc', payload.rfc)
+      params.append('estado', payload.estado)
+      params.append('municipio', payload.municipio)
+      params.append('cp', payload.cp)
+      params.append('colonia', payload.colonia)
+      params.append('numero_int', payload.numero_int)
+      params.append('numero_ext', payload.numero_ext)
+      axios.post(url, params)
+      .then(response=>{
+        if (response.data.rc == 0) {
+          let data = response.data.data
+          console.log(data)
+          let usuario = {
+            'usuario': data.username,
+            'email': data.email,
+            'nombre': data.nombre,
+            'apellidos': data.apellidos,
+            'id': data.id,
+            'rfc': data.rfc,
+            'calle': data.calle,
+            'numero_ext': data.numero_ext,
+            'numero_int': data.numero_int || "No",
+            'colonia': data.colonia,
+            'cp': data.cp,
+            'municipio': data.municipio || "No",
+            'estado': data.estado == null ? "No" : data.estado.estado,
+            'pedidos': data.pedidos
+          }
+          commit('setUsuario',usuario) 
+          router.push('/perfil')  
+        }
+      })
+      .catch(error => {
+       //this.errors.push(error);
+       console.log(error)
+     })
+      console.log(this.state.usuario)
+    },
     logout({commit}){
-      console.log('saliendo...')
       sessionStorage.removeItem('token')
       commit('setToken', null)
       commit('setUsuario', null)
@@ -187,7 +232,6 @@ export const store = new Vuex.Store({
       params.append('password', payload.password)
       axios.post(url,params)
       .then(response => {
-        console.log(response)
         if (response.data.rc == 0) {
           let data = response.data.data
           let usuario = {

@@ -8,6 +8,7 @@ import DetalleArticulo from '@/components/DetalleArticulo'
 import ResumenPedido from '@/components/ResumenPedido'
 import PedidoExitoso from '@/components/PedidoExitoso'
 import Perfil from '@/components/Perfil'
+import EditarPerfil from '@/components/EditarPerfil'
 
 
 Vue.use(Router)
@@ -37,6 +38,11 @@ export default new Router({
 		path: '/perfil',
 		name: 'Perfil',
 		component: Perfil,
+		beforeEnter: AuthGuard
+	},{
+		path: '/editar-perfil',
+		name: 'EditarPerfil',
+		component: EditarPerfil,
 		beforeEnter: AuthGuard
 	},{
 		path: '/resumen-pedido',

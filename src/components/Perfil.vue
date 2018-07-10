@@ -44,7 +44,9 @@
 									</table>
 									<div class="btn-group" role="group" aria-label="Basic example">
 										<button type="button" class="btn btn-primary">Mis pedidos</button>
-										<button type="button" class="btn btn-secondary">Editar perfil</button>
+										<router-link :to="{name: 'EditarPerfil'}" class="btn btn-secondary">
+											Editar perfil
+										</router-link>
 									</div>
 								</div>
 							</div>
@@ -63,7 +65,13 @@
 						<tbody>
 							<tr v-for="pedido in usuario.pedidos" :key="pedido.id">
 								<td>{{pedido.id}}</td>
-								<td>{{pedido.status}}</td>
+								<td>
+									<span v-if="pedido.status==0" class="badge badge-danger">
+									Cancelado</span>
+									<span v-if="pedido.status==1" class="badge badge-warning">Activo</span>
+									<span v-if="pedido.status==2" class="badge badge-info">Procesando</span>
+									<span v-if="pedido.status==3" class="badge badge-success">Entregado</span>
+								</td>
 								<td>
 									<ul>
 										<li v-for="articulo in pedido.articulos" :key="articulo.id" class="fs10">
