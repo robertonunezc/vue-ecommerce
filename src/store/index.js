@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import * as firebase from 'firebase'
 import axios from 'axios'
 import jsonp from 'jsonp'
 import router from '../router/index'
