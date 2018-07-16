@@ -5,8 +5,8 @@ import axios from 'axios'
 import jsonp from 'jsonp'
 import router from '../router/index'
 Vue.use(Vuex)
-//const host = "http://reicalab.com.cp-1.webhostbox.net/ecommerce/web/app_dev.php/api/"
-const host = "http://localhost:8000/api/"
+const host = "http://reicalab.com.cp-1.webhostbox.net/ecommerce/web/app_dev.php/api/"
+//const host = "http://localhost:8000/api/"
 export const store = new Vuex.Store({
   state: {
     listadoArticulos:[],

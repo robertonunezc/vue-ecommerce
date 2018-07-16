@@ -39,12 +39,10 @@
 			</div>
 		</div>
 	</div>
-	<div class="row"  v-if="carrito">
+	<div class="row">
 		<div class="col-md-4 offset-8">
-			<router-link tag="li" to="/resumen-pedido" class="btn btn-block btn-success">
-				REALIZAR PEDIDO
-			</router-link>
-
+			<button class="btn btn-block btn-success" @click.stop="onRealizarPedido">
+			REALIZAR PEDIDO</button>		
 		</div>
 	</div>
 </div>
@@ -71,7 +69,15 @@ export default {
 			return  carrito		
 		}
 	},
-	
+	methods:{
+		onRealizarPedido(){
+			if (this.carrito.articulos.length > 0) {
+				this.$router.push('/resumen-pedido')
+			}else{
+				alert('Debe agregar productos al carrito')
+			}
+		}
+	},
 	beforeCreate(){
 		try {
 			console.log("Carrito detalle beforeCreate", this.$store.getters.carrito)

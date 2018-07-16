@@ -32,9 +32,6 @@ export default {
 	},
 	data () {
 		return {
-			claves:[],
-			lineas:[],
-			familias:[],
 			paginate: ['articulos']
 		}
 	},
@@ -54,12 +51,16 @@ export default {
 		},
 		cargando(){
 			return this.$store.getters.cargando
+		},
+		claves(){
+			return this.$store.getters.claves
+		},
+		familias(){
+			return this.$store.getters.familias
+		},
+		lineas(){
+			return this.$store.getters.lineas
 		}
-	},
-	created(){
-		this.claves = this.$store.getters.claves
-		this.familias = this.$store.getters.familias
-		this.lineas = this.$store.getters.lineas
 	}
 }
 </script>
