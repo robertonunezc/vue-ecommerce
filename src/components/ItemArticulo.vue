@@ -1,5 +1,5 @@
 <template>
-	<div class="col-lg-3 col-md-6 mb-4">
+	<div class="col-lg-3 col-md-6 mb-4 col-sm-6">
 		<div class="card">
 			<router-link :to="{name:'DetalleArticulo', params: { claveArticulo: articulo.clave }}">
 				<img class="card-img-top" :src="articulo.imagen" width="244" height="180" alt="">
