@@ -66,7 +66,9 @@ export default {
 </script>
 
 <style lang="css">
-
+ul {
+	padding: 0
+}
 ul.paginate-links > li {
 	list-style: none;
 	float: left;
