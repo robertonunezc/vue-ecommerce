@@ -51,9 +51,7 @@ export const store = new Vuex.Store({
       let url = host + 'claves'
       axios.get(url)
       .then(response=>{
-        console.log("Response",response)
         if (response.data.rc == 0) {
-          console.log('Cargnado claves')
           commit('setClaves', response.data.data)
         }else {
           alert('Ocurrió un error cargando las claves desde el servidor')
@@ -68,7 +66,6 @@ export const store = new Vuex.Store({
       axios.get(url)
       .then(response=>{
         if (response.data.rc == 0) {
-          console.log('Cargnado familias')
           commit('setFamilias', response.data.data)
         }else {
           alert('Ocurrió un error cargando las familias desde el servidor')
@@ -83,7 +80,6 @@ export const store = new Vuex.Store({
       axios.get(url)
       .then(response=>{
         if (response.data.rc == 0) {
-          console.log('Cargando lineas')
           commit('setLineas', response.data.data)
         }else {
           alert('Ocurrió un error cargando las lineas desde el servidor')
@@ -111,7 +107,6 @@ export const store = new Vuex.Store({
 
       })
         .then(()=>{
-          console.log('Despues de crear el carrito')
           if (payload) {
             dispatch('actualizarCarrito', payload)
           }
@@ -188,7 +183,6 @@ export const store = new Vuex.Store({
       .then(response=>{
         if (response.data.rc == 0) {
           let data = response.data.data
-          console.log(data)
           let usuario = {
             'usuario': data.username,
             'email': data.email,
@@ -213,7 +207,6 @@ export const store = new Vuex.Store({
        //this.errors.push(error);
        console.log(error)
      })
-      console.log(this.state.usuario)
     },
     logout({commit}){
       sessionStorage.removeItem('token')
@@ -226,7 +219,6 @@ export const store = new Vuex.Store({
     }, 
     login({commit, getters, dispatch}, payload) {
       const url = host + 'login'
-      console.log(payload)
       const params = new URLSearchParams()
       params.append('username', payload.usuario)
       params.append('password', payload.password)
@@ -246,8 +238,8 @@ export const store = new Vuex.Store({
             'numero_int': data.numero_int || "No",
             'colonia': data.colonia,
             'cp': data.cp,
-            'municipio': data.municipio || "No",
-            'estado': data.estado.estado || "No",
+            'municipio': data.municipio == null ? "No": data.municipio,
+            'estado': data.estado == null ? "No" :data.estado.estado ,
             'pedidos': data.pedidos
           }
           let token = data.token
@@ -256,12 +248,9 @@ export const store = new Vuex.Store({
           commit('setUsuario',usuario)   
           let carritoActivo = data.pedidos.find(item => item.status == 1) 
           if (carritoActivo == null) {
-            console.log('No hay carrito lo creo')
             dispatch('crearCarrito')
           }else{
-            console.log('Si hay carrito lo setteo', carritoActivo)
             commit('setCarrito',carritoActivo)            
-            console.log('Obteneindo carrito', this.getters.carrito)
           }  
           router.push('/')      
         }else {
@@ -283,7 +272,6 @@ export const store = new Vuex.Store({
       const url = host + 'articulos'
       axios.get(url)
       .then(response => {        
-        console.log(response.data.rc)
         if (response.data.rc == 0) {
           var data = response.data.data          
           for (var i = 0; i < data.length; i++) {
@@ -297,7 +285,6 @@ export const store = new Vuex.Store({
           commit('setCargando', false)         
         }else{
           alert('Hubo un error al cargar articulos.Lo sentimos')          
-          console.log(response.data.rc)
         }
       })
       .catch(error => {

@@ -87,8 +87,13 @@ export default {
 				'articulo': this.articulo,
 				'cantidad': this.cantidad
 			}
-			this.$store.dispatch('actualizarCarrito', articulo)
-			alert('Producto agregado')
+			if (this.$store.carrito) {
+				this.$store.dispatch('actualizarCarrito', articulo)
+				alert('Producto agregado')	
+			}else{
+				alert('Debe iniciar sesión para poder comprar')
+
+			}
 		}
 	}
 
