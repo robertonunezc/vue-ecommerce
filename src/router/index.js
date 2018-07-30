@@ -9,6 +9,7 @@ import ResumenPedido from '@/components/ResumenPedido'
 import PedidoExitoso from '@/components/PedidoExitoso'
 import Perfil from '@/components/Perfil'
 import EditarPerfil from '@/components/EditarPerfil'
+import Registro from '@/components/Registro'
 
 
 Vue.use(Router)
@@ -39,6 +40,10 @@ export default new Router({
 		name: 'Perfil',
 		component: Perfil,
 		beforeEnter: AuthGuard
+	},{
+		path: '/registro',
+		name: 'Registro',
+		component: Registro		
 	},{
 		path: '/editar-perfil',
 		name: 'EditarPerfil',

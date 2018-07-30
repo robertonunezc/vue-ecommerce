@@ -54,27 +54,28 @@ export default {
       { icon: 'face', title: 'Entrar', link: '/login' },
       { icon: 'face', title: 'Catalogo', link: '/' },
       { icon: 'face', title: 'Carrito', link: '/carrito' },
-      { icon: 'face', title: 'Contacto', link: '/login' },
+      { icon: 'face', title: 'Registro', link: '/registro' },
+     // { icon: 'face', title: 'Contacto', link: '/login' },
+     ]
+     if (this.userIsAuthenticated) {
+      menuItems = [
+      { icon: 'supervisor_account', title: 'Mi Cuenta', link: '/perfil' },
+      { icon: 'face', title: 'Catalogo', link: '/' },
+      { icon: 'room', title: 'Carrito', link: '/carrito' },
       ]
-      if (this.userIsAuthenticated) {
-        menuItems = [
-        { icon: 'supervisor_account', title: 'Mi Cuenta', link: '/perfil' },
-        { icon: 'face', title: 'Catalogo', link: '/' },
-        { icon: 'room', title: 'Carrito', link: '/carrito' },
-        ]
-      }
-      return menuItems
-    } ,
-    userIsAuthenticated () {
-      return this.$store.getters.usuario !== null && this.$store.getters.usuario !== undefined
-    }   
-  },
-  methods: {
-    logout() {
-      this.$store.dispatch('logout')
-      this.$router.push('/')
     }
+    return menuItems
+  } ,
+  userIsAuthenticated () {
+    return this.$store.getters.usuario !== null && this.$store.getters.usuario !== undefined
+  }   
+},
+methods: {
+  logout() {
+    this.$store.dispatch('logout')
+    this.$router.push('/')
   }
+}
 }
 </script>
 

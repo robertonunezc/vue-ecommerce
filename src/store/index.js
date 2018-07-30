@@ -5,7 +5,7 @@ import jsonp from 'jsonp'
 import router from '../router/index'
 Vue.use(Vuex)
 //const host = "http://reicalab.com.cp-1.webhostbox.net/ecommerce/web/app_dev.php/api/"
-const host = "http://distribuidoraelva.mx/ecommerce/web/app_dev.php/api/"
+const host = "http://distribuidoraelva.mx/ecommerce/web/app.php/api/"
 //const host = "http://localhost:8000/api/"
 export const store = new Vuex.Store({
   state: {
@@ -15,6 +15,7 @@ export const store = new Vuex.Store({
     lineas:[],
     familias:[],
     errors: [],
+    message: {'tipo':-1, 'msg': null},
     token:null,
     cargando: true,
     carrito:null,
@@ -44,6 +45,9 @@ export const store = new Vuex.Store({
     },
     setCargando(state, payload) {
       state.cargando = payload
+    } ,
+    setMessage(state, payload) {
+      state.message = payload
     }
   },
   actions: { 
@@ -208,66 +212,99 @@ export const store = new Vuex.Store({
        console.log(error)
      })
     },
-    logout({commit}){
-      sessionStorage.removeItem('token')
-      commit('setToken', null)
-      commit('setUsuario', null)
-      commit('setCarrito', null)
-      commit('cargarArticulos', null)
-      window.location.reload()
-
-    }, 
-    login({commit, getters, dispatch}, payload) {
-      const url = host + 'login'
+    registroUsuario({commit},payload){
+      const url = host + 'register'
       const params = new URLSearchParams()
-      params.append('username', payload.usuario)
-      params.append('password', payload.password)
-      axios.post(url,params)
-      .then(response => {
-        if (response.data.rc == 0) {
-          let data = response.data.data
-          let usuario = {
-            'usuario': data.username,
-            'email': data.email,
-            'nombre': data.nombre,
-            'apellidos': data.apellidos,
-            'id': data.id,
-            'rfc': data.rfc,
-            'calle': data.calle,
-            'numero_ext': data.numero_ext,
-            'numero_int': data.numero_int || "No",
-            'colonia': data.colonia,
-            'cp': data.cp,
-            'municipio': data.municipio == null ? "No": data.municipio,
-            'estado': data.estado == null ? "No" :data.estado.estado ,
-            'pedidos': data.pedidos
-          }
-          let token = data.token
-          sessionStorage.setItem('token', token)
-          commit('setToken',token)  
-          commit('setUsuario',usuario)   
-          let carritoActivo = data.pedidos.find(item => item.status == 1) 
-          if (carritoActivo == null) {
-            dispatch('crearCarrito')
-          }else{
-            commit('setCarrito',carritoActivo)            
-          }  
-          router.push('/')      
-        }else {
-          alert('Entre datos correcto')
-          router.push('/login')      
-        }
-
-      })
-      .catch(error => {
+     // params.append('token', this.state.token)
+     params.append('username', payload.username)
+     params.append('password', payload.password)
+     params.append('email', payload.email)
+     params.append('nombre', payload.nombre)
+     params.append('apellidos', payload.apellidos)
+     params.append('calle', payload.calle)
+     params.append('rfc', payload.rfc)
+     params.append('estado', payload.estado)
+     params.append('municipio', payload.municipio)
+     params.append('cp', payload.cp)
+     params.append('colonia', payload.colonia)
+     params.append('numero_int', payload.numero_int)
+     params.append('numero_ext', payload.numero_ext)
+     axios.post(url, params)
+     .then(response=>{
+      if (response.data.rc == 0) { 
+        commit('setMessage', {'tipo':0,'msg':response.data.msg})
+        router.push('/')  
+      }else{
+        const msg ='Ocurrió un error con el registro. Regrese a la pantalla de registro para corregir los errores marcados en color rojo'
+        commit('setMessage', {'tipo':1,'msg':msg})          
+        router.push('/')  
+      }
+    })
+     .catch(error => {
        //this.errors.push(error);
        console.log(error)
      })
-    },
-    limpiarCarrito({commit}){
-      commit('setCarrito', null)
-    }, 
-    cargarArticulos ({commit}) {
+   },
+   logout({commit}){
+    sessionStorage.removeItem('token')
+    commit('setToken', null)
+    commit('setUsuario', null)
+    commit('setCarrito', null)
+    commit('cargarArticulos', null)
+    window.location.reload()
+
+  }, 
+  login({commit, getters, dispatch}, payload) {
+    const url = host + 'login'
+    const params = new URLSearchParams()
+    params.append('username', payload.usuario)
+    params.append('password', payload.password)
+    axios.post(url,params)
+    .then(response => {
+      if (response.data.rc == 0) {
+        let data = response.data.data
+        let usuario = {
+          'usuario': data.username,
+          'email': data.email,
+          'nombre': data.nombre,
+          'apellidos': data.apellidos,
+          'id': data.id,
+          'rfc': data.rfc,
+          'calle': data.calle,
+          'numero_ext': data.numero_ext,
+          'numero_int': data.numero_int || "No",
+          'colonia': data.colonia,
+          'cp': data.cp,
+          'municipio': data.municipio == null ? "No": data.municipio,
+          'estado': data.estado == null ? "No" :data.estado.estado ,
+          'pedidos': data.pedidos
+        }
+        let token = data.token
+        sessionStorage.setItem('token', token)
+        commit('setToken',token)  
+        commit('setUsuario',usuario)   
+        let carritoActivo = data.pedidos.find(item => item.status == 1) 
+        if (carritoActivo == null) {
+          dispatch('crearCarrito')
+        }else{
+          commit('setCarrito',carritoActivo)            
+        }  
+        router.push('/')      
+      }else {
+        alert('Entre datos correcto')
+        router.push('/login')      
+      }
+
+    })
+    .catch(error => {
+       //this.errors.push(error);
+       console.log(error)
+     })
+  },
+  limpiarCarrito({commit}){
+    commit('setCarrito', null)
+  }, 
+  cargarArticulos ({commit}) {
       //aqui se llama al servicio
       const url = host + 'articulos'
       axios.get(url)
@@ -278,7 +315,7 @@ export const store = new Vuex.Store({
             if (data[i].imagen == null) {
               data[i].imagen = "/static/img/producto.png"
             }else{
-              data[i].imagen = host.split("/api/")[0] + "/uploads/images/" + data[i].imagen
+              data[i].imagen = host.split("/app_dev.php/api/")[0] + "/uploads/images/" + data[i].imagen
             }
           }
           commit('cargarArticulos', data)
@@ -319,6 +356,9 @@ export const store = new Vuex.Store({
     },
     cargando(state) {
       return state.cargando
+    },    
+    message(state) {
+      return state.message
     },
     carrito(state) {           
       let carrito = state.carrito
