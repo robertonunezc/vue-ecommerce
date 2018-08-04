@@ -5,8 +5,8 @@ import jsonp from 'jsonp'
 import router from '../router/index'
 Vue.use(Vuex)
 //const host = "http://reicalab.com.cp-1.webhostbox.net/ecommerce/web/app_dev.php/api/"
-const host = "http://distribuidoraelva.mx/ecommerce/web/app.php/api/"
-//const host = "http://localhost:8000/api/"
+//const host = "http://distribuidoraelva.mx/ecommerce/web/app.php/api/"
+const host = "http://localhost:8000/api/"
 export const store = new Vuex.Store({
   state: {
     listadoArticulos:[],
@@ -223,6 +223,7 @@ export const store = new Vuex.Store({
      params.append('apellidos', payload.apellidos)
      params.append('calle', payload.calle)
      params.append('rfc', payload.rfc)
+     params.append('telefono', payload.telefono)
      params.append('estado', payload.estado)
      params.append('municipio', payload.municipio)
      params.append('cp', payload.cp)
@@ -315,7 +316,7 @@ export const store = new Vuex.Store({
             if (data[i].imagen == null) {
               data[i].imagen = "/static/img/producto.png"
             }else{
-              data[i].imagen = host.split("/app_dev.php/api/")[0] + "/uploads/images/" + data[i].imagen
+              data[i].imagen = host.split("/api/")[0] + "/uploads/images/" + data[i].imagen
             }
           }
           commit('cargarArticulos', data)

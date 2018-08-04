@@ -26,6 +26,10 @@
 												<td>Correo electrónico</td>
 												<td>{{usuario.email}}</td>
 											</tr>
+											<tr>
+												<td>Teléfono</td>
+												<td>{{usuario.telefono}}</td>
+											</tr>
 											<tr>												
 												<tr>
 													<td>Dirección envío</td>

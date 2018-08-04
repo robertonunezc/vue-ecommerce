@@ -3,8 +3,8 @@
 		<form action="#" class="well">
 			<h3 class="text-center">Entrar a su cuenta</h3>
 			<div class="form-group">
-				<label for="exampleInputEmail1">Correo electrónico</label>
-				<input type="text" class="form-control" id="usuario" v-model="usuario" aria-describedby="emailHelp" placeholder="Escriba su correo electrónico">				
+				<label for="exampleInputEmail1">Usuario</label>
+				<input type="text" class="form-control" id="usuario" v-model="usuario" aria-describedby="emailHelp" placeholder="Escriba su usuario">				
 			</div>
 			<div class="form-group">
 				<label for="exampleInputPassword1">Contraseña</label>

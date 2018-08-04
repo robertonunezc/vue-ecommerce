@@ -2,8 +2,8 @@
 	<!-- Jumbotron Header -->
 	<div>
 		<h2>Catálogo de productos</h2>
-		<div class="alert alert-success" v-if="message.tipo == 0">{{message.msg}}</div>
-		<div class="alert alert-danger" v-if="message.tipo == 1">{{message.msg}}</div>
+		<!-- <div class="alert alert-success" v-if="message.tipo == 1">{{message.msg}}</div>
+			<div class="alert alert-danger" v-if="message.tipo == 0">{{message.msg}}</div> -->
 		<!-- Filtros -->
 		<filtros-articulos v-bind:claves="claves" v-bind:lineas="lineas" v-bind:familias="familias"></filtros-articulos>		
 		<div v-if="cargando">

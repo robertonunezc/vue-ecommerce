@@ -29,6 +29,12 @@
 			</div>
 			<div class="col-md-4">
 				<div class="form-group">
+					<label for="nombre">Teléfono:</label>
+					<input type="text" v-model="telefono" class="form-control">
+				</div>
+			</div>
+			<div class="col-md-4">
+				<div class="form-group">
 					<label for="nombre">Calle:</label>
 					<input type="text" v-model="calle" class="form-control">
 				</div>
@@ -87,6 +93,7 @@ export default {
 			nombre: this.$store.getters.usuario.nombre,
 			apellidos: this.$store.getters.usuario.apellidos,
 			rfc: this.$store.getters.usuario.rfc,
+			telefono: this.$store.getters.usuario.telefono,
 			calle: this.$store.getters.usuario.calle,
 			numero_ext: this.$store.getters.usuario.numero_ext,
 			numero_int: this.$store.getters.usuario.numero_int,

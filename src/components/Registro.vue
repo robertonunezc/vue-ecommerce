@@ -29,14 +29,20 @@
 			</div>
 			<div class="col-md-4">
 				<div class="form-group">
-					<label for="nombre">Apellidos:</label>
+					<label for="apellido">Apellidos:</label>
 					<input type="text" v-model="apellidos" class="form-control">
 				</div>
 			</div>
 			<div class="col-md-4">
 				<div class="form-group">
-					<label for="nombre">RFC:</label>
+					<label for="rfc">RFC:</label>
 					<input type="text" v-model="rfc" class="form-control">
+				</div>
+			</div>
+			<div class="col-md-4">
+				<div class="form-group">
+					<label for="telefono">Teléfono:</label>
+					<input type="text" v-model="telefono" class="form-control">
 				</div>
 			</div>
 			<div class="col-md-4">
@@ -101,6 +107,7 @@ export default {
 			nombre: null,
 			apellidos: null,
 			rfc: null,
+			telefono: null,
 			calle: null,
 			numero_ext: null,
 			numero_int: null,
@@ -125,6 +132,7 @@ export default {
 				'apellidos':this.apellidos,
 				'calle':this.calle,
 				'rfc':this.rfc,
+				'telefono':this.telefono,
 				'estado':this.estado,
 				'municipio':this.municipio,
 				'cp':this.cp,
