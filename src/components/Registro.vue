@@ -42,7 +42,7 @@
 			<div class="col-md-4">
 				<div class="form-group">
 					<label for="telefono">Teléfono:</label>
-					<input type="text" v-model="telefono" class="form-control">
+					<input type="number" v-model="telefono" class="form-control">
 				</div>
 			</div>
 			<div class="col-md-4">

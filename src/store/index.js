@@ -5,8 +5,8 @@ import jsonp from 'jsonp'
 import router from '../router/index'
 Vue.use(Vuex)
 //const host = "http://reicalab.com.cp-1.webhostbox.net/ecommerce/web/app_dev.php/api/"
-//const host = "http://distribuidoraelva.mx/ecommerce/web/app.php/api/"
-const host = "http://localhost:8000/api/"
+const host = "http://distribuidoraelva.mx/ecommerce/web/app_dev.php/api/"
+//const host = "http://localhost:8000/api/"
 export const store = new Vuex.Store({
   state: {
     listadoArticulos:[],
@@ -47,6 +47,7 @@ export const store = new Vuex.Store({
       state.cargando = payload
     } ,
     setMessage(state, payload) {
+      console.log('setting message')
       state.message = payload
     }
   },
@@ -236,7 +237,7 @@ export const store = new Vuex.Store({
         commit('setMessage', {'tipo':0,'msg':response.data.msg})
         router.push('/')  
       }else{
-        const msg ='Ocurrió un error con el registro. Regrese a la pantalla de registro para corregir los errores marcados en color rojo'
+        const msg ='Ocurrió un error con el registro. Regrese a la pantalla de registro para corregir los datos introducidos'
         commit('setMessage', {'tipo':1,'msg':msg})          
         router.push('/')  
       }
@@ -316,7 +317,7 @@ export const store = new Vuex.Store({
             if (data[i].imagen == null) {
               data[i].imagen = "/static/img/producto.png"
             }else{
-              data[i].imagen = host.split("/api/")[0] + "/uploads/images/" + data[i].imagen
+              data[i].imagen = host.split("/app_dev.php/api/")[0] + "/uploads/images/" + data[i].imagen
             }
           }
           commit('cargarArticulos', data)
