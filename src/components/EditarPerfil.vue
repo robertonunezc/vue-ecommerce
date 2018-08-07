@@ -111,6 +111,7 @@ export default {
 				'apellidos':this.apellidos,
 				'calle':this.calle,
 				'rfc':this.rfc,
+				'telefono':this.telefono,
 				'estado':this.estado,
 				'municipio':this.municipio,
 				'cp':this.cp,

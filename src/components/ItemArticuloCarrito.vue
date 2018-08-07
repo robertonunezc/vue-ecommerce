@@ -1,7 +1,7 @@
 <template>
 	<tr>
 		<td>
-			<img width="80px" class="d-block m-0" src="https://www.mexicodesconocido.com.mx/assets/images/destinos/queretaro/_MG_0088_GEMD_QUERETARO_CD_TEMPLO-SANTA-ROSA-DE-VITERBO_TEMPLO-Y-FUENTE_NOCTURNA_RV.jpg">	
+			<img width="80px" class="d-block m-0" :src="urlImg + articulo.articulo.imagen">	
 		</td>
 		<td>
 			<p>{{articulo.articulo.clave}}
@@ -37,43 +37,45 @@ export default {
 	name: 'ItemArticuloCarrito',
 	data () {
 		return {
-			cantidad: this.articulo.cantidad,
-			enabled: false 				
-		}
-	},	
-	computed: {
-		precioTotal: function () {	
-			let precioTotal = this.articulo.articulo.precio
-			if (this.cantidad > 0) {
-				precioTotal = this.cantidad * this.articulo.articulo.precio	
-				let nuevoValor = {
-					'articulo': this.articulo,
-					'cantidad': this.cantidad
-				}										
-			}
-
-			return parseFloat(precioTotal).toFixed(2)
-		},
-		carrito(){
-			return this.$store.getters.carrito
-		}
-	},
-	methods: {
-		onBorrarArticulo(articulo){			
-			let payload = {
-				'articulo': articulo,
-			}
-			this.$store.dispatch('borrarArticuloCarrito', payload)
-		},
-		onActualizarArticulo(articulo) {
-			let payload = {
-				'articulo': articulo,
+			urlImg: "http://distribuidoraelva.mx/ecommerce/web/uploads/images/",
+//urlImg: "http://localhost:8000/uploads/images/",
+cantidad: this.articulo.cantidad,
+enabled: false 				
+}
+},	
+computed: {
+	precioTotal: function () {	
+		let precioTotal = this.articulo.articulo.precio
+		if (this.cantidad > 0) {
+			precioTotal = this.cantidad * this.articulo.articulo.precio	
+			let nuevoValor = {
+				'articulo': this.articulo,
 				'cantidad': this.cantidad
-			}
-			this.$store.dispatch('actualizarCarrito', payload)
+			}										
 		}
 
+		return parseFloat(precioTotal).toFixed(2)
+	},
+	carrito(){
+		return this.$store.getters.carrito
+	}
+},
+methods: {
+	onBorrarArticulo(articulo){			
+		let payload = {
+			'articulo': articulo,
+		}
+		this.$store.dispatch('borrarArticuloCarrito', payload)
+	},
+	onActualizarArticulo(articulo) {
+		let payload = {
+			'articulo': articulo,
+			'cantidad': this.cantidad
+		}
+		this.$store.dispatch('actualizarCarrito', payload)
+	}
 
-	}	
+
+}	
 }
 </script>

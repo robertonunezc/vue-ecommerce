@@ -5,12 +5,14 @@ import jsonp from 'jsonp'
 import router from '../router/index'
 Vue.use(Vuex)
 //const host = "http://reicalab.com.cp-1.webhostbox.net/ecommerce/web/app_dev.php/api/"
-const host = "http://distribuidoraelva.mx/ecommerce/web/app_dev.php/api/"
-//const host = "http://localhost:8000/api/"
+//const host = "http://distribuidoraelva.mx/ecommerce/web/app_dev.php/api/"
+const host = "http://localhost:8000/api/"
 export const store = new Vuex.Store({
   state: {
     listadoArticulos:[],
     usuario: null,
+    estados:[],
+    municipios:[],
     claves:[],
     lineas:[],
     familias:[],
@@ -39,6 +41,12 @@ export const store = new Vuex.Store({
     },
     setLineas(state, payload) {
       state.lineas = payload
+    },  
+    setEstados(state, payload) {
+      state.estados = payload
+    }, 
+    setMunicipios(state, payload) {
+      state.municipios = payload
     },
     setFamilias(state, payload) {
       state.familias = payload
@@ -180,6 +188,7 @@ export const store = new Vuex.Store({
       params.append('rfc', payload.rfc)
       params.append('estado', payload.estado)
       params.append('municipio', payload.municipio)
+      params.append('telefono', payload.telefono)
       params.append('cp', payload.cp)
       params.append('colonia', payload.colonia)
       params.append('numero_int', payload.numero_int)
@@ -195,6 +204,7 @@ export const store = new Vuex.Store({
             'apellidos': data.apellidos,
             'id': data.id,
             'rfc': data.rfc,
+            'telefono': data.telefono,
             'calle': data.calle,
             'numero_ext': data.numero_ext,
             'numero_int': data.numero_int || "No",
@@ -273,6 +283,7 @@ export const store = new Vuex.Store({
           'id': data.id,
           'rfc': data.rfc,
           'calle': data.calle,
+          'telefono': data.telefono,
           'numero_ext': data.numero_ext,
           'numero_int': data.numero_int || "No",
           'colonia': data.colonia,
@@ -306,7 +317,44 @@ export const store = new Vuex.Store({
   limpiarCarrito({commit}){
     commit('setCarrito', null)
   }, 
-  cargarArticulos ({commit}) {
+  cargarEstados({commit}){
+   const url = host + 'estados'
+   commit('setMunicipios', [])
+   axios.get(url)
+   .then(response=>{
+    if (response.data.rc == 0) { 
+      console.log(response.data.data)
+      commit('setEstados', response.data.data)
+    }else{
+      const msg ='Ocurrió un error al cargar los estado.'
+    }
+  })
+   .catch(error => {
+       //this.errors.push(error);
+       console.log(error)
+     })
+ }, 
+ cargarMunicipios({commit}, payload){
+   const url = host + 'municipios'
+   const params = new URLSearchParams()
+   params.append('estado', payload.estado)
+   axios.post(url, params)
+   .then(response=>{
+    if (response.data.rc == 0) { 
+      let municipios = response.data.data
+      console.log(municipios)    
+      commit('setMunicipios', municipios)
+      return municipios
+    }else{
+      const msg ='Ocurrió un error al cargar los estado.'
+    }
+  })
+   .catch(error => {
+       //this.errors.push(error);
+       console.log(error)
+     })
+ },
+ cargarArticulos ({commit}) {
       //aqui se llama al servicio
       const url = host + 'articulos'
       axios.get(url)
@@ -317,7 +365,7 @@ export const store = new Vuex.Store({
             if (data[i].imagen == null) {
               data[i].imagen = "/static/img/producto.png"
             }else{
-              data[i].imagen = host.split("/app_dev.php/api/")[0] + "/uploads/images/" + data[i].imagen
+              data[i].imagen = host.split("/api/")[0] + "/uploads/images/" + data[i].imagen
             }
           }
           commit('cargarArticulos', data)
@@ -374,6 +422,12 @@ export const store = new Vuex.Store({
     }, 
     claves(state) {
       return state.claves
+    },
+    municipios(state) {
+      return state.municipios
+    },  
+    estados(state) {
+      return state.estados
     },
     lineas(state) {
       return state.lineas

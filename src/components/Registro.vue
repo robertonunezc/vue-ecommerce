@@ -54,47 +54,72 @@
 			<div class="col-md-4">
 				<div class="form-group">
 					<label for="nombre">Número ext:</label>
-					<input type="number" v-model="numero_ext" class="form-control">
+					<input type="text" v-model="numero_ext" class="form-control">
 				</div>
 			</div>
 			<div class="col-md-4">
 				<div class="form-group">
 					<label for="nombre">Número int:</label>
-					<input type="number" v-model="numero_int" class="form-control">
+					<input type="text" v-model="numero_int" class="form-control">
 				</div>
 			</div>
 			<div class="col-md-4">
 				<div class="form-group">
-					<label for="nombre">colonia:</label>
+					<label for="nombre">Colonia:</label>
 					<input type="text" v-model="colonia" class="form-control">
 				</div>
 			</div>
 			<div class="col-md-4">
 				<div class="form-group">
-					<label for="nombre">cp:</label>
+					<label for="nombre">CP:</label>
 					<input type="number" v-model="cp" class="form-control">
 				</div>
-			</div>
-			<!-- <div class="col-md-4">
-				<div class="form-group">
-					<label for="nombre">municipio:</label>
-					<input type="text" v-model="municipio" class="form-control">
-				</div>
-			</div>
+			</div>			
 			<div class="col-md-4">
 				<div class="form-group">
-					<label for="nombre">estado:</label>
-					<input type="text" v-model="estado" class="form-control">
-				</div>
-			</div> -->
-			<div class="col-md-12">
-				<button class="btn btn-success" @click.stop="onRegistrarUsuario">REGISTRAR</button>
+					<label for="nombre">Estado:</label>
+					<select 
+					name="estados"
+					id="estado"
+					class="form-control"
+					v-model="estadoSeleccionado"
+					@change="onChangeEstado"
+					>
+					<option
+					v-for="estado in estados"
+					:value="estado.id"
+					:key="estado.id">{{estado.estado}}</option>						
+				</select>
+
 			</div>
 		</div>
+		<div class="col-md-4">
+			<div class="form-group">
+				<label for="nombre">Municipio:</label>
+				<select 
+				name="municipio"
+				id="municipios"
+				class="form-control"
+				v-model="municipioSeleccionado"				
+				>
+				<option
+				v-for="municipio in municipios"
+				:value="municipio.id"
+				:key="municipio.id">{{municipio.municipio}}</option>						
+			</select>	
+			<p style="font-size:10px;"><b>seleccione un estado primero</b></p>
+		</div>
 	</div>
+	<div class="col-md-12">
+		<button class="btn btn-success" @click.stop="onRegistrarUsuario">REGISTRAR</button>
+	</div>
+</div>
+</div>
 </template>
 
 <script>
+import axios from 'axios'
+
 export default {
 
 	name: 'EditarPerfil',
@@ -112,17 +137,27 @@ export default {
 			numero_ext: null,
 			numero_int: null,
 			colonia: null,
-			cp: null,
-			municipio: 10,
-			estado: 5,
+			cp: null,		
+			estadoSeleccionado: null,
+			municipioSeleccionado: null
 		}
 	},
 	computed: {
+		estados(){
+			return this.$store.getters.estados
+		},
+		municipios(){
+			return this.$store.getters.municipios
+		},
 		message(){
 			return this.$store.getters.message
 		} 
 	},
 	methods: {
+		onChangeEstado(){			
+			this.$store.dispatch('cargarMunicipios',
+				{'estado':this.estadoSeleccionado})
+		},		
 		onRegistrarUsuario(){
 			const usuario = {
 				'username': this.username,
@@ -133,8 +168,8 @@ export default {
 				'calle':this.calle,
 				'rfc':this.rfc,
 				'telefono':this.telefono,
-				'estado':this.estado,
-				'municipio':this.municipio,
+				'estado':this.estadoSeleccionado,
+				'municipio':this.municipioSeleccionado,
 				'cp':this.cp,
 				'colonia':this.colonia,
 				'numero_int':this.numero_int,
