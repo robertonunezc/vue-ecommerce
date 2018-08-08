@@ -65,21 +65,44 @@
 			</div>
 			<div class="col-md-4">
 				<div class="form-group">
-					<label for="nombre">municipio:</label>
-					<input type="text" v-model="municipio" class="form-control">
-				</div>
-			</div>
-			<div class="col-md-4">
-				<div class="form-group">
 					<label for="nombre">estado:</label>
-					<input type="text" v-model="estado" class="form-control">
-				</div>
-			</div>
-			<div class="col-md-12">
-				<button class="btn btn-success" @click.stop="onEditarPerfil">EDITAR</button>
+					<select 
+					name="estados"
+					id="estado"
+					class="form-control"
+					v-model="estadoSeleccionado"
+					@change="onChangeEstado"
+					>
+					<option
+					v-for="estado in estados"
+					:value="estado.id"
+					:selected="estado.estado == estadoSeleccionado ? selected : ''"
+					:key="estado.id">{{estado.estado}}</option>						
+				</select>
 			</div>
 		</div>
+		<div class="col-md-4">
+			<div class="form-group">
+				<label for="nombre">municipio:</label>
+				<select 
+				name="municipio"
+				id="municipios"
+				class="form-control"
+				v-model="municipioSeleccionado"				
+				>
+				<option
+				v-for="municipio in municipios"
+				:value="municipio.id"
+				:key="municipio.id">{{municipio.municipio}}</option>						
+			</select>	
+			<p style="font-size:10px;"><b>seleccione un estado primero</b></p>
+		</div>
 	</div>
+	<div class="col-md-12">
+		<button class="btn btn-success" @click.stop="onEditarPerfil">EDITAR</button>
+	</div>
+</div>
+</div>
 </template>
 
 <script>
@@ -99,11 +122,23 @@ export default {
 			numero_int: this.$store.getters.usuario.numero_int,
 			colonia: this.$store.getters.usuario.colonia,
 			cp: this.$store.getters.usuario.cp,
-			municipio: this.$store.getters.usuario.municipio,
-			estado: this.$store.getters.usuario.estado,
+			estadoSeleccionado: this.$store.getters.usuario.estado,	
+			municipioSeleccionado:	 this.$store.getters.usuario.municipio	
 		}
 	},
+	computed: {
+		estados(){
+			return this.$store.getters.estados
+		},
+		municipios(){
+			return this.$store.getters.municipios
+		},
+	},
 	methods: {
+		onChangeEstado(){			
+			this.$store.dispatch('cargarMunicipios',
+				{'estado':this.estadoSeleccionado})
+		},	
 		onEditarPerfil(){
 			const usuario = {
 				'email': this.email,
@@ -112,8 +147,8 @@ export default {
 				'calle':this.calle,
 				'rfc':this.rfc,
 				'telefono':this.telefono,
-				'estado':this.estado,
-				'municipio':this.municipio,
+				'estado':this.estadoSeleccionado,
+				'municipio':this.municipioSeleccionado,
 				'cp':this.cp,
 				'colonia':this.colonia,
 				'numero_int':this.numero_int,

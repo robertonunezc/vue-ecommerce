@@ -72,6 +72,8 @@ methods: {
 			'articulo': articulo,
 			'cantidad': this.cantidad
 		}
+		console.log('---actualizando carrito----')
+		console.log(payload)
 		this.$store.dispatch('actualizarCarrito', payload)
 	}
 
