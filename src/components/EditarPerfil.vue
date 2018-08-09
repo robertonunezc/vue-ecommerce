@@ -93,6 +93,7 @@
 				<option
 				v-for="municipio in municipios"
 				:value="municipio.id"
+				:selected="municipio.id == municipioSeleccionado ? selected : ''"
 				:key="municipio.id">{{municipio.municipio}}</option>						
 			</select>	
 			<p style="font-size:10px;"><b>seleccione un estado primero</b></p>
@@ -122,8 +123,8 @@ export default {
 			numero_int: this.$store.getters.usuario.numero_int,
 			colonia: this.$store.getters.usuario.colonia,
 			cp: this.$store.getters.usuario.cp,
-			estadoSeleccionado: this.$store.getters.usuario.estado,	
-			municipioSeleccionado:	 this.$store.getters.usuario.municipio	
+			estadoSeleccionado: this.$store.getters.usuario.estado.id,	
+			municipioSeleccionado:	 this.$store.getters.usuario.municipio.id	
 		}
 	},
 	computed: {

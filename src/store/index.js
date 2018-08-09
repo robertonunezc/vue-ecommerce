@@ -211,7 +211,7 @@ export const store = new Vuex.Store({
             'colonia': data.colonia,
             'cp': data.cp,
             'municipio': data.municipio || "No",
-            'estado': data.estado == null ? "No" : data.estado.estado,
+            'estado': data.estado == null ? "No" : data.estado,
             'pedidos': data.pedidos
           }
           commit('setUsuario',usuario) 
@@ -289,7 +289,7 @@ export const store = new Vuex.Store({
           'colonia': data.colonia,
           'cp': data.cp,
           'municipio': data.municipio == null ? "No": data.municipio,
-          'estado': data.estado == null ? "No" :data.estado.estado ,
+          'estado': data.estado == null ? "No" :data.estado ,
           'pedidos': data.pedidos
         }
         let token = data.token
@@ -342,8 +342,9 @@ export const store = new Vuex.Store({
    .then(response=>{
     if (response.data.rc == 0) { 
       let municipios = response.data.data
-      console.log(municipios)    
+      console.log('cargando municipios')    
       commit('setMunicipios', municipios)
+      console.log('fin carga municipios')    
       return municipios
     }else{
       const msg ='Ocurrió un error al cargar los estado.'

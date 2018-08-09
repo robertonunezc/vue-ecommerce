@@ -33,7 +33,7 @@
 												<td>
 													{{usuario.calle}} 
 													#{{usuario.numero_ext}}, {{usuario.colonia}}, {{usuario.municipio.municipio}}
-													,{{usuario.estado}},
+													,{{usuario.estado.estado}},
 													CP {{usuario.cp}}
 												</td>
 											</tr>												
@@ -109,7 +109,12 @@ export default {
 		usuario(){
 			return this.$store.getters.usuario
 		}
-	}
+	},
+	created(){
+		this.$store.dispatch('cargarMunicipios',
+			{'estado':this.$store.getters.usuario.estado.id})		
+	},
+
 }
 </script>
 
