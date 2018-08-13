@@ -87,7 +87,7 @@ export default {
 				'articulo': this.articulo,
 				'cantidad': this.cantidad
 			}
-			if (this.$store.carrito) {
+			if (this.$store.getters.carrito) {
 				this.$store.dispatch('actualizarCarrito', articulo)
 				alert('Producto agregado')	
 			}else{

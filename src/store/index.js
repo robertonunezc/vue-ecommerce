@@ -241,6 +241,13 @@ export const store = new Vuex.Store({
      params.append('colonia', payload.colonia)
      params.append('numero_int', payload.numero_int)
      params.append('numero_ext', payload.numero_ext)
+     params.append('factura', payload.factura)
+     params.append('razon_social', payload.razonSocial)
+     params.append('rfc_factura', payload.rfcFactura)
+     params.append('domicilio_factura', payload.domicilioFactura)
+     params.append('email_factura', payload.emailFactura)
+     params.append('telefono_factura', payload.telefonoFactura)
+     params.append('celular_factura', payload.celularFactura)
      axios.post(url, params)
      .then(response=>{
       if (response.data.rc == 0) { 
