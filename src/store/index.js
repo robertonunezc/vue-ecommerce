@@ -193,6 +193,13 @@ export const store = new Vuex.Store({
       params.append('colonia', payload.colonia)
       params.append('numero_int', payload.numero_int)
       params.append('numero_ext', payload.numero_ext)
+      params.append('factura', payload.factura)
+      params.append('razon_social', payload.razonSocial)
+      params.append('rfc_factura', payload.rfcFactura)
+      params.append('domicilio_factura', payload.domicilioFactura)
+      params.append('email_factura', payload.emailFactura)
+      params.append('telefono_factura', payload.telefonoFactura)
+      params.append('celular_factura', payload.celularFactura)
       axios.post(url, params)
       .then(response=>{
         if (response.data.rc == 0) {
@@ -210,6 +217,7 @@ export const store = new Vuex.Store({
             'numero_int': data.numero_int || "No",
             'colonia': data.colonia,
             'cp': data.cp,
+            'pedidos': data.pedidos,
             'municipio': data.municipio || "No",
             'estado': data.estado == null ? "No" : data.estado,
             'pedidos': data.pedidos
@@ -297,7 +305,16 @@ export const store = new Vuex.Store({
           'cp': data.cp,
           'municipio': data.municipio == null ? "No": data.municipio,
           'estado': data.estado == null ? "No" :data.estado ,
-          'pedidos': data.pedidos
+          'pedidos': data.pedidos,
+          'mostrarDatosFiscales': data.factura,
+          'razon_social': data.razon_social,
+          'rfc_factura': data.rfc_factura,
+          'domicilio_factura': data.domicilio_factura,
+          'numero_ext_factura': data.numero_ext_factura,
+          'numero_int_factura': data.numero_int_factura,
+          'email_factura': data.email_factura,
+          'telefono_factura': data.telefono_factura,
+          'celular_factura': data.celular_factura,
         }
         let token = data.token
         sessionStorage.setItem('token', token)

@@ -114,7 +114,7 @@
 	<div class="col-sm-12">
 		<div class="col-sm-4">
 			<div class="form-group">
-				<label for="nombre">Quiere Facturar:</label>
+				<label for="nombre">Necesito factura:</label>
 				<input type="checkbox" @click.stop="onFacturar" class="form-control">
 			</div>	
 		</div>		
