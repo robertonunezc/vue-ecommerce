@@ -8,35 +8,37 @@
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
-          <ul class="navbar-nav ml-auto">           
-          </li>
-          <li class="nav-item" v-for="item in menuItems">
+          <ul class="navbar-nav ml-auto">     
+            <li class="nav-item" v-if="usuario">
+              <a href="#" class="nav-link">Bienvenido {{usuario.usuario}}</a> 
+            </li>      
+            <li class="nav-item" v-for="item in menuItems">
 
-            <router-link :to="item.link" class="nav-link">
-              {{item.title}}
-            </router-link>             
-          </li>   
-          <li class="nav-item">
-           <a href="#" class="nav-link"  @click.stop="logout">Salir</a> 
-         </li>                      
-       </ul>
+              <router-link :to="item.link" class="nav-link">
+                {{item.title}}
+              </router-link>             
+            </li>   
+            <li class="nav-item">
+             <a href="#" class="nav-link"  @click.stop="logout">Salir</a> 
+           </li>                      
+         </ul>
+       </div>
      </div>
-   </div>
- </nav>
- <!-- Page Content -->
- <div class="container" style="margin-top:80px">
-  <transition>
-    <keep-alive>
-      <router-view></router-view>
-    </keep-alive>
-  </transition>
-</div>
-<!-- /.container -->
-<!-- Footer -->
-<footer class="py-5" style="margin-top:40px">
-  <p class="m-0 text-center ">Copyright &copy; Your Website 2018</p>
+   </nav>
+   <!-- Page Content -->
+   <div class="container" style="margin-top:80px">
+    <transition>
+      <keep-alive>
+        <router-view></router-view>
+      </keep-alive>
+    </transition>
+  </div>
   <!-- /.container -->
-</footer>
+  <!-- Footer -->
+  <footer class="py-5" style="margin-top:40px">
+    <p class="m-0 text-center ">Copyright &copy; Distribuidora Elva, S.A. de C.V. 2018</p>
+    <!-- /.container -->
+  </footer>
 
 </main>
 </template>
@@ -44,7 +46,8 @@
 export default {
   data () {
     return {
-      sideNav: false
+      sideNav: false,
+      usuario: this.$store.getters.usuario 
     }
   },
 

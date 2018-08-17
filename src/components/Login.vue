@@ -1,6 +1,6 @@
 <template>
 	<div class="login-wrapper">
-		<form action="#" class="well">
+		<div class="well">
 			<h3 class="text-center">Entrar a su cuenta</h3>
 			<div class="form-group">
 				<label for="exampleInputEmail1">Usuario</label>
@@ -14,7 +14,7 @@
 			class="btn btn-success"			
 			@click.stop="onLogin"
 			>Entrar</button>
-		</form>
+		</div>
 	</div>
 </template>
 
