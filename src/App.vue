@@ -46,12 +46,14 @@
 export default {
   data () {
     return {
-      sideNav: false,
-      usuario: this.$store.getters.usuario 
+      sideNav: false,      
     }
   },
 
   computed: {
+    usuario (){
+      return this.$store.getters.usuario 
+    },
     menuItems () {
       let menuItems = [
       { icon: 'face', title: 'Entrar', link: '/login' },
