@@ -3,7 +3,7 @@
 		<div class="alert alert-success alert-dismissible">
 			Gracias por comprar con nosotros. 
 			Cualquier duda o información no dude en contactarnos al
-			<strong>55-569-9989</strong>
+			<strong>993-160-5514</strong>
 		</div>
 	</div>
 </template>
