@@ -3,49 +3,41 @@
 		<div class="row">
 			<div class="col-sm-12 col-md-4">
 				<div class="form-group">
-					<label>Claves</label>
-					<select id="claves"
-					name="claves"
+					<label>Lineas</label>
+					<select id="lineas"
+					name="lineas"
 					class="form-control"
-					v-model="claveSeleccionada"	
-					data-tipo="clave"	
+					v-model="lineaSeleccionada"
+					data-tipo="lineas"	
 					@change="onSelectFiltro"			
 					>
-					<option v-for="clave in claves" data-clave="clave.nombre">{{clave.nombre}}</option>
+					<option v-for="linea in lineas">{{linea.nombre}}</option>
 				</select>
 			</div>
 		</div>
 		<div class="col-sm-12 col-md-4">
 			<div class="form-group">
-				<label>Lineas</label>
-				<select id="lineas"
-				name="lineas"
-				class="form-control"
-				v-model="lineaSeleccionada"
-				data-tipo="lineas"	
-				@change="onSelectFiltro"			
+				<label>Buscar</label>
+				<input type="text" class="form-control">
+			</div>
+		</div>
+		<div class="col-sm-12 col-md-4">
+			<div class="form-group">
+				<label>Familia</label>
+				<select id="familia" name="familia" class="form-control"
+				v-model="familiaSeleccionada"
+				data-tipo="familias"	
+				@change="onSelectFiltro"	
 				>
-				<option v-for="linea in lineas">{{linea.nombre}}</option>
+				<option v-for="familia in familias">{{familia.nombre}}</option>
 			</select>
 		</div>
 	</div>
-	<div class="col-sm-12 col-md-4">
+	<div class="col-sm-12 col-md-1">
 		<div class="form-group">
-			<label>Familia</label>
-			<select id="familia" name="familia" class="form-control"
-			v-model="familiaSeleccionada"
-			data-tipo="familias"	
-			@change="onSelectFiltro"	
-			>
-			<option v-for="familia in familias">{{familia.nombre}}</option>
-		</select>
+			<button class="btn btn-warning" @click="onBorrarFiltros">Borrar filtros</button>
+		</div>
 	</div>
-</div>
-<div class="col-sm-12 col-md-1">
-	<div class="form-group">
-		<button class="btn btn-warning" @click="onBorrarFiltros">Borrar filtros</button>
-	</div>
-</div>
 </div>
 </div>
 </div>

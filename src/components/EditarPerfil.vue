@@ -21,12 +21,12 @@
 					<input type="text" v-model="apellidos" class="form-control">
 				</div>
 			</div>
-			<div class="col-md-4">
+		<!-- 	<div class="col-md-4">
 				<div class="form-group">
 					<label for="nombre">RFC:</label>
 					<input type="text" v-model="rfc" class="form-control">
 				</div>
-			</div>
+			</div> -->
 			<div class="col-md-4">
 				<div class="form-group">
 					<label for="nombre">Teléfono:</label>

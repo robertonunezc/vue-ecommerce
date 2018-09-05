@@ -38,7 +38,7 @@
 												</td>
 											</tr>												
 											<td>RFC</td>
-											<td>{{usuario.rfc}}
+											<td>{{usuario.rfcFactura}}
 											</td>
 
 										</tr>

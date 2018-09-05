@@ -6,49 +6,49 @@
 			<div class="col-md-4">
 				<div class="form-group">
 					<label for="nombre">Usuario:</label>
-					<input type="text" v-model="username" class="form-control">
+					<input type="text" required="true" v-model="username" class="form-control">
 				</div>
 			</div>
 			<div class="col-md-4">
 				<div class="form-group">
 					<label for="nombre">Contraseña:</label>
-					<input type="password" v-model="password" class="form-control">
+					<input type="password"required="true" v-model="password" class="form-control">
 				</div>
 			</div>
 			<div class="col-md-4">
 				<div class="form-group">
 					<label for="nombre">Email:</label>
-					<input type="email" v-model="email" class="form-control">
+					<input type="email" required="true" v-model="email" class="form-control">
 				</div>
 			</div>
 			<div class="col-md-4">
 				<div class="form-group">
 					<label for="nombre">Nombre:</label>
-					<input type="text" v-model="nombre" class="form-control">
+					<input type="text" required="true" v-model="nombre" class="form-control">
 				</div>
 			</div>
 			<div class="col-md-4">
 				<div class="form-group">
 					<label for="apellido">Apellidos:</label>
-					<input type="text" v-model="apellidos" class="form-control">
+					<input type="text" required="true" v-model="apellidos" class="form-control">
 				</div>
 			</div>
-			<div class="col-md-4">
+			<!-- <div class="col-md-4">
 				<div class="form-group">
 					<label for="rfc">RFC:</label>
 					<input type="text" v-model="rfc" class="form-control">
 				</div>
-			</div>
+			</div> -->
 			<div class="col-md-4">
 				<div class="form-group">
 					<label for="telefono">Teléfono:</label>
-					<input type="number" v-model="telefono" class="form-control">
+					<input type="number" required="true" v-model="telefono" class="form-control">
 				</div>
 			</div>
 			<div class="col-md-4">
 				<div class="form-group">
 					<label for="nombre">Calle:</label>
-					<input type="text" v-model="calle" class="form-control">
+					<input type="text" required="true" v-model="calle" class="form-control">
 				</div>
 			</div>
 			<div class="col-md-4">
@@ -72,7 +72,7 @@
 			<div class="col-md-4">
 				<div class="form-group">
 					<label for="nombre">CP:</label>
-					<input type="number" v-model="cp" class="form-control">
+					<input type="number" required="true" v-model="cp" class="form-control">
 				</div>
 			</div>			
 			<div class="col-md-4">
@@ -80,7 +80,8 @@
 					<label for="nombre">Estado:</label>
 					<select 
 					name="estados"
-					id="estado"
+					id="estado" 
+					required="true"
 					class="form-control"
 					v-model="estadoSeleccionado"
 					@change="onChangeEstado"
@@ -99,6 +100,7 @@
 				<select 
 				name="municipio"
 				id="municipios"
+				required="true"
 				class="form-control"
 				v-model="municipioSeleccionado"				
 				>
@@ -127,37 +129,37 @@
 			<div class="col-md-4">
 				<div class="form-group">
 					<label for="nombre">Razón social:</label>
-					<input type="text" v-model="razonSocial" class="form-control">
+					<input type="text" required="true" v-model="razonSocial" class="form-control">
 				</div>
 			</div>
 			<div class="col-md-4">
 				<div class="form-group">
 					<label for="nombre">RFC:</label>
-					<input type="text" v-model="rfcFactura" class="form-control">
+					<input type="text" required="true" v-model="rfcFactura" class="form-control">
 				</div>
 			</div>	
 			<div class="col-md-4">
 				<div class="form-group">
 					<label for="nombre">Domicilio:</label>
-					<input type="text" v-model="domicilioFactura" class="form-control">
+					<input type="text" required="true" v-model="domicilioFactura" class="form-control">
 				</div>
 			</div>	
 			<div class="col-md-4">
 				<div class="form-group">
 					<label for="nombre">Email:</label>
-					<input type="text" v-model="emailFactura" class="form-control">
+					<input type="text" required="true" v-model="emailFactura" class="form-control">
 				</div>
 			</div>		
 			<div class="col-md-4">
 				<div class="form-group">
 					<label for="nombre">Teléfono:</label>
-					<input type="number" v-model="telefonoFactura" class="form-control">
+					<input type="number" required="true"  v-model="telefonoFactura" class="form-control">
 				</div>
 			</div>		
 			<div class="col-md-4">
 				<div class="form-group">
 					<label for="nombre">Celular:</label>
-					<input type="number" v-model="celularFactura" class="form-control">
+					<input type="number" required="true" v-model="celularFactura" class="form-control">
 				</div>
 			</div>	
 		</div>
@@ -229,7 +231,7 @@ export default {
 				'nombre': this.nombre,
 				'apellidos':this.apellidos,
 				'calle':this.calle,
-				'rfc':this.rfc,
+				'rfc':null,
 				'telefono':this.telefono,
 				'estado':this.estadoSeleccionado,
 				'municipio':this.municipioSeleccionado,

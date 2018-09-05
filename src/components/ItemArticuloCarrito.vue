@@ -13,7 +13,11 @@
 			<p>${{articulo.articulo.precio}}</p>
 		</td>
 		<td>
-			<input type="number" name="cantidad" v-model="cantidad" v-if="editable">			
+			<input type="number" name="cantidad"
+			v-model="cantidad"
+			v-if="editable"
+			@change="onActualizarArticulo(articulo.articulo)"
+			>			
 			<div v-if="!editable">{{articulo.cantidad}}</div>
 		</td>
 		<td>
@@ -22,8 +26,8 @@
 		<td v-if="editable">
 			<div class="btn btn-danger btn-sm"								
 			@click="onBorrarArticulo(articulo.articulo)">Borrar</div>
-			<div class="btn btn-info btn-sm"								
-			@click="onActualizarArticulo(articulo.articulo)">Actualizar</div>
+			<!-- <div class="btn btn-info btn-sm"								
+				>Actualizar</div> -->
 		</td>
 	</tr>
 </template>
