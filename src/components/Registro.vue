@@ -185,7 +185,7 @@ export default {
 			email: null,
 			nombre: null,
 			apellidos: null,
-			rfc: null,
+			rfc: "nullitooo",
 			telefono: null,
 			calle: null,
 			numero_ext: null,
@@ -231,7 +231,7 @@ export default {
 				'nombre': this.nombre,
 				'apellidos':this.apellidos,
 				'calle':this.calle,
-				'rfc':null,
+				'rfc':"nullitoooo",
 				'telefono':this.telefono,
 				'estado':this.estadoSeleccionado,
 				'municipio':this.municipioSeleccionado,
@@ -247,8 +247,39 @@ export default {
 				'telefonoFactura': this.telefonoFactura,
 				'celularFactura': this.celularFactura
 			}
-
-			this.$store.dispatch('registroUsuario', usuario)			
+			if (this.username==null || this.username == "") {
+				alert('Su nombre de usuario no puede ser vacio')
+				return
+			}
+			if (this.password==null || this.password == "") {
+				alert('Su contrasña  no puede ser vacio')
+				return
+			}
+			if (this.email==null || this.email == "") {
+				alert('Su email  no puede ser vacio')
+				return
+			}	
+			if (this.apellidos==null || this.apellidos == "") {
+				alert('Su email  no puede ser vacio')
+				return
+			}	
+			if (this.nombre==null || this.nombre == "") {
+				alert('Su nombre  no puede ser vacio')
+				return
+			}	
+			if (this.telefono==null || this.telefono == "") {
+				alert('Su telefono  no puede ser vacio')
+				return
+			}	
+			if (this.calle==null || this.calle == "") {
+				alert('Su calle  no puede ser vacio')
+				return
+			}	
+			if (this.cp==null || this.cp == "") {
+				alert('Su codigo postal  no puede ser vacio')
+				return
+			}
+			this.$store.dispatch('registroUsuario', usuario)									
 		}
 	}
 }

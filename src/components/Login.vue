@@ -1,5 +1,7 @@
 <template>
 	<div class="login-wrapper">
+		<div class="alert alert-success" v-if="message.tipo == 0">{{message.msg}}</div>
+		<div class="alert alert-danger" v-if="message.tipo == 1">{{message.msg}}</div> 
 		<div class="well">
 			<h3 class="text-center">Entrar a su cuenta</h3>
 			<div class="form-group">
@@ -33,6 +35,9 @@ export default {
 		formIsValid () {
 			return this.usuario !== '' &&
 			this.password !== ''
+		},
+		message(){
+			return this.$store.getters.message
 		}
 	},
 	methods: {
