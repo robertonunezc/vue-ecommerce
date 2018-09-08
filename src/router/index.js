@@ -20,51 +20,51 @@ export default new Router({
 		path: '/',
 		name: 'Home',
 		component: Home,
-		beforeEnter: AuthGuard
+	//	beforeEnter: AuthGuard
 
-	},{
-		path: '/login',
-		name: 'Login',
-		component: Login
-	},{
-		path: '/logout',
-		name: 'Logout',	
-		beforeEnter: AuthGuard
+},{
+	path: '/login',
+	name: 'Login',
+	component: Login
+},{
+	path: '/logout',
+	name: 'Logout',	
+	beforeEnter: AuthGuard
 
-	},{
-		path: '/carrito',
-		name: 'Carrito',
-		component: Carrito,
-		beforeEnter: AuthGuard
-	},{
-		path: '/perfil',
-		name: 'Perfil',
-		component: Perfil,
-		beforeEnter: AuthGuard
-	},{
-		path: '/registro',
-		name: 'Registro',
-		component: Registro		
-	},{
-		path: '/editar-perfil',
-		name: 'EditarPerfil',
-		component: EditarPerfil,
-		beforeEnter: AuthGuard
-	},{
-		path: '/resumen-pedido',
-		name: 'ResumenPedido',
-		component: ResumenPedido,
-		beforeEnter: AuthGuard
-	},{
-		path: '/pedido-exitoso',
-		name: 'PedidoExitoso',
-		component: PedidoExitoso,
-		beforeEnter: AuthGuard
-	},{
-		path: '/detalle-articulo/:claveArticulo+',
-		name: 'DetalleArticulo',
-		component: DetalleArticulo,
+},{
+	path: '/carrito',
+	name: 'Carrito',
+	component: Carrito,
+	beforeEnter: AuthGuard
+},{
+	path: '/perfil',
+	name: 'Perfil',
+	component: Perfil,
+	beforeEnter: AuthGuard
+},{
+	path: '/registro',
+	name: 'Registro',
+	component: Registro		
+},{
+	path: '/editar-perfil',
+	name: 'EditarPerfil',
+	component: EditarPerfil,
+	beforeEnter: AuthGuard
+},{
+	path: '/resumen-pedido',
+	name: 'ResumenPedido',
+	component: ResumenPedido,
+	beforeEnter: AuthGuard
+},{
+	path: '/pedido-exitoso',
+	name: 'PedidoExitoso',
+	component: PedidoExitoso,
+	beforeEnter: AuthGuard
+},{
+	path: '/detalle-articulo/:claveArticulo+',
+	name: 'DetalleArticulo',
+	component: DetalleArticulo,
 
-	}
-	]
+}
+]
 })
