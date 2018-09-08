@@ -34,12 +34,12 @@
 					<input type="text" required="true" v-model="apellidos" class="form-control">
 				</div>
 			</div>
-			<!-- <div class="col-md-4">
+			<div class="col-md-4">
 				<div class="form-group">
-					<label for="rfc">RFC:</label>
-					<input type="text" v-model="rfc" class="form-control">
+					<label for="rfc">#Cliente:</label>
+					<input type="text" v-model="rfc" placeholder="Ya tiene # de cliente ingréselo" class="form-control">
 				</div>
-			</div> -->
+			</div>
 			<div class="col-md-4">
 				<div class="form-group">
 					<label for="telefono">Teléfono:<span class="required">(*)</span></label>
@@ -186,7 +186,7 @@ export default {
 			email: null,
 			nombre: null,
 			apellidos: null,
-			rfc: "nullitooo",
+			rfc: null,
 			telefono: null,
 			calle: null,
 			numero_ext: null,
@@ -232,7 +232,7 @@ export default {
 				'nombre': this.nombre,
 				'apellidos':this.apellidos,
 				'calle':this.calle,
-				'rfc':"nullitoooo",
+				'rfc':this.rfc,
 				'telefono':this.telefono,
 				'estado':this.estadoSeleccionado,
 				'municipio':this.municipioSeleccionado,

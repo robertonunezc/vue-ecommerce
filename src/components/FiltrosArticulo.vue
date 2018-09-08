@@ -59,7 +59,7 @@ export default {
 	methods: {
 		onChangeBuscar(event){
 			let search = this.searchQuery
-			if (search.length % 3 == 0) {
+			if (search.length % 2 == 0) {
 				this.$store.dispatch('filtroBuscar',{'query':search})
 			}
 		},
