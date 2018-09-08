@@ -18,7 +18,7 @@
 		<div class="col-sm-12 col-md-4">
 			<div class="form-group">
 				<label>Buscar</label>
-				<input @keyup="onChangeBuscar" type="text" class="form-control" v-model="searchQuery">
+				<input @change="onChangeBuscar" type="text" class="form-control" v-model="searchQuery">
 			</div>
 		</div>
 		<div class="col-sm-12 col-md-4">
@@ -58,10 +58,9 @@ export default {
 	},
 	methods: {
 		onChangeBuscar(event){
-			let search = this.searchQuery
-			if (search.length % 2 == 0) {
-				this.$store.dispatch('filtroBuscar',{'query':search})
-			}
+			let search = this.searchQuery			
+			this.$store.dispatch('filtroBuscar',{'query':search})
+			
 		},
 		onSelectFiltro(event){
 			let selectedIndex = null
