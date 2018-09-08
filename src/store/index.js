@@ -26,6 +26,7 @@ export const store = new Vuex.Store({
   mutations: {
     cargarArticulos (state, payload) {
       state.listadoArticulos = payload;
+      
     },
     setUsuario(state, payload) {
       state.usuario = payload
@@ -220,7 +221,15 @@ export const store = new Vuex.Store({
             'pedidos': data.pedidos,
             'municipio': data.municipio || "No",
             'estado': data.estado == null ? "No" : data.estado,
-            'pedidos': data.pedidos
+            'pedidos': data.pedidos,
+            'razon_social': data.razon_social,
+            'rfc_factura': data.rfc_factura,
+            'domicilio_factura': data.domicilio_factura,
+            'numero_ext_factura': data.numero_ext_factura,
+            'numero_int_factura': data.numero_int_factura,
+            'email_factura': data.email_factura,
+            'telefono_factura': data.telefono_factura,
+            'celular_factura': data.celular_factura,
           }
           commit('setUsuario',usuario) 
           router.push('/perfil')  
@@ -379,8 +388,36 @@ export const store = new Vuex.Store({
        console.log(error)
      })
  },
- cargarArticulos ({commit}) {
+ filtroBuscar({commit}, payload){
+  commit('setCargando', true)         
+  const url = host + 'filter_articulos'+'?descripcion='+payload.query
+  axios.get(url)
+  .then(response => {        
+    if (response.data.rc == 0) {
+      var data = response.data.data          
+      for (var i = 0; i < data.length; i++) {
+        if (data[i].imagen == null) {
+          data[i].imagen = "/static/img/producto.png"
+        }else{
+          data[i].imagen = host.split("/app_dev.php/api/")[0] + "/uploads/images/" + data[i].imagen
+        }
+      }
+      commit('cargarArticulos', data)
+      commit('setCargando', false)         
+    }else{
+      alert('Hubo un error al cargar articulos.Lo sentimos')          
+    }
+  })
+  .catch(error => {
+    this.errors.push(error);
+    console.log(error)
+  })
+
+},
+cargarArticulos ({commit}) {
       //aqui se llama al servicio
+      commit('setCargando', true)        
+
       const url = host + 'articulos'
       axios.get(url)
       .then(response => {        
@@ -394,7 +431,7 @@ export const store = new Vuex.Store({
             }
           }
           commit('cargarArticulos', data)
-          commit('setCargando', false)         
+          commit('setCargando', false)   
         }else{
           alert('Hubo un error al cargar articulos.Lo sentimos')          
         }

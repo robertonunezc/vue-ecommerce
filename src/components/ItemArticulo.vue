@@ -16,7 +16,7 @@
 				<p class="card-text">{{articulo.descripcion}}</p>				
 			</div>
 			<div class="card-footer">
-				<a href="#" class="btn btn-primary"
+				<a href="#" class="btn btn-warning"
 				@click="addProductoCarrito">
 				Comprar
 				${{articulo.precio}}

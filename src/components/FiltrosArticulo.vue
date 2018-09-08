@@ -18,7 +18,7 @@
 		<div class="col-sm-12 col-md-4">
 			<div class="form-group">
 				<label>Buscar</label>
-				<input type="text" class="form-control">
+				<input @keyup="onChangeBuscar" type="text" class="form-control" v-model="searchQuery">
 			</div>
 		</div>
 		<div class="col-sm-12 col-md-4">
@@ -35,7 +35,7 @@
 	</div>
 	<div class="col-sm-12 col-md-1">
 		<div class="form-group">
-			<button class="btn btn-warning" @click="onBorrarFiltros">Borrar filtros</button>
+			<button class="btn btn-success" @click="onBorrarFiltros">Borrar filtros</button>
 		</div>
 	</div>
 </div>
@@ -52,10 +52,17 @@ export default {
 		return {
 			claveSeleccionada: "",
 			lineaSeleccionada: "",
-			familiaSeleccionada: ""
+			familiaSeleccionada: "",
+			searchQuery: ""
 		}
 	},
 	methods: {
+		onChangeBuscar(event){
+			let search = this.searchQuery
+			if (search.length % 3 == 0) {
+				this.$store.dispatch('filtroBuscar',{'query':search})
+			}
+		},
 		onSelectFiltro(event){
 			let selectedIndex = null
 			let option = null 
@@ -94,11 +101,14 @@ export default {
 			console.log(payload)
 			this.$store.dispatch('filtrarArticulo',payload)
 		},
-		onBorrarFiltros(){
+		async onBorrarFiltros(){
 			document.querySelectorAll('select').forEach( element => {
 				element.selectedIndex = -1
 			});
-			return this.$store.dispatch('cargarArticulos')
+			await this.$store.dispatch('cargarArticulos')
+			this.searchQuery = ""
+			await document.querySelectorAll('.paginate-links>li>a')[0].click()      
+			return
 		}
 	}
 }

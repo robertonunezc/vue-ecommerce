@@ -5,31 +5,32 @@
 		<div class="row">			
 			<div class="col-md-4">
 				<div class="form-group">
-					<label for="nombre">Usuario:</label>
+					<label for="nombre">Usuario:<span class="required">(*)</span></label>
 					<input type="text" required="true" v-model="username" class="form-control">
+					<p></p>
 				</div>
 			</div>
 			<div class="col-md-4">
 				<div class="form-group">
-					<label for="nombre">Contraseña:</label>
+					<label for="nombre">Contraseña:<span class="required">(*)</span></label>
 					<input type="password"required="true" v-model="password" class="form-control">
 				</div>
 			</div>
 			<div class="col-md-4">
 				<div class="form-group">
-					<label for="nombre">Email:</label>
+					<label for="nombre">Email:<span class="required">(*)</span></label>
 					<input type="email" required="true" v-model="email" class="form-control">
 				</div>
 			</div>
 			<div class="col-md-4">
 				<div class="form-group">
-					<label for="nombre">Nombre:</label>
+					<label for="nombre">Nombre:<span class="required">(*)</span></label>
 					<input type="text" required="true" v-model="nombre" class="form-control">
 				</div>
 			</div>
 			<div class="col-md-4">
 				<div class="form-group">
-					<label for="apellido">Apellidos:</label>
+					<label for="apellido">Apellidos:<span class="required">(*)</span></label>
 					<input type="text" required="true" v-model="apellidos" class="form-control">
 				</div>
 			</div>
@@ -41,13 +42,13 @@
 			</div> -->
 			<div class="col-md-4">
 				<div class="form-group">
-					<label for="telefono">Teléfono:</label>
+					<label for="telefono">Teléfono:<span class="required">(*)</span></label>
 					<input type="number" required="true" v-model="telefono" class="form-control">
 				</div>
 			</div>
 			<div class="col-md-4">
 				<div class="form-group">
-					<label for="nombre">Calle:</label>
+					<label for="nombre">Calle:<span class="required">(*)</span></label>
 					<input type="text" required="true" v-model="calle" class="form-control">
 				</div>
 			</div>
@@ -65,19 +66,19 @@
 			</div>
 			<div class="col-md-4">
 				<div class="form-group">
-					<label for="nombre">Colonia:</label>
+					<label for="nombre">Colonia:<span class="required">(*)</span></label>
 					<input type="text" v-model="colonia" class="form-control">
 				</div>
 			</div>
 			<div class="col-md-4">
 				<div class="form-group">
-					<label for="nombre">CP:</label>
+					<label for="nombre">CP:<span class="required">(*)</span></label>
 					<input type="number" required="true" v-model="cp" class="form-control">
 				</div>
 			</div>			
 			<div class="col-md-4">
 				<div class="form-group">
-					<label for="nombre">Estado:</label>
+					<label for="nombre">Estado:<span class="required">(*)</span></label>
 					<select 
 					name="estados"
 					id="estado" 
@@ -96,7 +97,7 @@
 		</div>
 		<div class="col-md-4">
 			<div class="form-group">
-				<label for="nombre">Municipio:</label>
+				<label for="nombre">Municipio:<span class="required">(*)</span></label>
 				<select 
 				name="municipio"
 				id="municipios"
@@ -286,4 +287,15 @@ export default {
 </script>
 
 <style lang="css" scoped>
+.required {
+	font-size: 8px;
+
+	color: red;
+
+	position: relative;
+
+	padding-bottom: 15px;
+
+	bottom: 5px;
+}
 </style>
