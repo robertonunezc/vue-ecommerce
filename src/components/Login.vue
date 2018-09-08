@@ -16,6 +16,9 @@
 			class="btn btn-success"			
 			@click.stop="onLogin"
 			>Entrar</button>
+			<router-link :to="{name:'Registro'}" style="float:right"  class="nav-link">
+				Regístrate
+			</router-link> 
 		</div>
 	</div>
 </template>
