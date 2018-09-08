@@ -5,19 +5,19 @@
 		<div class="row">
 			<div class="col-md-4">
 				<div class="form-group">
-					<label for="nombre">Nombre:</label>
+					<label for="nombre">Nombre:<span class="required">(*)</span></label>
 					<input type="text" v-model="nombre" class="form-control">
 				</div>
 			</div>
 			<div class="col-md-4">
 				<div class="form-group">
-					<label for="nombre">Email:</label>
+					<label for="nombre">Email:<span class="required">(*)</span></label>
 					<input type="text" v-model="email" class="form-control">
 				</div>
 			</div>
 			<div class="col-md-4">
 				<div class="form-group">
-					<label for="nombre">Apellidos:</label>
+					<label for="nombre">Apellidos:<span class="required">(*)</span></label>
 					<input type="text" v-model="apellidos" class="form-control">
 				</div>
 			</div>
@@ -29,13 +29,13 @@
 			</div> -->
 			<div class="col-md-4">
 				<div class="form-group">
-					<label for="nombre">Teléfono:</label>
+					<label for="nombre">Teléfono:<span class="required">(*)</span></label>
 					<input type="text" v-model="telefono" class="form-control">
 				</div>
 			</div>
 			<div class="col-md-4">
 				<div class="form-group">
-					<label for="nombre">Calle:</label>
+					<label for="nombre">Calle:<span class="required">(*)</span></label>
 					<input type="text" v-model="calle" class="form-control">
 				</div>
 			</div>
@@ -53,19 +53,19 @@
 			</div>
 			<div class="col-md-4">
 				<div class="form-group">
-					<label for="nombre">colonia:</label>
+					<label for="nombre">Colonia:<span class="required">(*)</span></label>
 					<input type="text" v-model="colonia" class="form-control">
 				</div>
 			</div>
 			<div class="col-md-4">
 				<div class="form-group">
-					<label for="nombre">cp:</label>
+					<label for="nombre">Cp:<span class="required">(*)</span></label>
 					<input type="text" v-model="cp" class="form-control">
 				</div>
 			</div>
 			<div class="col-md-4">
 				<div class="form-group">
-					<label for="nombre">estado:</label>
+					<label for="nombre">Estado:<span class="required">(*)</span></label>
 					<select 
 					name="estados"
 					id="estado"
@@ -83,7 +83,7 @@
 		</div>
 		<div class="col-md-4">
 			<div class="form-group">
-				<label for="nombre">municipio:</label>
+				<label for="nombre">Municipio:<span class="required">(*)</span></label>
 				<select 
 				name="municipio"
 				id="municipios"
@@ -221,6 +221,38 @@ export default {
 				'emailFactura':this.emailFactura,
 				'telefonoFactura': this.telefonoFactura,
 				'celularFactura': this.celularFactura
+			}
+			if (this.username==null || this.username == "") {
+				alert('Su nombre de usuario no puede ser vacio')
+				return
+			}
+			if (this.password==null || this.password == "") {
+				alert('Su contrasña  no puede ser vacio')
+				return
+			}
+			if (this.email==null || this.email == "") {
+				alert('Su email  no puede ser vacio')
+				return
+			}	
+			if (this.apellidos==null || this.apellidos == "") {
+				alert('Su email  no puede ser vacio')
+				return
+			}	
+			if (this.nombre==null || this.nombre == "") {
+				alert('Su nombre  no puede ser vacio')
+				return
+			}	
+			if (this.telefono==null || this.telefono == "") {
+				alert('Su telefono  no puede ser vacio')
+				return
+			}	
+			if (this.calle==null || this.calle == "") {
+				alert('Su calle  no puede ser vacio')
+				return
+			}	
+			if (this.cp==null || this.cp == "") {
+				alert('Su codigo postal  no puede ser vacio')
+				return
 			}			
 			this.$store.dispatch('editarPerfil', usuario)			
 		}
