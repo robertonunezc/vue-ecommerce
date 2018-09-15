@@ -12,7 +12,8 @@
 			</h6>
 			<p class="card-text">{{articulo.descripcion}}</p>				
 		</div>
-		<a href="#" class="btn btn-primary"
+		<input @change="onActualizarCantidad" class="cantidad-prod" type="number" v-model="cantidad">
+		<a href="#" class="btn btn-warning"
 		@click="addProductoCarrito">
 		Comprar
 		${{articulo.precio}}
@@ -26,13 +27,29 @@ export default {
 	name: 'ItemProducto',
 	data () {
 		return {
+			cantidad:1
 		}
 	},		
 	methods: {
+		onActualizarCantidad(){
+			let articulosCarrito = this.$store.getters.carrito.articulos
+			const estaAgregado = articulosCarrito.some(articulo => articulo.articulo.clave == this.articulo.clave)
+			if (estaAgregado) {
+				this.cantidad = 1
+				alert('Este producto está agregado al carrito. Modifique su compra en la pantalla de Carrito :)')
+				return
+			}
+			console.log(articulosCarrito)
+			if (this.cantidad <= 0) {
+				alert('La cantidad debe ser mayor a 0')
+				this.cantidad = 1
+				return
+			}
+		},
 		addProductoCarrito () {
 			let articulo = {
 				'articulo': this.articulo,
-				'cantidad': 1
+				'cantidad': this.cantidad
 			}
 			if(this.$store.getters.usuario && this.$store.getters.carrito){
 				this.$store.dispatch('actualizarCarrito',articulo)				
@@ -57,5 +74,9 @@ export default {
 	flex-direction: column;	
 	width: 45%;
 	margin: 5px;
+}
+.cantidad-prod {
+	max-width: 120px;
+	margin-bottom: 10px;
 }
 </style>

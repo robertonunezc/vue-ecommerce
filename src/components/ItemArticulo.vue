@@ -16,7 +16,7 @@
 				<p class="card-text">{{articulo.descripcion}}</p>				
 			</div>
 			<div class="card-footer">
-				<input @change="onActualizarCantidad" type="number" v-model="cantidad">
+				<input @change="onActualizarCantidad" class="cantidad-prod" type="number" v-model="cantidad">
 				<a href="#" class="btn btn-warning"
 				@click="addProductoCarrito">
 				Comprar
@@ -75,4 +75,8 @@ export default {
 </script>
 
 <style lang="css" scoped>
+.cantidad-prod {
+	max-width: 141px;
+	margin-bottom: 10px;
+}
 </style>
