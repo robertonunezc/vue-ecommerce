@@ -28,20 +28,20 @@
 			@click="onBorrarArticulo(articulo.articulo)">Borrar</div>
 			<!-- <div class="btn btn-info btn-sm"								
 				>Actualizar</div> -->
-		</td>
-	</tr>
-</template>
+			</td>
+		</tr>
+	</template>
 
-<script>
+	<script>
 
-import {eventBus} from '../main'
+	import {eventBus} from '../main'
 
-export default {
-	props:['articulo', 'editable'],
-	name: 'ItemArticuloCarrito',
-	data () {
-		return {
-			urlImg: "http://distribuidoraelva.mx/ecommerce/web/uploads/images/",
+	export default {
+		props:['articulo', 'editable'],
+		name: 'ItemArticuloCarrito',
+		data () {
+			return {
+				urlImg: "http://distribuidoraelva.mx/ecommerce/web/uploads/images/",
 //urlImg: "http://localhost:8000/uploads/images/",
 cantidad: this.articulo.cantidad,
 enabled: false 				
@@ -72,6 +72,11 @@ methods: {
 		this.$store.dispatch('borrarArticuloCarrito', payload)
 	},
 	onActualizarArticulo(articulo) {
+		if (this.cantidad <=0) {
+			alert('La cantidad de producto no pude ser menor a 1')
+			this.cantidad = 1
+			return
+		}
 		let payload = {
 			'articulo': articulo,
 			'cantidad': this.cantidad
