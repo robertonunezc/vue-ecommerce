@@ -31,7 +31,7 @@
 					</tr>
 					<tr>
 						<td>
-							RFC
+							Número Cliente
 						</td>
 						<td>
 							{{usuario.rfc}}
@@ -43,7 +43,7 @@
 						</td>
 						<td>
 							{{usuario.calle}} # {{usuario.numero_ext}},{{usuario.colonia}}, {{usuario.municipio.municipio}}
-							,{{usuario.estado}}, CP {{usuario.cp}}
+							,{{usuario.estado.estado}}, CP {{usuario.cp}}
 						</td>
 					</tr>
 				</table>

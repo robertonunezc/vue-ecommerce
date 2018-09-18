@@ -200,6 +200,9 @@ export default {
 			this.$store.dispatch('cargarMunicipios',
 				{'estado':this.estadoSeleccionado})
 		},	
+		onFacturar(){
+			this.mostrarDatosFiscales = !this.mostrarDatosFiscales
+		},
 		onEditarPerfil(){
 			const usuario = {
 				'email': this.email,
@@ -221,14 +224,6 @@ export default {
 				'emailFactura':this.emailFactura,
 				'telefonoFactura': this.telefonoFactura,
 				'celularFactura': this.celularFactura
-			}
-			if (this.username==null || this.username == "") {
-				alert('Su nombre de usuario no puede ser vacio')
-				return
-			}
-			if (this.password==null || this.password == "") {
-				alert('Su contrasña  no puede ser vacio')
-				return
 			}
 			if (this.email==null || this.email == "") {
 				alert('Su email  no puede ser vacio')
