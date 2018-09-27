@@ -55,17 +55,17 @@
           <div class="col-sm-3">
             <div class="row">
               <div class="col-sm-4">
-                <a href="Distribuidora Elva SA de CV">
+                <a href="https://facebook.com/Distribuidora-Elva-SA-de-CV-1951211168525526">
                   <img class="icon-social" width="40"src="http://distribuidoraelva.mx/wp-content/themes/elva/img/icons/fb.png">
                 </a>                        
               </div>
               <div class="col-sm-4">
-                <a href="@elvavhsa">
+                <a href="https://twitter.com/elvavhsa">
                   <img class="icon-social" width="40"src="http://distribuidoraelva.mx/wp-content/themes/elva/img/icons/tw.png">
                 </a>                        
               </div>
               <div class="col-sm-4">
-                <a href="http://google.com">
+                <a href="#">
                   <img class="icon-social" width="40"src="http://distribuidoraelva.mx/wp-content/themes/elva/img/icons/gg.png">
                 </a>                        
               </div>
