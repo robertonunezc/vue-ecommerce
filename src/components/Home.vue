@@ -80,6 +80,9 @@ ul.paginate-links > li:hover {
 	cursor: pointer;
 	background-color: #ededed;
 }
+ul.paginate-links{
+	min-height: 150px;
+}
 .loading{
 	display:block;
 	margin: 0 auto;

@@ -3,13 +3,13 @@
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg">
       <div class="col-md-1"></div>
-      <div class="col-md-5">
+      <div class="col-sm-12 col-md-5">
         <div class="navbar-header">
           <img alt="ELVA" width="60" height="80" src="http://distribuidoraelva.mx/wp-content/themes/elva/img/logo.png">
           <strong class="text">Distribuidora ELVA</strong>
         </div>
       </div>
-      <div class="col-md-5">
+      <div class="col-sm-12 col-md-5">
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav">
             <li class="nav-item" v-if="usuario">
@@ -147,7 +147,7 @@ methods: {
 
 #footer{
   padding: 20px 0 0;
-  margin-top:80px;
+  margin-top:150px;
 }
 
 .color p {

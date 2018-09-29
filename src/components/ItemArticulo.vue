@@ -24,6 +24,20 @@
 			</a>
 		</div>
 	</div>
+	<div id="myModal" class="modal" v-if="showModal">
+		<!-- Modal content -->
+		<div class="modal-content">			
+			<p>Debe iniciar sesión o registrarse</p>
+			<router-link :to="{name:'Registro'}" class="btn btn-success">
+				Registrarse
+			</router-link>   
+			<router-link :to="{name:'Login'}" class="btn btn-info">
+				Iniciar sesión
+			</router-link>            
+
+		</div>
+
+	</div>
 </div>
 </template>
 
@@ -33,7 +47,7 @@ export default {
 	name: 'ItemProducto',
 	data () {
 		return {
-			cantidad:1
+			cantidad:1,			
 		}
 	},		
 	methods: {
@@ -65,7 +79,8 @@ export default {
 			if (this.$store.getters.usuario && this.$store.getters.carrito == null) {
 				this.$store.dispatch('crearCarrito', articulo)
 			}else{
-				alert('Debe iniciar sesión para poder comprar')
+				alert('Debe iniciar sesión para poder comprar')		
+				this.$router.push('/login') 		
 			}
 
 		}
@@ -78,5 +93,41 @@ export default {
 .cantidad-prod {
 	max-width: 141px;
 	margin-bottom: 10px;
+}
+.modal {	
+	position: fixed;
+	z-index: 1; 
+	padding-top: 100px; 
+	left: 0;
+	top: 0;
+	width: 100%; 
+	height: 100%; 
+	overflow: auto; 
+	background-color: rgb(0,0,0); 
+	background-color: rgba(0,0,0,0.4); 
+}
+
+
+.modal-content {
+	background-color: #fefefe;
+	margin: auto;
+	padding: 20px;
+	border: 1px solid #888;
+	width: 80%;
+}
+
+
+.close {
+	color: #aaaaaa;
+	float: right;
+	font-size: 28px;
+	font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+	color: #000;
+	text-decoration: none;
+	cursor: pointer;
 }
 </style>

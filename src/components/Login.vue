@@ -11,14 +11,17 @@
 			<div class="form-group">
 				<label for="exampleInputPassword1">Contraseña</label>
 				<input type="password" class="form-control" v-model="password" id="password" placeholder="Contraseña">
-			</div>			
-			<button type="submit"
-			class="btn btn-success"			
-			@click.stop="onLogin"
-			>Entrar</button>
-			<router-link :to="{name:'Registro'}" class="nav-link">
-				Regístrate
-			</router-link> 
+			</div>	
+			<div class="flex">
+				<button type="submit"
+				class="btn btn-success"			
+				@click.stop="onLogin"
+				>Entrar</button>
+				<router-link :to="{name:'Registro'}" class="nav-link">
+					Regístrate
+				</router-link> 
+			</div>		
+
 		</div>
 	</div>
 </template>
@@ -56,6 +59,9 @@ export default {
 </script>
 
 <style lang="css" scoped>
+.flex {
+	display:flex;
+}
 .login-wrapper {
 	width: 50%;
 	display: block;
