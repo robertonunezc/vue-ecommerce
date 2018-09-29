@@ -1,7 +1,7 @@
 <template>
   <main>
     <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg">
+    <div class="row">
       <div class="col-md-1"></div>
       <div class="col-sm-12 col-md-5">
         <div class="navbar-header">
@@ -10,24 +10,21 @@
         </div>
       </div>
       <div class="col-sm-12 col-md-5">
-        <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav">
-            <li class="nav-item" v-if="usuario">
-              <a href="#" class="nav-link">Bienvenido {{usuario.usuario}}</a> 
-            </li>      
-            <li class="nav-item" v-for="item in menuItems">
-
-              <router-link :to="item.link" class="nav-link btn btn-default navbar-btn">
-                {{item.title}}
-              </router-link>             
-            </li>   
-            <li class="nav-item">
-              <a href="#" class="nav-link btn btn-default navbar-btn"  @click.stop="logout">Salir</a> 
-            </li>               
-          </ul>
-        </div>
+        <ul class="flex">
+          <li class="nav-item" v-if="usuario">
+            <a href="#" class="nav-link">Bienvenido {{usuario.usuario}}</a> 
+          </li>      
+          <li class="nav-item" v-for="item in menuItems">
+            <router-link :to="item.link" class="nav-link btn btn-default navbar-btn">
+              {{item.title}}
+            </router-link>             
+          </li>   
+          <li class="nav-item">
+            <a href="#" class="nav-link btn btn-default navbar-btn"  @click.stop="logout">Salir</a> 
+          </li>               
+        </ul>
       </div>
-    </nav>
+    </div>
 
     <!-- Page Content -->
     <div class="container" style="margin-top:40px">
@@ -120,7 +117,13 @@ methods: {
 </script>
 
 <style lang="css" scoped>
-
+li {
+  list-style-type: none;
+}
+.flex {
+  display:flex;
+  flex-wrap: wrap;
+}
 .btn {
   background: transparent;
   color: rgb(237, 132, 70);
