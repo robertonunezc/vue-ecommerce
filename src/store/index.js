@@ -9,6 +9,7 @@ const host = "http://distribuidoraelva.mx/ecommerce/web/app_dev.php/api/"
 //const host = "http://localhost:8000/api/"
 export const store = new Vuex.Store({
   state: {
+    listadoArticulosIntocable:[],
     listadoArticulos:[],
     usuario: null,
     estados:[],
@@ -25,8 +26,13 @@ export const store = new Vuex.Store({
   },
   mutations: {
     cargarArticulos (state, payload) {
-      state.listadoArticulos = payload;
-      
+      state.listadoArticulos = payload
+    },
+    setArticulosIntocables (state, payload) {
+      state.listadoArticulosIntocable = payload
+    },
+    setArticulosFromIntocable(state){
+      state.listadoArticulos = state.listadoArticulosIntocable
     },
     setUsuario(state, payload) {
       state.usuario = payload
@@ -414,6 +420,11 @@ export const store = new Vuex.Store({
   })
 
 },
+copyIntocableListado({commit}){
+  console.log('----copyaction----')
+  commit('setArticulosFromIntocable')
+  console.log(this.state.listadoArticulos)
+},
 cargarArticulos ({commit}) {
       //aqui se llama al servicio
       commit('setCargando', true)        
@@ -431,6 +442,7 @@ cargarArticulos ({commit}) {
             }
           }
           commit('cargarArticulos', data)
+          commit('setArticulosIntocables', data)
           commit('setCargando', false)   
         }else{
           alert('Hubo un error al cargar articulos.Lo sentimos')          

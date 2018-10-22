@@ -43,7 +43,7 @@
 			<div class="col-md-4">
 				<div class="form-group">
 					<label for="telefono">Teléfono:<span class="required">(*)</span></label>
-					<input type="number" required="true" v-model="telefono" class="form-control">
+					<input type="number" maxlength="10" required="true" v-model="telefono" class="form-control">
 				</div>
 			</div>
 			<div class="col-md-4">
@@ -154,13 +154,13 @@
 			<div class="col-md-4">
 				<div class="form-group">
 					<label for="nombre">Teléfono:</label>
-					<input type="number" required="true"  v-model="telefonoFactura" class="form-control">
+					<input type="number" maxlength="10" required="true"  v-model="telefonoFactura" class="form-control">
 				</div>
 			</div>		
 			<div class="col-md-4">
 				<div class="form-group">
 					<label for="nombre">Celular:</label>
-					<input type="number" required="true" v-model="celularFactura" class="form-control">
+					<input type="number" maxlength="10" required="true" v-model="celularFactura" class="form-control">
 				</div>
 			</div>	
 		</div>
@@ -272,12 +272,25 @@ export default {
 				alert('Su telefono  no puede ser vacio')
 				return
 			}	
+			if (this.telefono.length != 10) {
+				alert('El número de teléfono de ser de 10 dígitos')
+				return
+			}
 			if (this.calle==null || this.calle == "") {
 				alert('Su calle  no puede ser vacio')
 				return
 			}	
 			if (this.cp==null || this.cp == "") {
 				alert('Su codigo postal  no puede ser vacio')
+				return
+			}
+
+			if (this.telefonoFactura != "" && this.telefonoFactura.length != 10) {
+				alert('El telefono para factura debe ser 10 dígitos')
+				return
+			}
+			if (this.celularFactura != "" && this.celularFactura.length != 10) {
+				alert('El celular para factura debe ser 10 dígitos')
 				return
 			}
 			this.$store.dispatch('registroUsuario', usuario)									

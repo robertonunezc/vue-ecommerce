@@ -6,7 +6,7 @@
 const path = require('path')
 
 module.exports = {
-    urlBase :"http://localhost:8000/api/",
+    urlBase :"http://distribuidoraelva.mx/ecommerce/web/app_dev.php/api/",
     build: {
         env: require('./prod.env'),
         index: path.resolve(__dirname, '../dist/index.html'),

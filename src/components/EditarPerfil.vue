@@ -248,7 +248,19 @@ export default {
 			if (this.cp==null || this.cp == "") {
 				alert('Su codigo postal  no puede ser vacio')
 				return
-			}			
+			}	
+			if (this.telefono.length != 10) {
+				alert('El número de teléfono de ser de 10 dígitos')
+				return
+			}	
+			if (this.telefonoFactura != "" && this.telefonoFactura.length != 10) {
+				alert('El telefono para factura debe ser 10 dígitos')
+				return
+			}
+			if (this.celularFactura != "" && this.celularFactura.length != 10) {
+				alert('El celular para factura debe ser 10 dígitos')
+				return
+			}	
 			this.$store.dispatch('editarPerfil', usuario)			
 		}
 	}

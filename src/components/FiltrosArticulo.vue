@@ -68,6 +68,9 @@ export default {
 			let payload = {}
 			const tipoFiltro = event.target.dataset.tipo
 			if (tipoFiltro == "descripcion") {
+				if (this.familiaSeleccionada == "" && this.lineaSeleccionada == "") {
+					this.$store.dispatch('copyIntocableListado')	
+				}
 				payload = {
 					'campoFiltrar': "descripcion",
 					'text': event.target.value
@@ -75,28 +78,25 @@ export default {
 			}else{
 				selectedIndex = event.target.options.selectedIndex	
 			}
-			if (tipoFiltro == "clave") {
-				option = this.claves[selectedIndex]
-				payload = {
-					'campoFiltrar': "clave",
-					'text': option.nombre
-				}				
-			}
+
 			if (tipoFiltro == "lineas") {
-				option = this.lineas[selectedIndex]
+				if (this.familiaSeleccionada == "" && this.searchQuery == "") {
+					this.$store.dispatch('copyIntocableListado')	
+				}
 				payload = {
 					'campoFiltrar': "lineas",
-					'text': option.nombre
+					'text': this.lineaSeleccionada
 				}	
 			}
-			if (tipoFiltro == "familias") {
-				option = this.familias[selectedIndex]
+			if (tipoFiltro == "familias") {				
+				if (this.lineaSeleccionada == "" && this.searchQuery == "") {
+					this.$store.dispatch('copyIntocableListado')	
+				}
 				payload = {
 					'campoFiltrar': "familias",
-					'text': option.nombre
-				}	
+					'text': this.familiaSeleccionada
+				}					
 			}
-			
 			console.log(payload)
 			this.$store.dispatch('filtrarArticulo',payload)
 		},
@@ -104,8 +104,10 @@ export default {
 			document.querySelectorAll('select').forEach( element => {
 				element.selectedIndex = -1
 			});
-			await this.$store.dispatch('cargarArticulos')
+			this.lineaSeleccionada = ""
+			this.familiaSeleccionada = ""
 			this.searchQuery = ""
+			await this.$store.dispatch('cargarArticulos')
 			await document.querySelectorAll('.paginate-links>li>a')[0].click()      
 			return
 		}

@@ -24,20 +24,6 @@
 			</a>
 		</div>
 	</div>
-	<div id="myModal" class="modal" v-if="showModal">
-		<!-- Modal content -->
-		<div class="modal-content">			
-			<p>Debe iniciar sesión o registrarse</p>
-			<router-link :to="{name:'Registro'}" class="btn btn-success">
-				Registrarse
-			</router-link>   
-			<router-link :to="{name:'Login'}" class="btn btn-info">
-				Iniciar sesión
-			</router-link>            
-
-		</div>
-
-	</div>
 </div>
 </template>
 
