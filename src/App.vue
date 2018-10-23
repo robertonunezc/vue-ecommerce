@@ -62,8 +62,8 @@
                 </a>                        
               </div>
               <div class="col-sm-4">
-                <a href="#">
-                  <img class="icon-social" width="40"src="http://distribuidoraelva.mx/wp-content/themes/elva/img/icons/gg.png">
+                <a href="https://www.instagram.com/distribuidoraelva/">
+                  <img class="icon-social" width="40"src="http://distribuidoraelva.mx/wp-content/themes/elva/img/icons/inst.png">
                 </a>                        
               </div>
             </div>

@@ -97,7 +97,6 @@ export default {
 					'text': this.familiaSeleccionada
 				}					
 			}
-			console.log(payload)
 			this.$store.dispatch('filtrarArticulo',payload)
 		},
 		async onBorrarFiltros(){

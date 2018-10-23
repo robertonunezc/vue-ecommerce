@@ -19,6 +19,9 @@ export default {
 
 		}
 	},
+	created(){
+		this.$store.dispatch('cargarPerfilUsuario')			
+	},
 	
 }
 </script>

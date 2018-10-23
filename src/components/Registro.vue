@@ -1,6 +1,6 @@
 <template>
 	<div class="container">
-		<h3>Editar perfil</h3>
+		<h3>Registro</h3>
 		<hr>
 		<div class="row">			
 			<div class="col-md-4">
@@ -37,7 +37,7 @@
 			<div class="col-md-4">
 				<div class="form-group">
 					<label for="rfc">#Cliente:</label>
-					<input type="text" v-model="rfc" placeholder="Ya tiene # de cliente ingréselo" class="form-control">
+					<input type="text" v-model="numero_cliente" placeholder="Ya tiene # de cliente ingréselo" class="form-control">
 				</div>
 			</div>
 			<div class="col-md-4">
@@ -186,7 +186,7 @@ export default {
 			email: null,
 			nombre: null,
 			apellidos: null,
-			rfc: null,
+			numero_cliente: null,
 			telefono: null,
 			calle: null,
 			numero_ext: null,
@@ -232,7 +232,7 @@ export default {
 				'nombre': this.nombre,
 				'apellidos':this.apellidos,
 				'calle':this.calle,
-				'rfc':this.rfc,
+				'numero_cliente':this.numero_cliente,
 				'telefono':this.telefono,
 				'estado':this.estadoSeleccionado,
 				'municipio':this.municipioSeleccionado,

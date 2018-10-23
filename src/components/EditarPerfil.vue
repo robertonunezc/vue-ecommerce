@@ -24,7 +24,7 @@
 			<div class="col-md-4">
 				<div class="form-group">
 					<label for="rfc">#Cliente:</label>
-					<input type="text" v-model="rfc" placeholder="Ya tiene # de cliente ingréselo" class="form-control">
+					<input type="text" v-model="numero_cliente" placeholder="Ya tiene # de cliente ingréselo" class="form-control">
 				</div>
 			</div> 
 			<div class="col-md-4">
@@ -169,7 +169,7 @@ export default {
 			email: this.$store.getters.usuario.email,
 			nombre: this.$store.getters.usuario.nombre,
 			apellidos: this.$store.getters.usuario.apellidos,
-			rfc: this.$store.getters.usuario.rfc,
+			numero_cliente: this.$store.getters.usuario.numero_cliente,
 			telefono: this.$store.getters.usuario.telefono,
 			calle: this.$store.getters.usuario.calle,
 			numero_ext: this.$store.getters.usuario.numero_ext,
@@ -209,7 +209,7 @@ export default {
 				'nombre': this.nombre,
 				'apellidos':this.apellidos,
 				'calle':this.calle,
-				'rfc':this.rfc,
+				'numero_cliente':this.numero_cliente,
 				'telefono':this.telefono,
 				'estado':this.estadoSeleccionado,
 				'municipio':this.municipioSeleccionado,

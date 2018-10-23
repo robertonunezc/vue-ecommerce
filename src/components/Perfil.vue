@@ -43,7 +43,7 @@
 											<tr>
 												
 												<td>Num Cliente</td>
-												<td>{{usuario.rfc}}
+												<td>{{usuario.numero_cliente}}
 												</td>
 											</tr>
 
@@ -112,7 +112,7 @@
 		},
 		computed:{
 			usuario(){
-				return this.$store.getters.usuario
+				return this.$store.getters.perfilUsuario
 			}
 		},
 		created(){

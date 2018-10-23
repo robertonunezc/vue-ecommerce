@@ -22,11 +22,15 @@ export const store = new Vuex.Store({
     token:null,
     cargando: true,
     carrito:null,
+    perfil_usuario: null,
     host: host
   },
   mutations: {
     cargarArticulos (state, payload) {
       state.listadoArticulos = payload
+    },
+    setPerfilUsuario(state,payload){
+      state.perfil_usuario = payload
     },
     setArticulosIntocables (state, payload) {
       state.listadoArticulosIntocable = payload
@@ -67,6 +71,22 @@ export const store = new Vuex.Store({
     }
   },
   actions: { 
+    cargarPerfilUsuario({commit}){
+      let url = host + 'get_profile'
+      const params = new URLSearchParams()
+      params.append('token', this.state.token)
+      axios.post(url, params)
+      .then(response=>{
+        if (response.data.rc == 0) {
+          commit('setPerfilUsuario', response.data.data)
+        }else {
+          alert('Ocurrió un error cargando el perfil desde el servidor')
+        }
+      })
+      .catch(err =>{
+        console.log(err)
+      })
+    },    
     cargarClaves({commit}){
       let url = host + 'claves'
       axios.get(url)
@@ -192,7 +212,7 @@ export const store = new Vuex.Store({
       params.append('nombre', payload.nombre)
       params.append('apellidos', payload.apellidos)
       params.append('calle', payload.calle)
-      params.append('rfc', payload.rfc)
+      params.append('numero_cliente', payload.numero_cliente)
       params.append('estado', payload.estado)
       params.append('municipio', payload.municipio)
       params.append('telefono', payload.telefono)
@@ -217,7 +237,7 @@ export const store = new Vuex.Store({
             'nombre': data.nombre,
             'apellidos': data.apellidos,
             'id': data.id,
-            'rfc': data.rfc,
+            'numero_cliente': data.numero_cliente,
             'telefono': data.telefono,
             'calle': data.calle,
             'numero_ext': data.numero_ext,
@@ -256,7 +276,7 @@ export const store = new Vuex.Store({
      params.append('nombre', payload.nombre)
      params.append('apellidos', payload.apellidos)
      params.append('calle', payload.calle)
-     params.append('rfc', payload.rfc)
+     params.append('numero_cliente', payload.numero_cliente)
      params.append('telefono', payload.telefono)
      params.append('estado', payload.estado)
      params.append('municipio', payload.municipio)
@@ -456,7 +476,9 @@ cargarArticulos ({commit}) {
     filtrarArticulo({commit}, payload){
       const text = payload.text
       let compoFiltrar = payload.campoFiltrar            
-      let articulosFiltrados = this.state.listadoArticulos.filter( articulo=> {
+      let articulosTotales = this.state.listadoArticulos
+      let articulosIntocables = this.state.listadoArticulosIntocable
+      let articulosFiltrados = articulosTotales.filter( articulo=> {
         if (compoFiltrar == "clave" && articulo.clave == text) {
           return true
         }
@@ -471,12 +493,19 @@ cargarArticulos ({commit}) {
         }
         return false
       })
+      console.log(articulosFiltrados.length)
+      if (articulosFiltrados.length == 0 ) {
+        articulosFiltrados = articulosIntocables
+      }
       commit('cargarArticulos', articulosFiltrados)
     } 
   }, 
   getters: {
     usuario(state) {
       return state.usuario
+    },
+    perfilUsuario(state) {
+      return state.perfil_usuario
     },
     cargando(state) {
       return state.cargando
