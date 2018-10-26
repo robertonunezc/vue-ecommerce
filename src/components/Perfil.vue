@@ -51,7 +51,7 @@
 										</tbody>
 									</table>
 									<div class="btn-group" role="group" aria-label="Basic example">
-										<button type="button" class="btn btn-primary">Mis pedidos</button>
+										<button type="button" @click="onActulizarPerfil" class="btn btn-primary">Actualizar Mis pedidos</button>
 										<router-link :to="{name: 'EditarPerfil'}" class="btn btn-secondary">
 											Editar perfil
 										</router-link>
@@ -118,7 +118,13 @@
 		created(){
 			this.$store.dispatch('cargarMunicipios',
 				{'estado':this.$store.getters.usuario.estado.id})		
+			this.$store.dispatch('cargarPerfilUsuario')
 		},
+		methods: {
+			onActulizarPerfil(){
+				this.$store.dispatch('cargarPerfilUsuario')
+			}
+		}
 
 	}
 	</script>
