@@ -112,7 +112,7 @@
 		},
 		computed:{
 			usuario(){
-				return this.$store.getters.perfilUsuario
+				return this.$store.getters.usuario
 			}
 		},
 		created(){
