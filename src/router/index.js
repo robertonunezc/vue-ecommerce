@@ -10,6 +10,7 @@ import PedidoExitoso from '@/components/PedidoExitoso'
 import Perfil from '@/components/Perfil'
 import EditarPerfil from '@/components/EditarPerfil'
 import Registro from '@/components/Registro'
+import CambiarContrasena from '@/components/CambiarContrasena'
 
 
 Vue.use(Router)
@@ -65,6 +66,11 @@ export default new Router({
 	name: 'DetalleArticulo',
 	component: DetalleArticulo,
 
+},{
+	path: '/cambiar-contrasena',
+	name: 'CambiarContrasena',
+	component: CambiarContrasena,
+	beforeEnter: AuthGuard
 }
 ]
 })

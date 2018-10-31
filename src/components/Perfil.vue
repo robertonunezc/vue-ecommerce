@@ -55,6 +55,9 @@
 										<router-link :to="{name: 'EditarPerfil'}" class="btn btn-secondary">
 											Editar perfil
 										</router-link>
+										<router-link :to="{name: 'CambiarContrasena'}" class="btn btn-success">
+											Cambiar contraseña
+										</router-link>
 									</div>
 								</div>
 							</div>
