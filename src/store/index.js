@@ -298,7 +298,7 @@ export const store = new Vuex.Store({
         router.push('/')  
       }else{
         const msg ='Ocurrió un error con el registro. Regrese a la pantalla de registro para corregir los datos introducidos'
-        commit('setMessage', {'tipo':1,'msg':msg})          
+        commit('setMessage', {'tipo':1,'msg':response.data.msg})          
         router.push('/')  
       }
     })
