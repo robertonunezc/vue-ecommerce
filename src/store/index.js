@@ -350,6 +350,12 @@ export const store = new Vuex.Store({
           'email_factura': data.email_factura,
           'telefono_factura': data.telefono_factura,
           'celular_factura': data.celular_factura,
+          'tipo':"cliente"
+        }
+        if (data.ruta) {
+          usuario.tipo = "vendedor"
+          usuario.ruta = data.ruta
+          usuario.calificacion = data.clasificacion
         }
         let token = data.token
         sessionStorage.setItem('token', token)
