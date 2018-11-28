@@ -79,6 +79,9 @@ export const store = new Vuex.Store({
       .then(response=>{
         if (response.data.rc == 0) {
           commit('setPerfilUsuario', response.data.data)
+          if (response.data.data.ruta) {
+            response.data.data.tipo = "vendedor"
+          }
           commit('setUsuario', response.data.data)
         }else {
           alert('Ocurrió un error cargando el perfil desde el servidor')
