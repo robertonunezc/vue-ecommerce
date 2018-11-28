@@ -122,7 +122,7 @@ export default {
 	},
 	computed:{
 		usuario(){
-			return this.$store.getters.perfilUsuario
+			return this.$store.getters.usuario
 		}
 	},
 	created(){
@@ -133,6 +133,7 @@ export default {
 	methods: {
 		onActulizarPerfil(){
 			this.$store.dispatch('cargarPerfilUsuario')
+			this.usuario = this.$store.getters.perfilUsuario
 		}
 	}
 
