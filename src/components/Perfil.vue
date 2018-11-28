@@ -122,7 +122,7 @@ export default {
 	},
 	computed:{
 		usuario(){
-			return this.$store.getters.usuario
+			return this.$store.getters.perfilUsuario
 		}
 	},
 	created(){
