@@ -29,7 +29,7 @@
 							{{usuario.email}}
 						</td>
 					</tr>
-					<tr>
+					<tr v-if="usuario.tipo != 'vendedor'">
 						<td>
 							Número Cliente
 						</td>
@@ -37,7 +37,7 @@
 							{{usuario.rfc}}
 						</td>
 					</tr>
-					<tr>
+					<tr v-if="usuario.tipo != 'vendedor'">
 						<td>
 							Dirección envío
 						</td>
