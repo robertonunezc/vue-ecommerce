@@ -4,9 +4,13 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import { store } from './store/'
+import EasySlider from 'vue-easy-slider'
 import * as firebase from 'firebase'
 import VuePaginate from 'vue-paginate'
+
+Vue.use(EasySlider)
 Vue.use(VuePaginate)
+
 export const eventBus = new Vue({})
 Vue.config.productionTip = false
 /* eslint-disable no-new */

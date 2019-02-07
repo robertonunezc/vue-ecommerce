@@ -1,23 +1,30 @@
 <template>
 	<!-- Jumbotron Header -->
 	<div>
-		<h2>Catálogo de productos</h2>
-		<!-- Filtros -->
-		<filtros-articulos v-bind:lineas="lineas" v-bind:familias="familias"></filtros-articulos>		
-		<div v-if="cargando">
-			<img class="loading" src="/static/img/cargando.gif" alt="CARGANDO">
-		</div>
-		<paginate		
-		name="articulos"
-		:list="articulos"
-		:per="12"		
-		>
-		
-		<catalogo-articulos v-bind:listadoArticulos="paginated('articulos')" :cargando="!cargando"></catalogo-articulos>
-	</paginate>
-	<paginate-links for="articulos"></paginate-links>
+		<slider animation="fade" style="margin-bottom:20px">
+			<slider-item
+			v-for="(i, index) in sliders"
+			:key="index"
+			:style="i"
+			>
+			<img :src="i.src"/>
+		</slider-item>
+	</slider>
+	<!-- Filtros -->
+	<filtros-articulos v-bind:lineas="lineas" v-bind:familias="familias"></filtros-articulos>		
+	<div v-if="cargando">
+		<img class="loading" src="/static/img/cargando.gif" alt="CARGANDO">
+	</div>
+	<paginate		
+	name="articulos"
+	:list="articulos"
+	:per="12"		
+	>
 
-</div>
+	<catalogo-articulos v-bind:listadoArticulos="paginated('articulos')" :cargando="!cargando"></catalogo-articulos>
+</paginate>
+<paginate-links for="articulos"></paginate-links>
+
 </div>
 <!-- /.row -->
 </template>
@@ -32,13 +39,20 @@ export default {
 	},
 	data () {
 		return {
-			paginate: ['articulos']			
+			paginate: ['articulos']				
 		}
 	},
 	methods: {
 
 	},
 	computed: {
+		sliders () {
+			return [
+			{ backgroundColor: '#3f51b5', width: '100%', height: '100%', src: 'https://picsum.photos/612/612?random=2' },
+			{ backgroundColor: '#eee', width: '100%', height: '100%',src: 'https://picsum.photos/612/612?random=1' },
+			{ backgroundColor: '#f44336', width: '100%', height: '100%',src: 'https://picsum.photos/612/612?random=3' },
+			]
+		},
 		articulos () {
 			console.log('cargando articulos...')			
 			let articulos = this.$store.getters.listadoArticulos

@@ -9,8 +9,8 @@
           <strong class="text">Distribuidora ELVA</strong>
         </div>
       </div>
-      <div class="col-sm-12 col-md-5">
-        <ul class="flex">
+      <div class="col-sm-12 col-md-5 flex menu-container">
+        <ul class="flex menu-items">
           <li class="nav-item" v-if="usuario">
             <a href="#" class="nav-link">Bienvenido {{usuario.usuario}}</a> 
           </li>      
@@ -27,7 +27,7 @@
     </div>
 
     <!-- Page Content -->
-    <div class="container" style="margin-top:40px">
+    <div class="container" style="margin-top:20px">      
       <transition>
         <keep-alive>
           <router-view></router-view>
@@ -119,6 +119,13 @@ methods: {
 <style lang="css" scoped>
 li {
   list-style-type: none;
+}
+.menu-container {
+  align-items: center;
+  justify-content: center;
+}
+.menu-items {
+  margin-bottom: 0;
 }
 .flex {
   display:flex;
