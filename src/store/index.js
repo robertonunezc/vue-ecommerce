@@ -23,7 +23,8 @@ export const store = new Vuex.Store({
     cargando: true,
     carrito:null,
     perfil_usuario: null,
-    host: host
+    host: host,
+    slides: []
   },
   mutations: {
     cargarArticulos (state, payload) {
@@ -61,6 +62,9 @@ export const store = new Vuex.Store({
     },
     setFamilias(state, payload) {
       state.familias = payload
+    },
+    setSlides(state, payload) {
+      state.slides = payload
     },
     setCargando(state, payload) {
       state.cargando = payload
@@ -455,6 +459,20 @@ copyIntocableListado({commit}){
   commit('setArticulosFromIntocable')
   console.log(this.state.listadoArticulos)
 },
+cargarSlides({commit}){
+  let url = host + 'slides'
+  axios.get(url)
+  .then(response=>{
+    if (response.data.rc == 0) {
+      commit('setSlides', response.data.data)
+    }else {
+      alert('Ocurrió un error cargando las familias desde el servidor')
+    }
+  })
+  .catch(err =>{
+    console.log(err)
+  })
+},
 cargarArticulos ({commit}) {
       //aqui se llama al servicio
       commit('setCargando', true)        
@@ -550,6 +568,9 @@ cargarArticulos ({commit}) {
     },
     listadoArticulos (state) {
       return state.listadoArticulos
+    },
+    slides (state) {
+      return state.slides
     },
     articulo (state) {
       return (articuloClave)=> {

@@ -47,11 +47,7 @@ export default {
 	},
 	computed: {
 		sliders () {
-			return [
-			{ backgroundColor: '#3f51b5', width: '100%', height: '100%', src: 'https://picsum.photos/612/612?random=2' },
-			{ backgroundColor: '#eee', width: '100%', height: '100%',src: 'https://picsum.photos/612/612?random=1' },
-			{ backgroundColor: '#f44336', width: '100%', height: '100%',src: 'https://picsum.photos/612/612?random=3' },
-			]
+			return this.$store.getters.slides
 		},
 		articulos () {
 			console.log('cargando articulos...')			

@@ -26,6 +26,7 @@ new Vue({
 		this.$store.dispatch('cargarFamilias')
 		this.$store.dispatch('cargarLineas')
 		this.$store.dispatch('cargarEstados')
+		this.$store.dispatch('cargarSlides')
     //firebase.database().ref('articulos/').set(articulosDummy);
 }
 })
