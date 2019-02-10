@@ -7,7 +7,7 @@
 			:key="index"
 			:style="i"
 			>
-			<img :src="i.src"/>
+			<img :src="i.imagen"/>
 		</slider-item>
 	</slider>
 	<!-- Filtros -->
@@ -39,7 +39,8 @@ export default {
 	},
 	data () {
 		return {
-			paginate: ['articulos']				
+			paginate: ['articulos']
+
 		}
 	},
 	methods: {

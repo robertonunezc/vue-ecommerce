@@ -439,7 +439,7 @@ export const store = new Vuex.Store({
         if (data[i].imagen == null) {
           data[i].imagen = "/static/img/producto.png"
         }else{
-          data[i].imagen = host.split("/app_dev.php/api/")[0] + "/uploads/images/" + data[i].imagen
+          data[i].imagen = host.split("/app_dev.php/api/")[0] + " " + data[i].imagen
         }
       }
       commit('cargarArticulos', data)
@@ -464,7 +464,14 @@ cargarSlides({commit}){
   axios.get(url)
   .then(response=>{
     if (response.data.rc == 0) {
-      commit('setSlides', response.data.data)
+      let serverSlides = response.data.data;
+      const hostUpload = host.split("/app_dev.php/api/")[0]
+
+      for(let i = 0; i< serverSlides.length; i++) {
+        console.log('entro al slides')
+        serverSlides[i]['imagen'] = `${hostUpload}/uploads/images/${serverSlides[i]['imagen']}`
+      };
+      commit('setSlides', serverSlides)
     }else {
       alert('Ocurrió un error cargando las familias desde el servidor')
     }
