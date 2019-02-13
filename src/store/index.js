@@ -439,7 +439,7 @@ export const store = new Vuex.Store({
         if (data[i].imagen == null) {
           data[i].imagen = "/static/img/producto.png"
         }else{
-          data[i].imagen = host.split("/app_dev.php/api/")[0] + " " + data[i].imagen
+          data[i].imagen = host.split("/app_dev.php/api/")[0] + "/uploads/images/" + data[i].imagen
         }
       }
       commit('cargarArticulos', data)
