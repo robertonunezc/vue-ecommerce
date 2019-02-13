@@ -18,26 +18,34 @@
 		<div class="col-sm-12 col-md-4">
 			<div class="form-group">
 				<label>Buscar</label>
-				<input @change="onChangeBuscar" type="text" class="form-control" v-model="searchQuery">
+				<div class="flex">
+					<input @change="onChangeBuscar" type="text" class="form-control" v-model="searchQuery">
+					<button class="btn btn-xs btn-primary"
+					style="margin-left:5px;"
+					@click="onChangeBuscar"
+					>
+					Buscar
+				</button>
 			</div>
 		</div>
-		<div class="col-sm-12 col-md-4">
-			<div class="form-group">
-				<label>Familia</label>
-				<select id="familia" name="familia" class="form-control"
-				v-model="familiaSeleccionada"
-				data-tipo="familias"	
-				@change="onSelectFiltro"	
-				>
-				<option v-for="familia in familias">{{familia.nombre}}</option>
-			</select>
-		</div>
 	</div>
-	<div class="col-sm-12 col-md-1">
+	<div class="col-sm-12 col-md-4">
 		<div class="form-group">
-			<button class="btn btn-success" @click="onBorrarFiltros">Borrar filtros</button>
-		</div>
+			<label>Familia</label>
+			<select id="familia" name="familia" class="form-control"
+			v-model="familiaSeleccionada"
+			data-tipo="familias"	
+			@change="onSelectFiltro"	
+			>
+			<option v-for="familia in familias">{{familia.nombre}}</option>
+		</select>
 	</div>
+</div>
+<div class="col-sm-12 col-md-1">
+	<div class="form-group">
+		<button class="btn btn-success" @click="onBorrarFiltros">Borrar filtros</button>
+	</div>
+</div>
 </div>
 </div>
 </div>
@@ -115,4 +123,7 @@ export default {
 </script>
 
 <style lang="css" scoped>
+.flex {
+	display: flex
+}
 </style>
