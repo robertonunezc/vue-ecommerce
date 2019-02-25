@@ -98,4 +98,21 @@ ul.paginate-links{
 	display:block;
 	margin: 0 auto;
 }
+.slider-item img  {
+	width:100%;
+}
+.slider-item{
+	height: 80px;
+}
+
+@media only screen and (max-width: 800px) {
+	.slider {
+		height:140px!important;
+	}
+}
+@media only screen and (max-width: 400px) {
+	.slider {
+		height:80px !important;
+	}
+}
 </style>
